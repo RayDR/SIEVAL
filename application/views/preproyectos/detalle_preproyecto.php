@@ -29,12 +29,12 @@
                             <ul class="nav nav-pills nav-pill-circle flex-column flex-md-row">
                                 <li class="nav-item">
                                     <a id="editar" class="nav-link" aria-label="Tab Editar" href="#editar-preproyecto" data-bs-toggle="tooltip" title="Editar Preproyecto">
-                                        <span class="nav-link-icon d-block"><i class="fas fa-file-signature fa-5x"></i></span>
+                                        <span class="nav-link-icon d-block"><span class="fas fa-pencil-alt fa-2x"></span></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a id="actividad" class="nav-link" aria-label="Tab Reporte" href="#actividad-preproyecto" data-bs-toggle="tooltip" title="Nueva Actividad">
-                                        <span class="nav-link-icon d-block"><i class="fas fa-file-contract fa-5x"></i></span>
+                                        <span class="nav-link-icon d-block"><span class="fas fa-file-contract fa-2x"></span></span>
                                     </a>
                                 </li>
                             </ul>
@@ -79,48 +79,30 @@
                         </h2>
                         <div id="datos_preproyecto" class="accordion-collapse collapse show" aria-labelledby="titulo_preproyecto" data-bs-parent="#preproyecto">
                             <div class="accordion-body">
-                                <table class="table w-100 bg-white">
-                                    <tbody>
-                                        <tr>
-                                            <th width="20%">Trimestre</th>
-                                            <td class="text-dark">
-                                                <b><?= $preproyecto->trimestre ?>: </b>
-                                                <br><b>Inicio:</b> <?= $preproyecto->fecha_inicio ?>
-                                                <br><b>Término:</b> <?= $preproyecto->fecha_termino ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th width="20%">Alcance</th>
-                                            <td><?= ($preproyecto->ambito_localidad == 'E')? '' : $preproyecto->localidad .' - ' ?><b><?= $preproyecto->municipio ?></b></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Inversión</th>
-                                            <td id="inversion"><?= $preproyecto->inversion ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Beneficiarios</th>
-                                            <td id="beneficiarios"><?= $preproyecto->cantidad_beneficiarios ?></td>
-                                        </tr>
-                                        <?php if( $preproyecto->seccion ): ?>
-                                        <tr>
-                                            <th>Sección</th>
-                                            <td><?= $preproyecto->seccion ?></td>
-                                        </tr>
-                                        <?php endif ?>
-                                        <?php if( $preproyecto->incluido ): ?>
-                                        <tr>
-                                            <th>Incluido</th>
-                                            <td><?= $preproyecto->incluido ?></td>
-                                        </tr>
-                                        <?php endif ?>
-                                        <?php if( $preproyecto->url ): ?>
-                                        <tr>
-                                            <th>URL</th>
-                                            <td><a href="<?= $preproyecto->url ?>" target="_blank" class="card-link text-primary"><?= $preproyecto->url ?></a></td>
-                                        </tr>
-                                        <?php endif ?>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table w-100 bg-white">
+                                        <tbody>
+                                            <?php if( $preproyecto->seccion ): ?>
+                                            <tr>
+                                                <th>Sección</th>
+                                                <td><?= $preproyecto->seccion ?></td>
+                                            </tr>
+                                            <?php endif ?>
+                                            <?php if( $preproyecto->incluido ): ?>
+                                            <tr>
+                                                <th>Incluido</th>
+                                                <td><?= ( $preproyecto->incluido == 1 )? 'Sí' : 'No' ?></td>
+                                            </tr>
+                                            <?php endif ?>
+                                            <?php if( $preproyecto->url ): ?>
+                                            <tr>
+                                                <th>URL</th>
+                                                <td><a href="<?= $preproyecto->url ?>" target="_blank" class="card-link text-primary"><?= $preproyecto->url ?></a></td>
+                                            </tr>
+                                            <?php endif ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,10 +122,8 @@
                 <div class="col-12 col-lg-6 mb-3 opcion-detalles" data-target="#actividad-detalle<?= $key ?>">
                     <div class="card border-rounded shadow p-3">
                         <div class="card-body text-dark">
-                            <div class="d-none d-sm-block">
-                                <h2 class="h6 mb-0 text-dark"><strong class="h3 text-dark"><?= $key+1 ?>.</strong>&nbsp;<?= $actividad->actividad ?></h2>
-                                <h3 class="fw-extrabold mb-2 text-dark">Inversión: <?= $actividad->inversion ?></h3>
-                            </div>
+                            <h2 class="h6 mb-0 text-dark"><strong class="h3 text-dark"><?= $key+1 ?>.</strong>&nbsp;<?= $actividad->actividad ?></h2>
+                            <h3 class="fw-extrabold mb-2 text-dark">Inversión: <span class="dinero"><?= $actividad->inversion ?></span></h3>
                             <small class="text-dark">                                
                                 <?= mdate('%d-%m-%Y', strtotime($actividad->fecha_inicio)) ?> -  <?= mdate('%d-%m-%Y', strtotime($actividad->fecha_termino)) ?>
                             </small> 
@@ -151,9 +131,19 @@
                                 <div>Alcance: <?= ($actividad->ambito_localidad == 'E')? '' : $actividad->localidad .' - ' ?><b><?= $actividad->municipio ?></b></div>
                             </div>
 
-                            <legend class="h6 text-dark mt-3">Mas detalles</legend>
+                            <div class="row">
+                                <input type="hidden" class=".actactividad_id" data-actividad="<?= $actividad->preproyecto_actividad_id ?>">
+                                <div class="col-9">                                    
+                                    <legend class="h6 text-dark mt-3">Mas detalles »</legend>
+                                </div>
+                                <div class="col mr-auto">
+                                    <a class="btn btn-icon-only rounded-circle bg-dark text-white my-3 editar-actividad" data-actividad="<?= $actividad->preproyecto_actividad_id ?>" aria-label="Editar Actividad" href="#editar-actividad"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+                            </div>
+
                             <div id="actividad-detalle<?= $key ?>" style="display: none;">
-                                <div>Grupo Beneficiado: <?= $actividad->cantidad_beneficiarios ?> (<?= $actividad->beneficiados ?>, <?= $actividad->beneficiados ?>)</div>                                
+                                <hr class="border-light">
+                                <div>Grupo Beneficiado: <?= $actividad->cantidad_beneficiarios ?> (<?= $actividad->beneficiados ?>, <?= $actividad->beneficiados ?>)</div>
                                 <div class="row">
                                     <div class="col-6"><?php if ( $actividad->seccion ): ?> Sección: <?= $actividad->seccion ?><?php endif ?></div>
                                     <div class="col-6">Incluido: <?= ( $actividad->incluido == 1 )? 'Sí' : 'No' ?></div>
@@ -183,16 +173,12 @@
 (function(){
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 
-    const inversion     = document.getElementById('inversion');
-    const beneficiarios = document.getElementById('beneficiarios');
-    if ( inversion )          
-        inversion.innerHTML = fu_formatMxn(<?= ($preproyecto->inversion)? $preproyecto->inversion: 0 ?>);
-    if ( beneficiarios )
-        beneficiarios.innerHTML = fu_formatNum(<?= ($preproyecto->cantidad_beneficiarios)? $preproyecto->cantidad_beneficiarios : 0 ?>);
-
+    $('.dinero').each(function(index, input) {
+        $(input).text( '$' + fu_formatNum($(input).text()) );
+    });
 })();
 </script>
 

@@ -13,9 +13,11 @@ function finicia_select2(){
     // Cargar Select2 y establecer Centro como Opción por defecto
     $('#municipio').select2();
     // Autocargar alcance estatal
-    $.when($("#municipio").val(lastMunicipio).change()).then(function() {
-        $("#localidad").val(lastLocalidad).select2();
-    });
+    if ( lastMunicipio ){
+        $.when($("#municipio").val(lastMunicipio).change()).then(function() {
+            $("#localidad").val(lastLocalidad).select2();
+        });
+    }
 
 }
 
@@ -43,7 +45,8 @@ function fguardar(e){
             else if ( input.nombre == 'inversion' || input.nombre == 'cantidad_beneficiada'  ){
                 if ( valor < 0 )
                     errores += `El campo <a href="#${input.nombre}">${input.texto}</a> no puede ser menor 0.<br>`;
-            }
+            } else if ( input.nombre == 'incluido' )
+                datos[input.nombre] = $(`#${input.nombre}`).is(':checked')? true : false;
         });
         if ( ! errores ){
             respuesta   = fu_json_query(
@@ -51,7 +54,7 @@ function fguardar(e){
                 datos 
             );
             if ( respuesta.exito ){
-                fu_notificacion('Se ha registrado la preproyecto exitosamente.', 'success');
+                fu_notificacion('Se ha registrado la actividad exitosamente.', 'success');
                 window.location.replace( url('Preproyectos') );
             } else
                 fu_notificacion(respuesta.mensaje, 'danger');
@@ -60,7 +63,7 @@ function fguardar(e){
             fu_notificacion('Existen campos pendientes por llenar.', 'danger');    
         }
     } catch(e) {
-        fu_alerta('Ha ocurrido un error al guardar la preproyecto, intentelo más tarde.', 'danger');
+        fu_alerta('Ha ocurrido un error al guardar la actividad, intentelo más tarde.', 'danger');
     }
 
     $('#guardar').prop({disabled: false});

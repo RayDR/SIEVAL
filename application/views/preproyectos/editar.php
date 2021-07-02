@@ -81,11 +81,6 @@
 
 <script type="text/javascript">
     var inputs          = JSON.parse('<?php print(json_encode($inputs, JSON_HEX_TAG)); ?>'),
-        municipio       = <?= $preproyecto->municipio_id ?>,
-        localidad       = <?= $preproyecto->localidad_id ?>,
-        linea_accion    = <?= $preproyecto->linea_accion_id ?>,
-        unidad_medida   = <?= $preproyecto->unidad_medida_id ?>,
-        tipo_medicion   = <?= $preproyecto->medicion_id ?>,
-        gbeneficiado    = <?= $preproyecto->beneficiario_id ?>;
+        linea_accion    = <?= $preproyecto->linea_accion_id ?>;
 </script>
 <script src="<?= base_url('assets/js/preproyectos/editar.js') ?>" type="text/javascript" charset="utf-8" async defer></script>

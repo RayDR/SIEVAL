@@ -29,12 +29,12 @@
                             <ul class="nav nav-pills nav-pill-circle flex-column flex-md-row">
                                 <li class="nav-item">
                                     <a id="editar" class="nav-link" aria-label="Tab Editar" href="#editar-actividad" data-bs-toggle="tooltip" title="Editar Actividad">
-                                        <span class="nav-link-icon d-block"><span class="fas fa-pencil-alt"></span></span>
+                                        <span class="nav-link-icon d-block"><span class="fas fa-pencil-alt fa-2x"></span></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a id="reporte" class="nav-link" aria-label="Tab Reporte" href="#reporte-actividad" data-bs-toggle="tooltip" title="Reportar Actividad">
-                                        <span class="nav-link-icon d-block"><span class="fas fa-file-import"></span></span>
+                                        <span class="nav-link-icon d-block"><span class="fas fa-file-contract fa-2x"></span></span>
                                     </a>
                                 </li>
                             </ul>

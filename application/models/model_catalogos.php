@@ -125,6 +125,33 @@ class Model_catalogos extends CI_Model {
 	}
 
 	/**
+		* Devuelve el catalogo de fuentes de financiamiento
+		*
+		* @access public
+		* @param  array   $filtros 			filtros a iterar
+		* @param  boolean $tipo_retorno 	Modo de retonro: 
+		*								 		TRUE - Objeto
+		*								 		FALSE - Array
+		* @return programas
+	*/
+	public function get_fuentes_financiamiento($filtros = NULL, $tipo_retorno = TRUE){
+		try {			
+			if ( is_array($filtros) ){
+				foreach ($filtros as $key => $filtro) {
+					$this->db->where($key, $filtro);
+				}
+			}
+			$programas = $this->db->get('fuentes_financiamiento');
+			if ( $tipo_retorno )
+				return $programas->result();
+			else
+				return $programas->result_array();
+		} catch (Exception $e) {
+			return [];
+		}
+	}
+
+	/**
 		* Devuelve el catalogo de Líneas de Acción
 		*
 		* @access public
@@ -146,6 +173,60 @@ class Model_catalogos extends CI_Model {
 				return $lineas_accion->result();
 			else
 				return $lineas_accion->result_array();
+		} catch (Exception $e) {
+			return [];
+		}
+	}
+
+	/**
+		* Devuelve el catalogo de mediciones
+		*
+		* @access public
+		* @param  array   $filtros 			filtros a iterar
+		* @param  boolean $tipo_retorno 	Modo de retonro: 
+		*								 		TRUE - Objeto
+		*								 		FALSE - Array
+		* @return programas
+	*/
+	public function get_mediciones($filtros = NULL, $tipo_retorno = TRUE){
+		try {			
+			if ( is_array($filtros) ){
+				foreach ($filtros as $key => $filtro) {
+					$this->db->where($key, $filtro);
+				}
+			}
+			$programas = $this->db->get('mediciones');
+			if ( $tipo_retorno )
+				return $programas->result();
+			else
+				return $programas->result_array();
+		} catch (Exception $e) {
+			return [];
+		}
+	}
+
+	/**
+		* Devuelve el catalogo de grupos beneficiados
+		*
+		* @access public
+		* @param  array   $filtros 			filtros a iterar
+		* @param  boolean $tipo_retorno 	Modo de retonro: 
+		*								 		TRUE - Objeto
+		*								 		FALSE - Array
+		* @return programas
+	*/
+	public function get_grupos_beneficiados($filtros = NULL, $tipo_retorno = TRUE){
+		try {			
+			if ( is_array($filtros) ){
+				foreach ($filtros as $key => $filtro) {
+					$this->db->where($key, $filtro);
+				}
+			}
+			$programas = $this->db->get('beneficiados');
+			if ( $tipo_retorno )
+				return $programas->result();
+			else
+				return $programas->result_array();
 		} catch (Exception $e) {
 			return [];
 		}

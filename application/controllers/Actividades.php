@@ -41,6 +41,87 @@ class Actividades extends CI_Controller {
         $this->load->view( RUTA_TEMA . 'body', $data, FALSE );
     }
 
+    public function pdfTEST(){
+        $this->load->library('TCPDF/pdf');
+        $tcpdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+ 
+        // set document information
+        $tcpdf->SetCreator(PDF_CREATOR);
+        $tcpdf->SetAuthor('Muhammad Saqlain Arif');
+        $tcpdf->SetTitle('TCPDF Example 001');
+        $tcpdf->SetSubject('TCPDF Tutorial');
+        $tcpdf->SetKeywords('TCPDF, PDF, example, test, guide');
+         
+        //set default header information
+         
+        $tcpdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,65,256), array(0,65,127));
+        $tcpdf->setFooterData(array(0,65,0), array(0,65,127));
+         
+        //set header  textual styles
+        $tcpdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        //set footer textual styles
+        $tcpdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+         
+        //set default monospaced textual style
+        $tcpdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+         
+        // set default margins
+        $tcpdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        // Set Header Margin
+        $tcpdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        // Set Footer Margin
+        $tcpdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+         
+        // set auto for page breaks
+        $tcpdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+         
+        // set image for scale factor
+        $tcpdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+         
+        // it is optional :: set some language-dependent strings
+        if (@file_exists(dirname(__FILE__).'/lang/eng.php'))
+        {
+        // optional
+        require_once(dirname(__FILE__).'/lang/eng.php');
+        // optional
+        $tcpdf->setLanguageArray($l);
+        }
+         
+        // set default font for subsetting mode
+        $tcpdf->setFontSubsetting(true);
+         
+        // Set textual style
+        // dejavusans is an UTF-8 Unicode textual style, on the off chance that you just need to
+        // print standard ASCII roasts, you can utilize center text styles like
+        // helvetica or times to lessen record estimate.
+        $tcpdf->SetFont('dejavusans', '', 14, '', true);
+         
+        // Add a new page
+        // This technique has a few choices, check the source code documentation for more data.
+        $tcpdf->AddPage();
+         
+        // set text shadow for effect
+        $tcpdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,197,198), 'opacity'=>1, 'blend_mode'=>'Normal'));
+         
+        //Set some substance to print
+         
+        $set_html = <<<EOD
+         
+        <h1>Welcome to <a href="http://www.tcpdf.org" style="text-decoration:none;background-color:#CC0001;color:black;">&nbsp;<span style="color:black;">TC</span><span style="color:white;">PDF Example</span>&nbsp;</a>!</h1>
+        <i>This is the principal case of TCPDF library.</i>
+        <p>This content is printed utilizing the <i>writeHTMLCell()</i> strategy however you can likewise utilize: <i>Multicell(), writeHTML(), Write(), Cell() and Text()</i>.</p>
+        <p>Please check the source code documentation and different cases for further information.</p>
+         
+        EOD;
+         
+        //Print content utilizing writeHTMLCell()
+        $tcpdf->writeHTMLCell(0, 0, '', '', $set_html, 0, 1, 0, true, '', true);
+         
+        // Close and yield PDF record
+        // This technique has a few choices, check the source code documentation for more data.
+        $tcpdf->Output('tcpdfexample-onlinecode.pdf', 'I');
+    }
+
     // Vista de Registro
     public function registrar()
     {
@@ -54,10 +135,13 @@ class Actividades extends CI_Controller {
                      array( 'direccion_id' => $combinacion->direccion_id );
                      
         $data = array(
-            'titulo'    => 'Registrar',            
+            'titulo'    => 'Registrar',
             'programas' =>  $this->model_catalogos->get_programas(),
             'l_accion'  =>  $this->model_catalogos->get_lineas_accion(),
+            'f_financia'=>  $this->model_catalogos->get_fuentes_financiamiento(),
             'u_medida'  =>  $this->model_catalogos->get_unidades_medida($condicion),
+            'g_benef'   =>  $this->model_catalogos->get_grupos_beneficiados(),
+            'mediciones'=>  $this->model_catalogos->get_mediciones(),
             'inputs'    =>  $this->inputs_registro(),
             'view'      => 'actividades/registrar'
         );
@@ -70,6 +154,14 @@ class Actividades extends CI_Controller {
     {
         $json = array('exito' => TRUE);
         $actividad_id = $this->input->post('actividad');
+
+        // Área usuario
+        $area_usuario   = array('combinacion_area_id' => $this->session->userdata('combinacion_area'));
+        $combinacion    = $this->model_catalogos->get_areas( $area_usuario );
+
+        $condicion = ( $this->session->userdata('tuser') == 1 )? NULL : 
+                     array( 'direccion_id' => $combinacion->direccion_id );
+
         if ( $actividad_id ){
             $encabezado   = $this->model_actividades->get_actividad($actividad_id);
             $detalles     = $this->model_actividades->get_seguimiento_actividades($actividad_id);
@@ -78,6 +170,13 @@ class Actividades extends CI_Controller {
                 'view'      => 'actividades/editar',
                 'encabezado'=> $encabezado,
                 'detalles'  => $detalles,
+                'programas' => $this->model_catalogos->get_programas(),
+                'l_accion'  => $this->model_catalogos->get_lineas_accion(),
+                'f_financia'=> $this->model_catalogos->get_fuentes_financiamiento(),
+                'g_benef'   => $this->model_catalogos->get_grupos_beneficiados(),
+                'mediciones'=> $this->model_catalogos->get_mediciones(),
+                'u_medida'  => $this->model_catalogos->get_unidades_medida($condicion),
+                'inputs'    => $this->inputs_registro()
             );
             $json['html'] = $this->load->view( $data['view'], $data, TRUE );
         } else 
@@ -147,12 +246,13 @@ class Actividades extends CI_Controller {
     public function guardar(){
         $json = array('exito' => TRUE);
         $area_origen                    = $this->input->post('area_origen');
-        $programa_presupuestario        = $this->input->post('programa_presupuestario');
         $linea_accion                   = $this->input->post('linea_accion');
+        $fuente_financiamiento          = $this->input->post('fuente_financiamiento');
         $detalle_actividad              = $this->input->post('detalle_actividad');
         $unidad_medida                  = $this->input->post('unidad_medida');
         $tipo_medicion                  = $this->input->post('tipo_medicion');
         $grupo_beneficiado              = $this->input->post('grupo_beneficiado');
+        $programa_presupuestario        = $this->input->post('programa_presupuestario');
         $programado_fisico              = $this->input->post('fisico_objetivo_anual');
         $programado_fisico_mensual      = $this->input->post('programado-fisico');
         $programado_financiero          = $this->input->post('financiero_objetivo_anual');
@@ -160,7 +260,9 @@ class Actividades extends CI_Controller {
 
         $datos  = array(
             'area_origen'                   => $area_origen,
+            'programa_presupuestario'       => $programa_presupuestario,
             'linea_accion'                  => $linea_accion,
+            'fuente_financiamiento'         => $fuente_financiamiento,
             'detalle_actividad'             => $detalle_actividad,
             'unidad_medida'                 => $unidad_medida,
             'tipo_medicion'                 => $tipo_medicion,
@@ -173,8 +275,47 @@ class Actividades extends CI_Controller {
             'ejercicio'                     => date('Y')
         );
 
-        $datos['programa_presupuestario'] = $programa_presupuestario;
-        $json = $this->model_actividades->set_nueva_actividad($datos, TRUE);
+        $json = $this->model_actividades->set_nueva_actividad($datos);
+        return print(json_encode($json));
+    }
+
+    public function guardar_edicion(){
+        $json = array('exito' => TRUE);
+        
+        $proyecto_actividad_id  = $this->input->post('proyecto_id');
+        $actividad_id           = $this->input->post('actividad_id');
+
+        $area_origen                    = $this->input->post('area_origen');
+        $linea_accion                   = $this->input->post('linea_accion');
+        $fuente_financiamiento          = $this->input->post('fuente_financiamiento');
+        $detalle_actividad              = $this->input->post('detalle_actividad');
+        $unidad_medida                  = $this->input->post('unidad_medida');
+        $tipo_medicion                  = $this->input->post('tipo_medicion');
+        $grupo_beneficiado              = $this->input->post('grupo_beneficiado');
+        $programa_presupuestario        = $this->input->post('programa_presupuestario');
+        $programado_fisico              = $this->input->post('fisico_objetivo_anual');
+        $programado_fisico_mensual      = $this->input->post('programado-fisico');
+        $programado_financiero          = $this->input->post('financiero_objetivo_anual');
+        $programado_financiero_mensual  = $this->input->post('programado-financiero');
+
+        $datos  = array(
+            'area_origen'                   => $area_origen,
+            'programa_presupuestario'       => $programa_presupuestario,
+            'linea_accion'                  => $linea_accion,
+            'fuente_financiamiento'         => $fuente_financiamiento,
+            'detalle_actividad'             => $detalle_actividad,
+            'unidad_medida'                 => $unidad_medida,
+            'tipo_medicion'                 => $tipo_medicion,
+            'grupo_beneficiado'             => $grupo_beneficiado,
+            'programado_fisico'             => $programado_fisico,
+            'programado_fisico_mensual'     => $programado_fisico_mensual,
+            'programado_financiero'         => $programado_financiero,
+            'programado_financiero_mensual' => $programado_financiero_mensual,
+            'usuario_id'                    => $this->session->userdata('uid'),
+            'ejercicio'                     => date('Y')
+        );
+
+        $json = $this->model_actividades->update_proyecto_actividad($proyecto_actividad_id, $actividad_id, $datos);
         return print(json_encode($json));
     }
 
@@ -280,6 +421,11 @@ class Actividades extends CI_Controller {
             [
                 'nombre'=> 'linea_accion',
                 'texto' => 'Línea de Acción',
+                'tipo'  => 'select'
+            ],
+            [
+                'nombre'=> 'fuente_financiamiento',
+                'texto' => 'Fuente de Financiamiento',
                 'tipo'  => 'select'
             ],
             [

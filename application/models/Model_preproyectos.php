@@ -93,6 +93,36 @@ class Model_preproyectos extends CI_Model {
         }
     }
 
+    /**
+        * Obtener los datos de una actividad de un preproyecto
+        *
+        * @access public
+        * @param  int     actividad_id      Identificador de actividad
+        * @param  array   $filtros          Filtros a iterar
+        * @param  boolean $tipo_retorno     Modo de retonro: 
+        *                                       TRUE - Objeto
+        *                                       FALSE - Array
+        * @return actividad
+    */
+    public function get_actividad($actividad_id, $filtros = NULL, $tipo_retorno = TRUE){
+        try {           
+            if ( is_array($filtros) ){
+                foreach ($filtros as $key => $filtro) {
+                    $this->db->where($key, $filtro);
+                }
+            }
+            $this->db->where('preproyecto_actividad_id', $actividad_id);
+
+            $actividad = $this->db->get('vw_preproyectos_actividades');
+
+            if ( $tipo_retorno )
+                return $actividad->row();
+            else
+                return $actividad->row_array();
+        } catch (Exception $e) {
+            return [];
+        }
+    }
 
     /**
         * Registrar una activiad nueva
@@ -112,7 +142,7 @@ class Model_preproyectos extends CI_Model {
                     'linea_accion_id'           => $datos['linea_accion'],
                     'actividad'                 => $datos['detalle_preproyecto'],
                     'seccion'                   => $datos['seccion'],
-                    'incluido'                  => ( $datos['incluido'] )? $datos['incluido'] : 0,
+                    'incluido'                  => ( $datos['incluido'] == 'true' )? 1 : 0,
                     'url'                       => $datos['url'],
                     'usuario_id'                => $datos['usuario_id'],
                 );
@@ -150,7 +180,7 @@ class Model_preproyectos extends CI_Model {
                     'linea_accion_id'           => $datos['linea_accion'],
                     'actividad'                 => $datos['detalle_preproyecto'],
                     'seccion'                   => $datos['seccion'],
-                    'incluido'                  => ( $datos['incluido'] )? $datos['incluido'] : 0,
+                    'incluido'                  => ( $datos['incluido'] == 'true' )? 1 : 0,
                     'url'                       => $datos['url'],
                     'usuario_id_modifica'       => $datos['usuario_id'],
                 );
@@ -195,7 +225,7 @@ class Model_preproyectos extends CI_Model {
                     'inversion'                 => $datos['inversion'],
                     'trimestre'                 => $datos['trimestre'],
                     'seccion'                   => $datos['seccion'],
-                    'incluido'                  => ( $datos['incluido'] )? $datos['incluido'] : 0,
+                    'incluido'                  => ( $datos['incluido'] == 'true' )? 1 : 0,
                     'fecha_inicio'              => $datos['fecha_inicio'],
                     'fecha_termino'             => $datos['fecha_termino'],
                     'url'                       => $datos['url'],
@@ -204,6 +234,52 @@ class Model_preproyectos extends CI_Model {
                 $this->db->insert('preproyectos_actividades', $db_datos);
                 $preproyecto = $this->db->insert_id();
                 $resultado['preproyecto'] = $preproyecto;
+            } else
+                throw new Exception('La estructura de los datos es incorrecta.');
+
+            $this->db->trans_commit();
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
+            $resultado['exito'] = FALSE;
+            $resultado['error'] = $e;
+        }
+        return $resultado;
+    }
+
+    /**
+        * Editar actividad de un preproyecto
+        *
+        * @access public
+        * @param  array   $datos                Datos a almacenar en preproyectos
+        *
+        * @return resultado[]
+    */
+    public function editar_actividad($preproyecto_actividad_id, $datos){
+        $resultado = array('exito' => TRUE);
+        try {
+            $this->db->trans_begin();
+
+            if ( is_array($datos) ){
+                $db_datos = array(
+                    'municipio_id'              => $datos['municipio'],
+                    'localidad_id'              => $datos['localidad'],
+                    'linea_accion_id'           => $datos['linea_accion'],
+                    'actividad'                 => $datos['detalle_preproyecto'],
+                    'unidad_medida_id'          => $datos['unidad_medida'],
+                    'medicion_id'               => $datos['tipo_medicion'],
+                    'beneficiario_id'           => $datos['grupo_beneficiado'],
+                    'cantidad_beneficiarios'    => $datos['cantidad_beneficiarios'],
+                    'inversion'                 => $datos['inversion'],
+                    'trimestre'                 => $datos['trimestre'],
+                    'seccion'                   => $datos['seccion'],
+                    'incluido'                  => ( $datos['incluido'] == 'true' )? 1 : 0,
+                    'fecha_inicio'              => $datos['fecha_inicio'],
+                    'fecha_termino'             => $datos['fecha_termino'],
+                    'url'                       => $datos['url'],
+                    'usuario_id_modifica'       => $datos['usuario_id'],
+                );
+                $this->db->where('preproyecto_actividad_id', $preproyecto_actividad_id);
+                $this->db->update('preproyectos_actividades', $db_datos);
             } else
                 throw new Exception('La estructura de los datos es incorrecta.');
 

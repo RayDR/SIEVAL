@@ -57,19 +57,18 @@
                             <label class="my-1 me-2" for="tipo_medicion">Tipo de Medición</label>
                             <select class="form-select" id="tipo_medicion" aria-label="Default select example">
                                 <option selected disabled>Seleccione una opción</option>
-                                <option value="1">Absoluto</option>
-                                <option value="2">Porcentaje</option>
-                                <option value="3">Promedio</option>
+                                <?php foreach ($mediciones as $key => $medicion): ?>
+                                <option value="<?= $medicion->medicion_id ?>"><?= $medicion->descripcion ?></option>
+                                <?php endforeach; ?>  
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="my-1 me-2" for="grupo_beneficiado">Grupo Beneficiado</label>
                             <select class="form-select" id="grupo_beneficiado" aria-label="Default select example">
                                 <option selected disabled>Seleccione una opción</option>
-                                <option value="1">Masculino</option>
-                                <option value="2">Femenino</option>
-                                <option value="3">Ambos</option>
-                                <option value="4">No Aplica</option>
+                                <?php foreach ($g_benef as $key => $grupo): ?>
+                                <option value="<?= $grupo->beneficiado_id ?>"><?= $grupo->descripcion ?></option>
+                                <?php endforeach; ?> 
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -164,7 +163,7 @@
 
 <script type="text/javascript">
     var inputs          = JSON.parse('<?php print(json_encode($inputs, JSON_HEX_TAG)); ?>'),
-        lastMunicipio   = '<?= ($actividades)? $actividades[0]->municipio_id : $preproyecto->municipio_id  ?>',
-        lastLocalidad   = '<?= ($actividades)? $actividades[0]->localidad_id : $preproyecto->localidad_id  ?>';
+        lastMunicipio   = '<?= ($actividades)? $actividades[0]->municipio_id : 18 ?>',
+        lastLocalidad   = '<?= ($actividades)? $actividades[0]->localidad_id : 2717 ?>';
 </script>
 <script src="<?= base_url('assets/js/preproyectos/actividades.js') ?>" type="text/javascript" charset="utf-8" async defer></script>

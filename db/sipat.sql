@@ -102,7 +102,6 @@ CREATE TABLE `actividades` (
   `cantidad_beneficiario` float(11,2) DEFAULT NULL,
   `usuario_id` int(11) DEFAULT NULL,
   `monto_presupuestado` float(11,2) DEFAULT NULL,
-  `narrativa_general` text,
   `ejercicio` int(6) DEFAULT NULL,
   PRIMARY KEY (`actividad_id`) USING BTREE,
   KEY `unidad_medida_id` (`unidad_medida_id`),
@@ -111,7 +110,7 @@ CREATE TABLE `actividades` (
   KEY `beneficiado_id` (`beneficiado_id`),
   CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`proyecto_actividad_id`) REFERENCES `proyectos_actividades` (`proyecto_actividad_id`),
   CONSTRAINT `actividades_ibfk_2` FOREIGN KEY (`beneficiado_id`) REFERENCES `beneficiados` (`beneficiado_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,6 +119,7 @@ CREATE TABLE `actividades` (
 
 LOCK TABLES `actividades` WRITE;
 /*!40000 ALTER TABLE `actividades` DISABLE KEYS */;
+INSERT INTO `actividades` VALUES (1,'Pague este sistema para que quedara mas perrón','2021-06-28 00:49:38','2021-06-28 00:49:38',5,1,103,1,1,100.00,1,1500000.00,NULL),(2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ','2021-06-28 05:48:00','2021-06-28 05:48:00',6,1,54,1,4,100.00,1,15000.00,2021);
 /*!40000 ALTER TABLE `actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +147,7 @@ CREATE TABLE `actividades_detalladas` (
   PRIMARY KEY (`actividad_detallada_id`) USING BTREE,
   KEY `actividad_id` (`actividad_id`),
   CONSTRAINT `actividades_detalladas_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `actividades` (`actividad_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,6 +156,7 @@ CREATE TABLE `actividades_detalladas` (
 
 LOCK TABLES `actividades_detalladas` WRITE;
 /*!40000 ALTER TABLE `actividades_detalladas` DISABLE KEYS */;
+INSERT INTO `actividades_detalladas` VALUES (1,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,1,10.00,NULL,1000000.00,NULL,1),(2,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,2,10.00,NULL,100000.00,NULL,1),(3,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,3,50.00,NULL,100000.00,NULL,1),(4,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,4,30.00,NULL,300000.00,NULL,1),(5,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,5,0.00,NULL,0.00,NULL,1),(6,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,6,0.00,NULL,0.00,NULL,1),(7,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,7,0.00,NULL,0.00,NULL,1),(8,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,8,0.00,NULL,0.00,NULL,1),(9,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,9,0.00,NULL,0.00,NULL,1),(10,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,10,0.00,NULL,0.00,NULL,1),(11,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,11,0.00,NULL,0.00,NULL,1),(12,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,12,0.00,NULL,0.00,NULL,1),(13,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,1,10.00,NULL,1000.00,NULL,1),(14,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,2,10.00,NULL,1000.00,NULL,1),(15,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,3,10.00,NULL,1000.00,NULL,1),(16,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,4,10.00,NULL,1000.00,NULL,1),(17,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,5,10.00,NULL,1000.00,NULL,1),(18,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,6,10.00,NULL,1000.00,NULL,1),(19,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,7,10.00,NULL,5000.00,NULL,1),(20,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,8,10.00,NULL,1000.00,NULL,1),(21,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,9,10.00,NULL,2000.00,NULL,1),(22,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,10,10.00,NULL,1000.00,NULL,1),(23,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,11,0.00,NULL,0.00,NULL,1),(24,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,12,0.00,NULL,0.00,NULL,1);
 /*!40000 ALTER TABLE `actividades_detalladas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +182,7 @@ CREATE TABLE `acuerdos` (
   KEY `tema_id` (`tema_id`),
   CONSTRAINT `acuerdos_ibfk_1` FOREIGN KEY (`tema_id`) REFERENCES `temas` (`tema_id`),
   CONSTRAINT `fk_combinacion_area` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,6 +191,7 @@ CREATE TABLE `acuerdos` (
 
 LOCK TABLES `acuerdos` WRITE;
 /*!40000 ALTER TABLE `acuerdos` DISABLE KEYS */;
+INSERT INTO `acuerdos` VALUES (1,1,'sdasdsadsadasdsad',1,1,2021,1,'2021-06-29 06:49:05','2021-06-29 06:49:05'),(2,1,'sadsadasdasdasd',1,1,2021,1,'2021-06-29 06:49:42','2021-06-29 06:49:42');
 /*!40000 ALTER TABLE `acuerdos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -601,11 +603,11 @@ DROP TABLE IF EXISTS `fuentes_financiamiento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fuentes_financiamiento` (
-  `fuente_finaciamiento_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fuente_financiamiento_id` int(11) NOT NULL AUTO_INCREMENT,
   `cve_fuente_financiamiento` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `estatus` int(11) DEFAULT '1',
-  PRIMARY KEY (`fuente_finaciamiento_id`) USING BTREE
+  PRIMARY KEY (`fuente_financiamiento_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -926,7 +928,7 @@ CREATE TABLE `preproyectos` (
   CONSTRAINT `fk_ums_preproyectos` FOREIGN KEY (`unidad_medida_id`) REFERENCES `unidades_medida` (`unidad_medida_id`),
   CONSTRAINT `fk_usuario_modifica_preproyecto` FOREIGN KEY (`usuario_id_modifica`) REFERENCES `usuarios` (`usuario_id`),
   CONSTRAINT `fk_usuarios_preproyecto` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -935,6 +937,7 @@ CREATE TABLE `preproyectos` (
 
 LOCK TABLES `preproyectos` WRITE;
 /*!40000 ALTER TABLE `preproyectos` DISABLE KEYS */;
+INSERT INTO `preproyectos` VALUES (1,5,'0000-00-00 00:00:00','0000-00-00 00:00:00','dsafdasdfsadasdasd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'https://psiqueyciencia.com/comming-soon/',1,1,1,1,1,NULL,'2021-06-28 12:33:44','2021-06-28 12:42:48'),(2,6,'0000-00-00 00:00:00','0000-00-00 00:00:00','asdsadasdsadasdfdfkvgb sdivnmv4ds451521sd dsfasddasd 6as21d6as2d3as0d3asd0 as63d',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'http://aplicaciones.setab.gob.mx/aprendeencasa/sources/img/Verano/Verano-00.png',2,1,1,1,1,NULL,'2021-06-28 12:35:39','2021-06-28 12:42:56'),(3,5,'0000-00-00 00:00:00','0000-00-00 00:00:00','sdfsd sdfsd5 4fsd5 3r342978339',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'https://youtu.be/FWwLZN3aRL0',0,0,1,1,NULL,NULL,'2021-06-28 12:36:19',NULL),(4,9,'0000-00-00 00:00:00','0000-00-00 00:00:00','z<dxz<xz<x<zx<zx<zx',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',0,1,1,1,1,NULL,'2021-06-28 12:36:53','2021-06-29 10:17:27'),(5,1,'0000-00-00 00:00:00','0000-00-00 00:00:00','Pinche preproyec5o vergas wey',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',1,0,1,1,1,NULL,'2021-06-29 11:33:29','2021-06-29 11:33:40');
 /*!40000 ALTER TABLE `preproyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -970,7 +973,7 @@ CREATE TABLE `preproyectos_actividades` (
   `fecha_modificacion` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `estatus_id` int(11) DEFAULT '1',
   PRIMARY KEY (`preproyecto_actividad_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -979,6 +982,7 @@ CREATE TABLE `preproyectos_actividades` (
 
 LOCK TABLES `preproyectos_actividades` WRITE;
 /*!40000 ALTER TABLE `preproyectos_actividades` DISABLE KEYS */;
+INSERT INTO `preproyectos_actividades` VALUES (1,2,'sadfaslkndoikasjndpkasdp´lkaspdokjaspkdpolaksdpkmaspdmaspdmaslpmdñlasmdñalsmdñlasm',6,2,466,76,2,2,100,NULL,15050.00,'https://psiqueyciencia.com/comming-soon/',2,'2021-04-01 00:00:00','2021-06-30 00:00:00',2,0,1,1,'2021-06-28 12:46:23','2021-06-29 11:23:09',1),(2,4,'sadasdasdsadasdasdasdsadsdasdasasa',9,15,2428,9,2,2,150,NULL,15000000.00,'https://psiqueyciencia.com/comming-soon/',2,'2021-04-01 00:00:00','2021-06-30 00:00:00',2,1,1,1,'2021-06-29 10:18:12','2021-06-29 11:37:05',1),(3,4,'Avemus cacao',9,15,2427,9,2,1,100,NULL,1556930.00,'https://psiqueyciencia.com/comming-soon/',3,'2021-07-01 00:00:00','2021-09-30 00:00:00',2,1,1,1,'2021-06-29 11:16:55','2021-06-29 11:33:00',1),(4,4,'asfkohaseu hsskasbdishanksa sndoijakd asa',9,14,2380,122,1,1,15151,NULL,5612650.00,'https://psiqueyciencia.com/comming-soon/',1,'2021-01-01 00:00:00','2021-03-31 00:00:00',1,0,1,NULL,'2021-06-29 11:18:21',NULL,1),(5,3,'Ashaushaushaushuahsuahsuahsua',5,18,2717,58,1,2,0,NULL,0.00,'',1,'2021-01-01 00:00:00','2021-03-31 00:00:00',0,1,1,1,'2021-06-29 11:42:21','2021-06-29 11:42:37',1),(6,3,'ahsauhsuahsuahsuahs por 2',5,14,2378,116,2,2,1000,NULL,15151515.00,'',1,'2021-01-01 00:00:00','2021-03-31 00:00:00',1,1,1,1,'2021-06-29 11:43:19','2021-06-29 11:43:39',1);
 /*!40000 ALTER TABLE `preproyectos_actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1023,10 +1027,8 @@ CREATE TABLE `proyectos_actividades` (
   `proyecto_actividad_id` int(11) NOT NULL AUTO_INCREMENT,
   `combinacion_area_id` int(11) DEFAULT NULL,
   `programa_presupuestario_id` int(11) DEFAULT NULL,
-  `objetivo_programa_id` int(11) DEFAULT NULL,
-  `estrategia_programa_id` int(11) DEFAULT NULL,
   `linea_accion_id` int(11) DEFAULT NULL,
-  `fuente_finaciamiento_id` int(11) NOT NULL,
+  `fuente_financiamiento_id` int(11) NOT NULL,
   `objetivo_presupuestario_id` int(11) DEFAULT NULL,
   `fecha_creacion` datetime DEFAULT CURRENT_TIMESTAMP,
   `fecha_actualizacion` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -1036,9 +1038,7 @@ CREATE TABLE `proyectos_actividades` (
   `secuencia_actividad` int(11) DEFAULT NULL,
   `preproyecto` int(11) DEFAULT '0',
   PRIMARY KEY (`proyecto_actividad_id`) USING BTREE,
-  KEY `fuente_finaciamiento_id` (`fuente_finaciamiento_id`),
-  KEY `estrategia_programa_id` (`estrategia_programa_id`),
-  KEY `objetivo_institucional_id` (`objetivo_programa_id`),
+  KEY `fuente_finaciamiento_id` (`fuente_financiamiento_id`),
   KEY `objetivo_presupuestario_id` (`objetivo_presupuestario_id`),
   KEY `programa_presupuestario_id` (`programa_presupuestario_id`),
   KEY `usuario_id` (`usuario_id`),
@@ -1048,7 +1048,7 @@ CREATE TABLE `proyectos_actividades` (
   CONSTRAINT `proyectos_actividades_ibfk_2` FOREIGN KEY (`programa_presupuestario_id`) REFERENCES `programas_presupuestarios` (`programa_presupuestario_id`),
   CONSTRAINT `proyectos_actividades_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`),
   CONSTRAINT `proyectos_actividades_ibfk_4` FOREIGN KEY (`linea_accion_id`) REFERENCES `lineas_accion` (`linea_accion_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1057,6 +1057,7 @@ CREATE TABLE `proyectos_actividades` (
 
 LOCK TABLES `proyectos_actividades` WRITE;
 /*!40000 ALTER TABLE `proyectos_actividades` DISABLE KEYS */;
+INSERT INTO `proyectos_actividades` VALUES (5,11,NULL,4,0,NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38','2021',1,1,NULL,0),(6,11,4,4,2,NULL,'2021-06-28 05:48:00','2021-06-28 07:22:44','2021',1,1,NULL,0);
 /*!40000 ALTER TABLE `proyectos_actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1150,7 +1151,7 @@ CREATE TABLE `seguimientos_acuerdos` (
   CONSTRAINT `fk_combinacion_area_sa` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`),
   CONSTRAINT `fk_estatus_acuerdos` FOREIGN KEY (`estatus_acuerdo_id`) REFERENCES `estatus_acuerdos` (`estatus_acuerdo_id`),
   CONSTRAINT `seguimientos_acuerdos_ibfk_1` FOREIGN KEY (`acuerdo_id`) REFERENCES `acuerdos` (`acuerdo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1159,6 +1160,7 @@ CREATE TABLE `seguimientos_acuerdos` (
 
 LOCK TABLES `seguimientos_acuerdos` WRITE;
 /*!40000 ALTER TABLE `seguimientos_acuerdos` DISABLE KEYS */;
+INSERT INTO `seguimientos_acuerdos` VALUES (1,1,1,2021,'sdasdsadsadasdsad',1,1,1,'beautiful-blur-casual-935756.jpg,MUESTRA - Manual de Imagen Corporativa Psique y Ciencia _ 2019.pdf','2021-06-29 06:49:05','2021-06-29 06:59:37',1),(2,2,1,2021,'sadsadasdasdasd',1,1,NULL,'care-connection-device-1282308.jpg','2021-06-29 06:49:42','2021-06-29 06:49:42',1),(3,1,2,2021,'Ya quedo',1,1,1,'Logo.png','2021-06-29 06:59:37','2021-06-29 07:00:04',2),(4,1,3,2021,'dsfsdfsdfsdfsdfdsf',1,1,1,NULL,'2021-06-29 07:00:04','2021-06-29 07:00:04',3);
 /*!40000 ALTER TABLE `seguimientos_acuerdos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1646,25 +1648,9 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `objetivo`,
  1 AS `estrategia_programa_id`,
  1 AS `estrategia`,
- 1 AS `trimestre`,
  1 AS `fecha_inicio`,
  1 AS `fecha_termino`,
  1 AS `actividad`,
- 1 AS `municipio_id`,
- 1 AS `municipio`,
- 1 AS `localidad_id`,
- 1 AS `localidad`,
- 1 AS `ambito_localidad`,
- 1 AS `unidad_medida_id`,
- 1 AS `cve_medida`,
- 1 AS `unidad_medida`,
- 1 AS `medicion_id`,
- 1 AS `cve_medicion`,
- 1 AS `medicion`,
- 1 AS `beneficiario_id`,
- 1 AS `beneficiados`,
- 1 AS `cantidad_beneficiarios`,
- 1 AS `inversion`,
  1 AS `url`,
  1 AS `seccion`,
  1 AS `incluido`,
@@ -1793,9 +1779,11 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `proyecto_actividad_id`,
  1 AS `actividad_general`,
  1 AS `folio`,
+ 1 AS `programa_presupuestario_id`,
  1 AS `cve_programa`,
  1 AS `programa_presupuestario`,
  1 AS `techo_financiero`,
+ 1 AS `fuente_financiamiento_id`,
  1 AS `cve_fuente_financiamiento`,
  1 AS `descripcion`,
  1 AS `usuario_proyecto_id`,
@@ -1835,8 +1823,10 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `vw_proyectos` AS SELECT 
  1 AS `cve_programa`,
+ 1 AS `programa_presupuestario_id`,
  1 AS `programa_presupuestario`,
  1 AS `techo_financiero`,
+ 1 AS `fuente_financiamiento_id`,
  1 AS `cve_fuente_financiamiento`,
  1 AS `descripcion`,
  1 AS `ejercicio`,
@@ -1982,7 +1972,8 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `primer_apellido_usuario_recibe`,
  1 AS `segundo_apellido_usuario_recibe`,
  1 AS `usuario_recibe`,
- 1 AS `fecha_respuesta`*/;
+ 1 AS `fecha_respuesta`,
+ 1 AS `estatus`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -2055,7 +2046,8 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `fecha_actualizacion_seguimiento`,
  1 AS `estatus_acuerdo_id`,
  1 AS `estatus_seguimiento`,
- 1 AS `fecha_respuesta`*/;
+ 1 AS `fecha_respuesta`,
+ 1 AS `estatus`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -2113,7 +2105,8 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `usuario_envia`,
  1 AS `usuario_id_recibe`,
  1 AS `usuario_recibe`,
- 1 AS `fecha_respuesta`*/;
+ 1 AS `fecha_respuesta`,
+ 1 AS `estatus`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -2332,7 +2325,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_preproyectos` AS select `preproyectos`.`preproyecto_id` AS `preproyecto_id`,`preproyectos`.`linea_accion_id` AS `linea_accion_id`,`lineas_accion`.`descripcion` AS `linea_accion`,`lineas_accion`.`ejercicio` AS `ejercicio`,`lineas_accion`.`objetivo_programa_id` AS `objetivo_programa_id`,`objetivos_programas`.`cve_objetivo` AS `cve_objetivo`,`objetivos_programas`.`descripcion` AS `objetivo`,`lineas_accion`.`estrategia_programa_id` AS `estrategia_programa_id`,`estrategias_programa`.`descripcion` AS `estrategia`,`preproyectos`.`trimestre` AS `trimestre`,`preproyectos`.`fecha_inicio` AS `fecha_inicio`,`preproyectos`.`fecha_termino` AS `fecha_termino`,`preproyectos`.`actividad` AS `actividad`,`preproyectos`.`municipio_id` AS `municipio_id`,`municipios`.`descripcion` AS `municipio`,`preproyectos`.`localidad_id` AS `localidad_id`,`localidades`.`descripcion` AS `localidad`,`localidades`.`ambito_id` AS `ambito_localidad`,`preproyectos`.`unidad_medida_id` AS `unidad_medida_id`,`unidades_medida`.`cve_medida` AS `cve_medida`,`unidades_medida`.`descripcion` AS `unidad_medida`,`preproyectos`.`medicion_id` AS `medicion_id`,`mediciones`.`cve_medicion` AS `cve_medicion`,`mediciones`.`descripcion` AS `medicion`,`preproyectos`.`beneficiario_id` AS `beneficiario_id`,`beneficiados`.`descripcion` AS `beneficiados`,`preproyectos`.`cantidad_beneficiarios` AS `cantidad_beneficiarios`,`preproyectos`.`inversion` AS `inversion`,`preproyectos`.`url` AS `url`,`preproyectos`.`seccion` AS `seccion`,`preproyectos`.`incluido` AS `incluido`,`preproyectos`.`usuario_id` AS `usuario_id`,`usuarios`.`usuario` AS `usuario`,`usuarios`.`nombres` AS `usuario_nombres`,`usuarios`.`primer_apellido` AS `usuario_primer_apellido`,`usuarios`.`segundo_apellido` AS `usuario_segundo_apellido`,concat_ws(' ',`usuarios`.`nombres`,`usuarios`.`primer_apellido`,`usuarios`.`segundo_apellido`) AS `usuario_nombre_completo`,`preproyectos`.`usuario_id_modifica` AS `usuario_id_modifica`,`usuario_modifico`.`usuario` AS `usuario_modifico`,`usuario_modifico`.`nombres` AS `usuario_modifico_nombres`,`usuario_modifico`.`primer_apellido` AS `usuario_modifico_primer_apellido`,`usuario_modifico`.`segundo_apellido` AS `usuario_modifico_segundo_apellido`,concat_ws(' ',`usuario_modifico`.`nombres`,`usuario_modifico`.`primer_apellido`,`usuario_modifico`.`segundo_apellido`) AS `usuario_modifico_nombre_completo`,`preproyectos`.`fecha_creacion` AS `fecha_creacion`,`preproyectos`.`fecha_modificacion` AS `fecha_modificacion`,`preproyectos`.`estatus_id` AS `estatus_id`,`preproyecto_estatus`.`descripcion` AS `estatus`,`preproyecto_estatus`.`estatus_clave` AS `estatus_clave`,`preproyecto_estatus`.`estatus_html` AS `estatus_html` from (((((((((((`preproyectos` join `lineas_accion` on((`lineas_accion`.`linea_accion_id` = `preproyectos`.`linea_accion_id`))) join `objetivos_programas` on((`objetivos_programas`.`objetivo_programa_id` = `lineas_accion`.`objetivo_programa_id`))) join `estrategias_programa` on((`estrategias_programa`.`estrategia_programa_id` = `lineas_accion`.`estrategia_programa_id`))) left join `municipios` on((`municipios`.`municipio_id` = `preproyectos`.`municipio_id`))) left join `localidades` on((`localidades`.`localidad_id` = `preproyectos`.`localidad_id`))) left join `unidades_medida` on((`unidades_medida`.`unidad_medida_id` = `preproyectos`.`unidad_medida_id`))) left join `mediciones` on((`mediciones`.`medicion_id` = `preproyectos`.`medicion_id`))) left join `beneficiados` on((`beneficiados`.`beneficiado_id` = `preproyectos`.`beneficiario_id`))) join `usuarios` on((`usuarios`.`usuario_id` = `preproyectos`.`usuario_id`))) join `preproyecto_estatus` on((`preproyecto_estatus`.`estatus_preproyecto_id` = `preproyectos`.`estatus_id`))) left join `usuarios` `usuario_modifico` on((`usuario_modifico`.`usuario_id` = `preproyectos`.`usuario_id_modifica`))) */;
+/*!50001 VIEW `vw_preproyectos` AS select `preproyectos`.`preproyecto_id` AS `preproyecto_id`,`preproyectos`.`linea_accion_id` AS `linea_accion_id`,`lineas_accion`.`descripcion` AS `linea_accion`,`lineas_accion`.`ejercicio` AS `ejercicio`,`lineas_accion`.`objetivo_programa_id` AS `objetivo_programa_id`,`objetivos_programas`.`cve_objetivo` AS `cve_objetivo`,`objetivos_programas`.`descripcion` AS `objetivo`,`lineas_accion`.`estrategia_programa_id` AS `estrategia_programa_id`,`estrategias_programa`.`descripcion` AS `estrategia`,`preproyectos`.`fecha_inicio` AS `fecha_inicio`,`preproyectos`.`fecha_termino` AS `fecha_termino`,`preproyectos`.`actividad` AS `actividad`,`preproyectos`.`url` AS `url`,`preproyectos`.`seccion` AS `seccion`,`preproyectos`.`incluido` AS `incluido`,`preproyectos`.`usuario_id` AS `usuario_id`,`usuarios`.`usuario` AS `usuario`,`usuarios`.`nombres` AS `usuario_nombres`,`usuarios`.`primer_apellido` AS `usuario_primer_apellido`,`usuarios`.`segundo_apellido` AS `usuario_segundo_apellido`,concat_ws(' ',`usuarios`.`nombres`,`usuarios`.`primer_apellido`,`usuarios`.`segundo_apellido`) AS `usuario_nombre_completo`,`preproyectos`.`usuario_id_modifica` AS `usuario_id_modifica`,`usuario_modifico`.`usuario` AS `usuario_modifico`,`usuario_modifico`.`nombres` AS `usuario_modifico_nombres`,`usuario_modifico`.`primer_apellido` AS `usuario_modifico_primer_apellido`,`usuario_modifico`.`segundo_apellido` AS `usuario_modifico_segundo_apellido`,concat_ws(' ',`usuario_modifico`.`nombres`,`usuario_modifico`.`primer_apellido`,`usuario_modifico`.`segundo_apellido`) AS `usuario_modifico_nombre_completo`,`preproyectos`.`fecha_creacion` AS `fecha_creacion`,`preproyectos`.`fecha_modificacion` AS `fecha_modificacion`,`preproyectos`.`estatus_id` AS `estatus_id`,`preproyecto_estatus`.`descripcion` AS `estatus`,`preproyecto_estatus`.`estatus_clave` AS `estatus_clave`,`preproyecto_estatus`.`estatus_html` AS `estatus_html` from ((((((`preproyectos` join `lineas_accion` on((`lineas_accion`.`linea_accion_id` = `preproyectos`.`linea_accion_id`))) join `objetivos_programas` on((`objetivos_programas`.`objetivo_programa_id` = `lineas_accion`.`objetivo_programa_id`))) join `estrategias_programa` on((`estrategias_programa`.`estrategia_programa_id` = `lineas_accion`.`estrategia_programa_id`))) join `usuarios` on((`usuarios`.`usuario_id` = `preproyectos`.`usuario_id`))) join `preproyecto_estatus` on((`preproyecto_estatus`.`estatus_preproyecto_id` = `preproyectos`.`estatus_id`))) left join `usuarios` `usuario_modifico` on((`usuario_modifico`.`usuario_id` = `preproyectos`.`usuario_id_modifica`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2386,7 +2379,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_proyecto_actividades` AS select `act`.`actividad_id` AS `actividad_id`,`act`.`descripcion` AS `actividad`,`act`.`beneficiado_id` AS `beneficiado_id`,`b`.`descripcion` AS `beneficiados`,`act`.`cantidad_beneficiario` AS `cantidad_beneficiario`,`act`.`estatus` AS `estatus_actividad`,`act`.`fecha_creacion` AS `fecha_creacion_actividad`,`act`.`fecha_actualizacion` AS `fecha_actualizacion_actividad`,`act`.`medicion_id` AS `medicion_id`,`medic`.`descripcion` AS `medicion`,`act`.`unidad_medida_id` AS `unidad_medida_id`,`uni_med`.`descripcion` AS `unidad_medida`,`act`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`act`.`descripcion` AS `actividad_general`,concat_ws('-',`proy`.`proyecto_actividad_id`,`act`.`actividad_id`) AS `folio`,`proy`.`cve_programa` AS `cve_programa`,`proy`.`programa_presupuestario` AS `programa_presupuestario`,`proy`.`techo_financiero` AS `techo_financiero`,`proy`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`proy`.`descripcion` AS `descripcion`,`proy`.`usuario_id` AS `usuario_proyecto_id`,`proy`.`fecha_creacion_proyecto` AS `fecha_creacion_proyecto`,`proy`.`fecha_actualizacion_proyecto` AS `fecha_actualizacion_proyecto`,`proy`.`cve_direccion_proyecto` AS `cve_direccion_proyecto`,`proy`.`direccion_proyecto` AS `direccion_proyecto`,`proy`.`cve_subdireccion_proyecto` AS `cve_subdireccion_proyecto`,`proy`.`subdireccion_proyecto` AS `subdireccion_proyecto`,`proy`.`cve_departamento_proyecto` AS `cve_departamento_proyecto`,`proy`.`departamento_proyecto` AS `departamento_proyecto`,`proy`.`cve_area_proyecto` AS `cve_area_proyecto`,`proy`.`area_proyecto` AS `area_proyecto`,`proy`.`direccion_proyecto_id` AS `direccion_proyecto_id`,`proy`.`subdireccion_proyecto_id` AS `subdireccion_proyecto_id`,`proy`.`departamento_proyecto_id` AS `departamento_proyecto_id`,`proy`.`area_proyecto_id` AS `area_proyecto_id`,`proy`.`linea_accion_id` AS `linea_accion_id`,`proy`.`linea_accion` AS `linea_accion`,`proy`.`objetivo_programa_id` AS `objetivo_programa_id`,`proy`.`objetivo_programa` AS `objetivo_programa`,`proy`.`estrategia_programa_id` AS `estrategia_programa_id`,`proy`.`estrategia_programa` AS `estrategia_programa`,(select sum(`vw_seguimiento_actividades`.`programado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_fisico`,(select sum(`vw_seguimiento_actividades`.`realizado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_fisico`,(select sum(`vw_seguimiento_actividades`.`programado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_financiero`,(select sum(`vw_seguimiento_actividades`.`realizado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_financiero` from ((((`actividades` `act` join `vw_proyectos` `proy` on((`act`.`proyecto_actividad_id` = `proy`.`proyecto_actividad_id`))) join `unidades_medida` `uni_med` on((`act`.`unidad_medida_id` = `uni_med`.`unidad_medida_id`))) join `mediciones` `medic` on((`act`.`medicion_id` = `medic`.`medicion_id`))) join `beneficiados` `b` on((`act`.`beneficiado_id` = `b`.`beneficiado_id`))) order by `proy`.`proyecto_actividad_id`,`act`.`actividad_id` desc */;
+/*!50001 VIEW `vw_proyecto_actividades` AS select `act`.`actividad_id` AS `actividad_id`,`act`.`descripcion` AS `actividad`,`act`.`beneficiado_id` AS `beneficiado_id`,`b`.`descripcion` AS `beneficiados`,`act`.`cantidad_beneficiario` AS `cantidad_beneficiario`,`act`.`estatus` AS `estatus_actividad`,`act`.`fecha_creacion` AS `fecha_creacion_actividad`,`act`.`fecha_actualizacion` AS `fecha_actualizacion_actividad`,`act`.`medicion_id` AS `medicion_id`,`medic`.`descripcion` AS `medicion`,`act`.`unidad_medida_id` AS `unidad_medida_id`,`uni_med`.`descripcion` AS `unidad_medida`,`act`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`act`.`descripcion` AS `actividad_general`,concat_ws('-',`proy`.`proyecto_actividad_id`,`act`.`actividad_id`) AS `folio`,`proy`.`programa_presupuestario_id` AS `programa_presupuestario_id`,`proy`.`cve_programa` AS `cve_programa`,`proy`.`programa_presupuestario` AS `programa_presupuestario`,`proy`.`techo_financiero` AS `techo_financiero`,`proy`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`proy`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`proy`.`descripcion` AS `descripcion`,`proy`.`usuario_id` AS `usuario_proyecto_id`,`proy`.`fecha_creacion_proyecto` AS `fecha_creacion_proyecto`,`proy`.`fecha_actualizacion_proyecto` AS `fecha_actualizacion_proyecto`,`proy`.`cve_direccion_proyecto` AS `cve_direccion_proyecto`,`proy`.`direccion_proyecto` AS `direccion_proyecto`,`proy`.`cve_subdireccion_proyecto` AS `cve_subdireccion_proyecto`,`proy`.`subdireccion_proyecto` AS `subdireccion_proyecto`,`proy`.`cve_departamento_proyecto` AS `cve_departamento_proyecto`,`proy`.`departamento_proyecto` AS `departamento_proyecto`,`proy`.`cve_area_proyecto` AS `cve_area_proyecto`,`proy`.`area_proyecto` AS `area_proyecto`,`proy`.`direccion_proyecto_id` AS `direccion_proyecto_id`,`proy`.`subdireccion_proyecto_id` AS `subdireccion_proyecto_id`,`proy`.`departamento_proyecto_id` AS `departamento_proyecto_id`,`proy`.`area_proyecto_id` AS `area_proyecto_id`,`proy`.`linea_accion_id` AS `linea_accion_id`,`proy`.`linea_accion` AS `linea_accion`,`proy`.`objetivo_programa_id` AS `objetivo_programa_id`,`proy`.`objetivo_programa` AS `objetivo_programa`,`proy`.`estrategia_programa_id` AS `estrategia_programa_id`,`proy`.`estrategia_programa` AS `estrategia_programa`,(select sum(`vw_seguimiento_actividades`.`programado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_fisico`,(select sum(`vw_seguimiento_actividades`.`realizado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_fisico`,(select sum(`vw_seguimiento_actividades`.`programado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_financiero`,(select sum(`vw_seguimiento_actividades`.`realizado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_financiero` from ((((`actividades` `act` join `vw_proyectos` `proy` on((`act`.`proyecto_actividad_id` = `proy`.`proyecto_actividad_id`))) join `unidades_medida` `uni_med` on((`act`.`unidad_medida_id` = `uni_med`.`unidad_medida_id`))) join `mediciones` `medic` on((`act`.`medicion_id` = `medic`.`medicion_id`))) join `beneficiados` `b` on((`act`.`beneficiado_id` = `b`.`beneficiado_id`))) order by `proy`.`proyecto_actividad_id`,`act`.`actividad_id` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2404,7 +2397,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_proyectos` AS select `pp`.`cve_programa` AS `cve_programa`,`pp`.`descripcion` AS `programa_presupuestario`,`pp`.`techo_financiero` AS `techo_financiero`,`ff`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`ff`.`descripcion` AS `descripcion`,`pa`.`ejercicio` AS `ejercicio`,`pa`.`estatus` AS `estatus`,`pa`.`usuario_id` AS `usuario_id`,`pa`.`fecha_creacion` AS `fecha_creacion_proyecto`,`pa`.`fecha_actualizacion` AS `fecha_actualizacion_proyecto`,`pa`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`pa`.`objetivo_presupuestario_id` AS `objetivo_presupuestario_id`,`pa`.`linea_accion_id` AS `linea_accion_id`,`la`.`descripcion` AS `linea_accion`,`la`.`objetivo_programa_id` AS `objetivo_programa_id`,`op`.`cve_objetivo` AS `cve_objetivo`,`op`.`descripcion` AS `objetivo_programa`,`la`.`estrategia_programa_id` AS `estrategia_programa_id`,`ep`.`descripcion` AS `estrategia_programa`,`ca`.`cve_direccion` AS `cve_direccion_proyecto`,`ca`.`direccion` AS `direccion_proyecto`,`ca`.`cve_subdireccion` AS `cve_subdireccion_proyecto`,`ca`.`subdireccion` AS `subdireccion_proyecto`,`ca`.`cve_departamento` AS `cve_departamento_proyecto`,`ca`.`departamento` AS `departamento_proyecto`,`ca`.`cve_area` AS `cve_area_proyecto`,`ca`.`area` AS `area_proyecto`,`ca`.`direccion_id` AS `direccion_proyecto_id`,`ca`.`subdireccion_id` AS `subdireccion_proyecto_id`,`ca`.`departamento_id` AS `departamento_proyecto_id`,`ca`.`area_id` AS `area_proyecto_id` from (((((((`proyectos_actividades` `pa` left join `programas_presupuestarios` `pp` on((`pa`.`programa_presupuestario_id` = `pp`.`programa_presupuestario_id`))) left join `fuentes_financiamiento` `ff` on((`pa`.`fuente_finaciamiento_id` = `ff`.`fuente_finaciamiento_id`))) join `lineas_accion` `la` on((`la`.`linea_accion_id` = `pa`.`linea_accion_id`))) left join `estrategias_programa` `ep` on((`ep`.`estrategia_programa_id` = `la`.`estrategia_programa_id`))) left join `objetivos_programas` `op` on((`op`.`objetivo_programa_id` = `la`.`objetivo_programa_id`))) join `combinaciones_areas` `ca` on((`pa`.`combinacion_area_id` = `ca`.`combinacion_area_id`))) join `vw_usuarios` `u` on((`u`.`usuario_id` = `pa`.`usuario_id`))) */;
+/*!50001 VIEW `vw_proyectos` AS select `pp`.`cve_programa` AS `cve_programa`,`pp`.`programa_presupuestario_id` AS `programa_presupuestario_id`,`pp`.`descripcion` AS `programa_presupuestario`,`pp`.`techo_financiero` AS `techo_financiero`,`ff`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`ff`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`ff`.`descripcion` AS `descripcion`,`pa`.`ejercicio` AS `ejercicio`,`pa`.`estatus` AS `estatus`,`pa`.`usuario_id` AS `usuario_id`,`pa`.`fecha_creacion` AS `fecha_creacion_proyecto`,`pa`.`fecha_actualizacion` AS `fecha_actualizacion_proyecto`,`pa`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`pa`.`objetivo_presupuestario_id` AS `objetivo_presupuestario_id`,`pa`.`linea_accion_id` AS `linea_accion_id`,`la`.`descripcion` AS `linea_accion`,`la`.`objetivo_programa_id` AS `objetivo_programa_id`,`op`.`cve_objetivo` AS `cve_objetivo`,`op`.`descripcion` AS `objetivo_programa`,`la`.`estrategia_programa_id` AS `estrategia_programa_id`,`ep`.`descripcion` AS `estrategia_programa`,`ca`.`cve_direccion` AS `cve_direccion_proyecto`,`ca`.`direccion` AS `direccion_proyecto`,`ca`.`cve_subdireccion` AS `cve_subdireccion_proyecto`,`ca`.`subdireccion` AS `subdireccion_proyecto`,`ca`.`cve_departamento` AS `cve_departamento_proyecto`,`ca`.`departamento` AS `departamento_proyecto`,`ca`.`cve_area` AS `cve_area_proyecto`,`ca`.`area` AS `area_proyecto`,`ca`.`direccion_id` AS `direccion_proyecto_id`,`ca`.`subdireccion_id` AS `subdireccion_proyecto_id`,`ca`.`departamento_id` AS `departamento_proyecto_id`,`ca`.`area_id` AS `area_proyecto_id` from (((((((`proyectos_actividades` `pa` left join `programas_presupuestarios` `pp` on((`pa`.`programa_presupuestario_id` = `pp`.`programa_presupuestario_id`))) left join `fuentes_financiamiento` `ff` on((`pa`.`fuente_financiamiento_id` = `ff`.`fuente_financiamiento_id`))) join `lineas_accion` `la` on((`la`.`linea_accion_id` = `pa`.`linea_accion_id`))) left join `estrategias_programa` `ep` on((`ep`.`estrategia_programa_id` = `la`.`estrategia_programa_id`))) left join `objetivos_programas` `op` on((`op`.`objetivo_programa_id` = `la`.`objetivo_programa_id`))) join `combinaciones_areas` `ca` on((`pa`.`combinacion_area_id` = `ca`.`combinacion_area_id`))) join `vw_usuarios` `u` on((`u`.`usuario_id` = `pa`.`usuario_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2458,7 +2451,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_seguimiento_acuerdo_ag` AS select `a`.`acuerdo_id` AS `acuerdo_id`,`a`.`tema` AS `tema`,`a`.`tema_id` AS `tema_id`,`sa`.`seguimiento_acuerdo_id` AS `seguimiento_acuerdo_id`,`sa`.`folio` AS `folio`,`a`.`asunto` AS `asunto`,`sa`.`seguimiento` AS `seguimiento`,`a`.`fecha_creacion_acuerdo` AS `fecha_creacion_acuerdo`,`sa`.`fecha_creacion_seguimiento` AS `fecha_creacion_seguimiento`,`sa`.`fecha_actualizacion_seguimiento` AS `fecha_actualizacion_seguimiento`,`a`.`combinacion_area_acuerdo_id` AS `combinacion_area_acuerdo_id`,`sa`.`combinacion_area_seguimiento_id` AS `combinacion_area_seguimiento_id`,concat(`a`.`direccion_acuerdo`,' ',`a`.`subdireccion_acuerdo`,' ',`a`.`departamento_acuerdo`,' ',`a`.`area_acuerdo`) AS `area_acuerdo`,concat(`sa`.`direccion_seguimiento`,' ',`sa`.`subdireccion_seguimiento`,' ',`sa`.`departamento_seguimiento`,' ',`sa`.`area_seguimiento`) AS `area_seguimiento`,`a`.`direccion_id_acuerdo` AS `direccion_id_acuerdo`,`a`.`subdireccion_id_acuerdo` AS `subdireccion_id_acuerdo`,`a`.`departamento_id_acuerdo` AS `departamento_id_acuerdo`,`a`.`area_id_acuerdo` AS `area_id_acuerdo`,`sa`.`direccion_seguimiento_id` AS `direccion_id_seguimiento`,`sa`.`subdireccion_seguimiento_id` AS `subdireccion_id_seguimiento`,`sa`.`departamento_seguimiento_id` AS `departamento_id_seguimiento`,`sa`.`area_seguimiento_id` AS `area_id_seguimiento`,`sa`.`estatus_acuerdo_id` AS `estatus_acuerdo_id`,`sa`.`estatus_seguimiento` AS `estatus_seguimiento`,`sa`.`usuario_id_registra` AS `usuario_id_registra`,`sa`.`nombres_usuario_registra` AS `nombres_usuario_registra`,`sa`.`primer_apellido_usuario_registra` AS `primer_apellido_usuario_registra`,`sa`.`segundo_apellido_usuario_registra` AS `segundo_apellido_usuario_registra`,concat_ws(' ',`sa`.`nombres_usuario_registra`,`sa`.`primer_apellido_usuario_registra`,`sa`.`segundo_apellido_usuario_registra`) AS `usuario_registra`,`sa`.`usuario_id_envia` AS `usuario_id_envia`,`sa`.`nombres_usuario_envia` AS `nombres_usuario_envia`,`sa`.`primer_apellido_usuario_envia` AS `primer_apellido_usuario_envia`,`sa`.`segundo_apellido_usuario_envia` AS `segundo_apellido_usuario_envia`,concat_ws(' ',`sa`.`nombres_usuario_envia`,`sa`.`primer_apellido_usuario_envia`,`sa`.`segundo_apellido_usuario_envia`) AS `usuario_envia`,`sa`.`usuario_id_recibe` AS `usuario_id_recibe`,`sa`.`nombres_usuario_recibe` AS `nombres_usuario_recibe`,`sa`.`primer_apellido_usuario_recibe` AS `primer_apellido_usuario_recibe`,`sa`.`segundo_apellido_usuario_recibe` AS `segundo_apellido_usuario_recibe`,concat_ws(' ',`sa`.`nombres_usuario_recibe`,`sa`.`primer_apellido_usuario_recibe`,`sa`.`segundo_apellido_usuario_recibe`) AS `usuario_recibe`,`a`.`fecha_respuesta` AS `fecha_respuesta` from (`vw_acuerdos` `a` left join `vw_seguimiento_acuerdos` `sa` on((`sa`.`acuerdo_id` = `a`.`acuerdo_id`))) order by `a`.`acuerdo_id`,`sa`.`seguimiento_acuerdo_id` desc */;
+/*!50001 VIEW `vw_seguimiento_acuerdo_ag` AS select `a`.`acuerdo_id` AS `acuerdo_id`,`a`.`tema` AS `tema`,`a`.`tema_id` AS `tema_id`,`sa`.`seguimiento_acuerdo_id` AS `seguimiento_acuerdo_id`,`sa`.`folio` AS `folio`,`a`.`asunto` AS `asunto`,`sa`.`seguimiento` AS `seguimiento`,`a`.`fecha_creacion_acuerdo` AS `fecha_creacion_acuerdo`,`sa`.`fecha_creacion_seguimiento` AS `fecha_creacion_seguimiento`,`sa`.`fecha_actualizacion_seguimiento` AS `fecha_actualizacion_seguimiento`,`a`.`combinacion_area_acuerdo_id` AS `combinacion_area_acuerdo_id`,`sa`.`combinacion_area_seguimiento_id` AS `combinacion_area_seguimiento_id`,concat(`a`.`direccion_acuerdo`,' ',`a`.`subdireccion_acuerdo`,' ',`a`.`departamento_acuerdo`,' ',`a`.`area_acuerdo`) AS `area_acuerdo`,concat(`sa`.`direccion_seguimiento`,' ',`sa`.`subdireccion_seguimiento`,' ',`sa`.`departamento_seguimiento`,' ',`sa`.`area_seguimiento`) AS `area_seguimiento`,`a`.`direccion_id_acuerdo` AS `direccion_id_acuerdo`,`a`.`subdireccion_id_acuerdo` AS `subdireccion_id_acuerdo`,`a`.`departamento_id_acuerdo` AS `departamento_id_acuerdo`,`a`.`area_id_acuerdo` AS `area_id_acuerdo`,`sa`.`direccion_seguimiento_id` AS `direccion_id_seguimiento`,`sa`.`subdireccion_seguimiento_id` AS `subdireccion_id_seguimiento`,`sa`.`departamento_seguimiento_id` AS `departamento_id_seguimiento`,`sa`.`area_seguimiento_id` AS `area_id_seguimiento`,`sa`.`estatus_acuerdo_id` AS `estatus_acuerdo_id`,`sa`.`estatus_seguimiento` AS `estatus_seguimiento`,`sa`.`usuario_id_registra` AS `usuario_id_registra`,`sa`.`nombres_usuario_registra` AS `nombres_usuario_registra`,`sa`.`primer_apellido_usuario_registra` AS `primer_apellido_usuario_registra`,`sa`.`segundo_apellido_usuario_registra` AS `segundo_apellido_usuario_registra`,concat_ws(' ',`sa`.`nombres_usuario_registra`,`sa`.`primer_apellido_usuario_registra`,`sa`.`segundo_apellido_usuario_registra`) AS `usuario_registra`,`sa`.`usuario_id_envia` AS `usuario_id_envia`,`sa`.`nombres_usuario_envia` AS `nombres_usuario_envia`,`sa`.`primer_apellido_usuario_envia` AS `primer_apellido_usuario_envia`,`sa`.`segundo_apellido_usuario_envia` AS `segundo_apellido_usuario_envia`,concat_ws(' ',`sa`.`nombres_usuario_envia`,`sa`.`primer_apellido_usuario_envia`,`sa`.`segundo_apellido_usuario_envia`) AS `usuario_envia`,`sa`.`usuario_id_recibe` AS `usuario_id_recibe`,`sa`.`nombres_usuario_recibe` AS `nombres_usuario_recibe`,`sa`.`primer_apellido_usuario_recibe` AS `primer_apellido_usuario_recibe`,`sa`.`segundo_apellido_usuario_recibe` AS `segundo_apellido_usuario_recibe`,concat_ws(' ',`sa`.`nombres_usuario_recibe`,`sa`.`primer_apellido_usuario_recibe`,`sa`.`segundo_apellido_usuario_recibe`) AS `usuario_recibe`,`a`.`fecha_respuesta` AS `fecha_respuesta`,`a`.`estatus` AS `estatus` from (`vw_acuerdos` `a` left join `vw_seguimiento_acuerdos` `sa` on((`sa`.`acuerdo_id` = `a`.`acuerdo_id`))) order by `a`.`acuerdo_id`,`sa`.`seguimiento_acuerdo_id` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2476,7 +2469,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_seguimiento_acuerdos` AS select `a`.`acuerdo_id` AS `acuerdo_id`,`sa`.`seguimiento_acuerdo_id` AS `seguimiento_acuerdo_id`,concat_ws('-',`a`.`acuerdo_id`,`sa`.`folio`) AS `folio`,`a`.`asunto` AS `asunto`,`a`.`tema_id` AS `tema_id`,`a`.`tema` AS `tema`,`a`.`cve_direccion_acuerdo` AS `cve_direccion_acuerdo`,`a`.`direccion_acuerdo` AS `direccion_acuerdo`,`a`.`cve_subdireccion_acuerdo` AS `cve_subdireccion_acuerdo`,`a`.`subdireccion_acuerdo` AS `subdireccion_acuerdo`,`a`.`cve_departamento_acuerdo` AS `cve_departamento_acuerdo`,`a`.`departamento_acuerdo` AS `departamento_acuerdo`,`a`.`cve_area_acuerdo` AS `cve_area_acuerdo`,`a`.`area_acuerdo` AS `area_acuerdo`,`a`.`direccion_id_acuerdo` AS `direccion_id_acuerdo`,`a`.`subdireccion_id_acuerdo` AS `subdireccion_id_acuerdo`,`a`.`departamento_id_acuerdo` AS `departamento_id_acuerdo`,`a`.`area_id_acuerdo` AS `area_id_acuerdo`,`a`.`ejercicio_acuerdo` AS `ejercicio_acuerdo`,`sa`.`seguimiento` AS `seguimiento`,`cad`.`combinacion_area_id` AS `combinacion_area_seguimiento_id`,`cad`.`cve_direccion` AS `cve_direccion_seguimiento`,`cad`.`direccion` AS `direccion_seguimiento`,`cad`.`cve_subdireccion` AS `cve_subdireccion_seguimiento`,`cad`.`subdireccion` AS `subdireccion_seguimiento`,`cad`.`cve_departamento` AS `cve_departamento_seguimiento`,`cad`.`departamento` AS `departamento_seguimiento`,`cad`.`cve_area` AS `cve_area_seguimiento`,`cad`.`area` AS `area_seguimiento`,`cad`.`direccion_id` AS `direccion_seguimiento_id`,`cad`.`subdireccion_id` AS `subdireccion_seguimiento_id`,`cad`.`departamento_id` AS `departamento_seguimiento_id`,`cad`.`area_id` AS `area_seguimiento_id`,`a`.`usuario_registra_id` AS `usuario_id_registra`,`a`.`nombres_usuario` AS `nombres_usuario_registra`,`a`.`primer_apellido_usuario` AS `primer_apellido_usuario_registra`,`a`.`segundo_apellido_usuario` AS `segundo_apellido_usuario_registra`,`a`.`cve_cuenta_usuario` AS `cuenta_usuario_registra`,`u_ad`.`cve_direccion` AS `cve_direccion_ad`,`u_ad`.`direccion` AS `direccion_ad`,`u_ad`.`cve_subdireccion` AS `cve_subdireccion_ad`,`u_ad`.`subdireccion` AS `subdireccion_ad`,`u_ad`.`cve_departamento` AS `cve_departamento_ad`,`u_ad`.`departamento` AS `departamento_ad`,`u_ad`.`cve_area` AS `cve_area_ad`,`u_ad`.`area` AS `area_ad`,`u_ad`.`nombres` AS `nombres_usuario_envia`,`u_ad`.`primer_apellido` AS `primer_apellido_usuario_envia`,`u_ad`.`segundo_apellido` AS `segundo_apellido_usuario_envia`,`u_ad`.`cve_cuenta` AS `cuenta_usuario_envia`,`u_ad`.`usuario_id` AS `usuario_id_envia`,`u_adr`.`usuario_id` AS `usuario_id_recibe`,`u_adr`.`nombres` AS `nombres_usuario_recibe`,`u_adr`.`primer_apellido` AS `primer_apellido_usuario_recibe`,`u_adr`.`segundo_apellido` AS `segundo_apellido_usuario_recibe`,`sa`.`archivo_anexo` AS `archivo_anexo`,`a`.`fecha_creacion_acuerdo` AS `fecha_creacion_acuerdo`,`sa`.`fecha_creacion` AS `fecha_creacion_seguimiento`,`sa`.`fecha_actualizacion` AS `fecha_actualizacion_seguimiento`,`sa`.`estatus_acuerdo_id` AS `estatus_acuerdo_id`,`ea`.`descripcion` AS `estatus_seguimiento`,`a`.`fecha_respuesta` AS `fecha_respuesta` from (((((`seguimientos_acuerdos` `sa` join `combinaciones_areas` `cad` on((`cad`.`combinacion_area_id` = `sa`.`combinacion_area_id`))) left join `vw_usuarios` `u_ad` on((`sa`.`usuario_acuerda_id` = `u_ad`.`usuario_id`))) left join `vw_usuarios` `u_adr` on((`sa`.`usuario_recibe_id` = `u_adr`.`usuario_id`))) join `vw_acuerdos` `a` on((`sa`.`acuerdo_id` = `a`.`acuerdo_id`))) join `estatus_acuerdos` `ea` on(((`ea`.`estatus_acuerdo_id` = `sa`.`estatus_acuerdo_id`) and (`ea`.`estatus` = 1)))) order by `a`.`acuerdo_id`,`sa`.`seguimiento_acuerdo_id` desc */;
+/*!50001 VIEW `vw_seguimiento_acuerdos` AS select `a`.`acuerdo_id` AS `acuerdo_id`,`sa`.`seguimiento_acuerdo_id` AS `seguimiento_acuerdo_id`,concat_ws('-',`a`.`acuerdo_id`,`sa`.`folio`) AS `folio`,`a`.`asunto` AS `asunto`,`a`.`tema_id` AS `tema_id`,`a`.`tema` AS `tema`,`a`.`cve_direccion_acuerdo` AS `cve_direccion_acuerdo`,`a`.`direccion_acuerdo` AS `direccion_acuerdo`,`a`.`cve_subdireccion_acuerdo` AS `cve_subdireccion_acuerdo`,`a`.`subdireccion_acuerdo` AS `subdireccion_acuerdo`,`a`.`cve_departamento_acuerdo` AS `cve_departamento_acuerdo`,`a`.`departamento_acuerdo` AS `departamento_acuerdo`,`a`.`cve_area_acuerdo` AS `cve_area_acuerdo`,`a`.`area_acuerdo` AS `area_acuerdo`,`a`.`direccion_id_acuerdo` AS `direccion_id_acuerdo`,`a`.`subdireccion_id_acuerdo` AS `subdireccion_id_acuerdo`,`a`.`departamento_id_acuerdo` AS `departamento_id_acuerdo`,`a`.`area_id_acuerdo` AS `area_id_acuerdo`,`a`.`ejercicio_acuerdo` AS `ejercicio_acuerdo`,`sa`.`seguimiento` AS `seguimiento`,`cad`.`combinacion_area_id` AS `combinacion_area_seguimiento_id`,`cad`.`cve_direccion` AS `cve_direccion_seguimiento`,`cad`.`direccion` AS `direccion_seguimiento`,`cad`.`cve_subdireccion` AS `cve_subdireccion_seguimiento`,`cad`.`subdireccion` AS `subdireccion_seguimiento`,`cad`.`cve_departamento` AS `cve_departamento_seguimiento`,`cad`.`departamento` AS `departamento_seguimiento`,`cad`.`cve_area` AS `cve_area_seguimiento`,`cad`.`area` AS `area_seguimiento`,`cad`.`direccion_id` AS `direccion_seguimiento_id`,`cad`.`subdireccion_id` AS `subdireccion_seguimiento_id`,`cad`.`departamento_id` AS `departamento_seguimiento_id`,`cad`.`area_id` AS `area_seguimiento_id`,`a`.`usuario_registra_id` AS `usuario_id_registra`,`a`.`nombres_usuario` AS `nombres_usuario_registra`,`a`.`primer_apellido_usuario` AS `primer_apellido_usuario_registra`,`a`.`segundo_apellido_usuario` AS `segundo_apellido_usuario_registra`,`a`.`cve_cuenta_usuario` AS `cuenta_usuario_registra`,`u_ad`.`cve_direccion` AS `cve_direccion_ad`,`u_ad`.`direccion` AS `direccion_ad`,`u_ad`.`cve_subdireccion` AS `cve_subdireccion_ad`,`u_ad`.`subdireccion` AS `subdireccion_ad`,`u_ad`.`cve_departamento` AS `cve_departamento_ad`,`u_ad`.`departamento` AS `departamento_ad`,`u_ad`.`cve_area` AS `cve_area_ad`,`u_ad`.`area` AS `area_ad`,`u_ad`.`nombres` AS `nombres_usuario_envia`,`u_ad`.`primer_apellido` AS `primer_apellido_usuario_envia`,`u_ad`.`segundo_apellido` AS `segundo_apellido_usuario_envia`,`u_ad`.`cve_cuenta` AS `cuenta_usuario_envia`,`u_ad`.`usuario_id` AS `usuario_id_envia`,`u_adr`.`usuario_id` AS `usuario_id_recibe`,`u_adr`.`nombres` AS `nombres_usuario_recibe`,`u_adr`.`primer_apellido` AS `primer_apellido_usuario_recibe`,`u_adr`.`segundo_apellido` AS `segundo_apellido_usuario_recibe`,`sa`.`archivo_anexo` AS `archivo_anexo`,`a`.`fecha_creacion_acuerdo` AS `fecha_creacion_acuerdo`,`sa`.`fecha_creacion` AS `fecha_creacion_seguimiento`,`sa`.`fecha_actualizacion` AS `fecha_actualizacion_seguimiento`,`sa`.`estatus_acuerdo_id` AS `estatus_acuerdo_id`,`ea`.`descripcion` AS `estatus_seguimiento`,`a`.`fecha_respuesta` AS `fecha_respuesta`,`a`.`estatus` AS `estatus` from (((((`seguimientos_acuerdos` `sa` join `combinaciones_areas` `cad` on((`cad`.`combinacion_area_id` = `sa`.`combinacion_area_id`))) left join `vw_usuarios` `u_ad` on((`sa`.`usuario_acuerda_id` = `u_ad`.`usuario_id`))) left join `vw_usuarios` `u_adr` on((`sa`.`usuario_recibe_id` = `u_adr`.`usuario_id`))) join `vw_acuerdos` `a` on((`sa`.`acuerdo_id` = `a`.`acuerdo_id`))) join `estatus_acuerdos` `ea` on(((`ea`.`estatus_acuerdo_id` = `sa`.`estatus_acuerdo_id`) and (`ea`.`estatus` = 1)))) order by `a`.`acuerdo_id`,`sa`.`seguimiento_acuerdo_id` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2512,7 +2505,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_ultimo_seguimiento` AS select `ag`.`acuerdo_id` AS `acuerdo_id`,`ag`.`tema` AS `tema`,`ag`.`tema_id` AS `tema_id`,`ag`.`seguimiento_acuerdo_id` AS `seguimiento_acuerdo_id`,`ag`.`folio` AS `folio`,`ag`.`asunto` AS `asunto`,`ag`.`seguimiento` AS `seguimiento`,`ag`.`fecha_creacion_acuerdo` AS `fecha_creacion_acuerdo`,`ag`.`fecha_creacion_seguimiento` AS `fecha_creacion_seguimiento`,`ag`.`fecha_actualizacion_seguimiento` AS `fecha_actualizacion_seguimiento`,`ag`.`combinacion_area_acuerdo_id` AS `combinacion_area_acuerdo_id`,`ag`.`direccion_id_acuerdo` AS `direccion_id_acuerdo`,`ag`.`subdireccion_id_acuerdo` AS `subdireccion_id_acuerdo`,`ag`.`departamento_id_acuerdo` AS `departamento_id_acuerdo`,`ag`.`area_id_acuerdo` AS `area_id_acuerdo`,`ag`.`direccion_id_seguimiento` AS `direccion_id_seguimiento`,`ag`.`subdireccion_id_seguimiento` AS `subdireccion_id_seguimiento`,`ag`.`departamento_id_seguimiento` AS `departamento_id_seguimiento`,`ag`.`area_id_seguimiento` AS `area_id_seguimiento`,`ag`.`combinacion_area_seguimiento_id` AS `combinacion_area_seguimiento_id`,`ag`.`area_acuerdo` AS `area_acuerdo`,`ag`.`area_seguimiento` AS `area_seguimiento`,`ag`.`estatus_seguimiento` AS `estatus_seguimiento`,`ag`.`usuario_id_registra` AS `usuario_id_registra`,`ag`.`usuario_registra` AS `usuario_registra`,`ag`.`usuario_id_envia` AS `usuario_id_envia`,`ag`.`usuario_envia` AS `usuario_envia`,`ag`.`usuario_id_recibe` AS `usuario_id_recibe`,`ag`.`usuario_recibe` AS `usuario_recibe`,`ag`.`fecha_respuesta` AS `fecha_respuesta` from (`vw_seguimiento_acuerdo_ag` `ag` join (select max(`vw_seguimiento_acuerdo_ag`.`seguimiento_acuerdo_id`) AS `seguimiento_acuerdo_id` from `vw_seguimiento_acuerdo_ag` group by `vw_seguimiento_acuerdo_ag`.`acuerdo_id`) `x` on((`x`.`seguimiento_acuerdo_id` = `ag`.`seguimiento_acuerdo_id`))) */;
+/*!50001 VIEW `vw_ultimo_seguimiento` AS select `ag`.`acuerdo_id` AS `acuerdo_id`,`ag`.`tema` AS `tema`,`ag`.`tema_id` AS `tema_id`,`ag`.`seguimiento_acuerdo_id` AS `seguimiento_acuerdo_id`,`ag`.`folio` AS `folio`,`ag`.`asunto` AS `asunto`,`ag`.`seguimiento` AS `seguimiento`,`ag`.`fecha_creacion_acuerdo` AS `fecha_creacion_acuerdo`,`ag`.`fecha_creacion_seguimiento` AS `fecha_creacion_seguimiento`,`ag`.`fecha_actualizacion_seguimiento` AS `fecha_actualizacion_seguimiento`,`ag`.`combinacion_area_acuerdo_id` AS `combinacion_area_acuerdo_id`,`ag`.`direccion_id_acuerdo` AS `direccion_id_acuerdo`,`ag`.`subdireccion_id_acuerdo` AS `subdireccion_id_acuerdo`,`ag`.`departamento_id_acuerdo` AS `departamento_id_acuerdo`,`ag`.`area_id_acuerdo` AS `area_id_acuerdo`,`ag`.`direccion_id_seguimiento` AS `direccion_id_seguimiento`,`ag`.`subdireccion_id_seguimiento` AS `subdireccion_id_seguimiento`,`ag`.`departamento_id_seguimiento` AS `departamento_id_seguimiento`,`ag`.`area_id_seguimiento` AS `area_id_seguimiento`,`ag`.`combinacion_area_seguimiento_id` AS `combinacion_area_seguimiento_id`,`ag`.`area_acuerdo` AS `area_acuerdo`,`ag`.`area_seguimiento` AS `area_seguimiento`,`ag`.`estatus_seguimiento` AS `estatus_seguimiento`,`ag`.`usuario_id_registra` AS `usuario_id_registra`,`ag`.`usuario_registra` AS `usuario_registra`,`ag`.`usuario_id_envia` AS `usuario_id_envia`,`ag`.`usuario_envia` AS `usuario_envia`,`ag`.`usuario_id_recibe` AS `usuario_id_recibe`,`ag`.`usuario_recibe` AS `usuario_recibe`,`ag`.`fecha_respuesta` AS `fecha_respuesta`,`ag`.`estatus` AS `estatus` from (`vw_seguimiento_acuerdo_ag` `ag` join (select max(`vw_seguimiento_acuerdo_ag`.`seguimiento_acuerdo_id`) AS `seguimiento_acuerdo_id` from `vw_seguimiento_acuerdo_ag` group by `vw_seguimiento_acuerdo_ag`.`acuerdo_id`) `x` on((`x`.`seguimiento_acuerdo_id` = `ag`.`seguimiento_acuerdo_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2562,4 +2555,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-16 15:40:38
+-- Dump completed on 2021-07-02  7:07:49

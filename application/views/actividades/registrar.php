@@ -20,6 +20,7 @@
                     <?php $this->load->view(RUTA_TEMA_UTIL . '/alertas'); ?>
                 </div>
                 <form>
+                    <!-- ORIGEN DEL PROYECTO -->
                     <div class="row">
                         <?php if( $this->session->userdata('tuser') == 1 ): ?>
                         <div class="col-12 mb-3">
@@ -32,6 +33,9 @@
                             <input type="hidden" id="area_origen" name="area_origen" value="<?= $this->session->userdata('combinacion_area') ?>">
                         <?php endif ?>
                     </div>
+                    <!-- ORIGEN DEL PROYECTO -->
+
+                    <!-- ENCABEZADO DEL PROYECTO -->
                     <div class="row">
                         <div class="col-12 mb-3">
                             <label class="my-1 me-2" for="programa_presupuestario">Programa Presupuestario</label>
@@ -51,7 +55,16 @@
                                 <?php endforeach; ?>  
                             </select>
                         </div>
-                        <div id="datos_linea_accion" class="col-12"></div>
+                        <div id="datos_linea_accion" class="col-12 mb-3"></div>
+                        <div class="col-12 mb-3">
+                            <label class="my-1 me-2" for="fuente_financiamiento">Fuente de Financiamiento</label>
+                            <select class="form-select" id="fuente_financiamiento" aria-label="Fuente de Financiamiento" required>
+                                <option selected disabled>Seleccione una opción</option>
+                                <?php foreach ($f_financia as $key => $fuente): ?>
+                                <option value="<?= $fuente->fuente_financiamiento_id ?>"><?= $fuente->descripcion ?></option>
+                                <?php endforeach; ?>  
+                            </select>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12 mb-3">
@@ -61,6 +74,9 @@
                             </div>
                         </div>
                     </div>
+                    <!-- ENCABEZADO DEL PROYECTO -->
+
+                    <!-- DATOS DE ACTIVIDAD -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="my-1 me-2" for="unidad_medida">Unidad de Medida</label>
@@ -75,19 +91,18 @@
                             <label class="my-1 me-2" for="tipo_medicion">Tipo de Medición</label>
                             <select class="form-select" id="tipo_medicion" aria-label="Default select example">
                                 <option selected disabled>Seleccione una opción</option>
-                                <option value="1">Absoluto</option>
-                                <option value="2">Porcentaje</option>
-                                <option value="3">Promedio</option>
+                                <?php foreach ($mediciones as $key => $medicion): ?>
+                                <option value="<?= $medicion->medicion_id ?>"><?= $medicion->descripcion ?></option>
+                                <?php endforeach; ?>  
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="my-1 me-2" for="grupo_beneficiado">Grupo Beneficiado</label>
                             <select class="form-select" id="grupo_beneficiado" aria-label="Default select example">
                                 <option selected disabled>Seleccione una opción</option>
-                                <option value="1">Masculino</option>
-                                <option value="2">Femenino</option>
-                                <option value="3">Ambos</option>
-                                <option value="4">No Aplica</option>
+                                <?php foreach ($g_benef as $key => $grupo): ?>
+                                <option value="<?= $grupo->beneficiado_id ?>"><?= $grupo->descripcion ?></option>
+                                <?php endforeach; ?>  
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -95,12 +110,15 @@
                             <input type="number" class="form-control" id="cantidad_beneficiarios" value="0" required>
                         </div>
                     </div>
+                    <!-- DATOS DE ACTIVIDAD -->
 
+                    <!-- DETALLES DE ACTIVIDAD -->
                     <div id="programados" class="card card-body my-3 mx-2" style="display: none;">
                         <?php $this->load->view('actividades/secciones/programado_fisico'); ?>
                         <?php $this->load->view('actividades/secciones/programado_financiero'); ?>
                     </div>
-                    
+                    <!-- DETALLES DE ACTIVIDAD -->
+
                     <div class="mt-3">
                         <button id="guardar" type="button" class="btn btn-dark">Guardar</button>
                     </div>

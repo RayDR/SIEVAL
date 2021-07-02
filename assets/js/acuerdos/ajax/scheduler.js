@@ -12,11 +12,12 @@ $(document).ready(function($) {
 function finiciar_scheduler(){
   var datos = [];
   acuerdos.forEach( function(acuerdo, index) {
+    let _endDate = ( acuerdo.estatus_seguimiento == 'Terminado')? acuerdo.fecha_actualizacion_seguimiento : moment(acuerdo.fecha_creacion_acuerdo).add(acuerdo.fecha_respuesta, 'days');
     datos.push({
       disabled  : true,
-      content: acuerdo.asunto,
-      startDate: new Date(acuerdo.fecha_creacion_acuerdo),
-      endDate: new Date(moment(acuerdo.fecha_creacion_acuerdo).add(acuerdo.fecha_respuesta, 'days'))
+      content   : `${acuerdo.estatus_seguimiento}: ${acuerdo.asunto}`,
+      startDate : new Date(acuerdo.fecha_creacion_acuerdo),
+      endDate   : new Date(_endDate)
     });
   });
     

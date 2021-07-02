@@ -94,7 +94,7 @@ class Preproyectos extends CI_Controller {
             } else 
                 $json = array('exito' => FALSE, 'error' => 'No se recuperó información sobre este preproyecto.');
         } else 
-            $json = array('exito' => FALSE, 'error' => 'No se recibió el folio de la preproyecto.');
+            $json = array('exito' => FALSE, 'error' => 'No se recibió el folio del preproyecto.');
         return print(json_encode($json));
     
     }
@@ -121,7 +121,9 @@ class Preproyectos extends CI_Controller {
                     'programas'     => $this->model_catalogos->get_programas(),
                     'municipios'    => $this->model_catalogos->get_municipios(),
                     'l_accion'      => $this->model_catalogos->get_lineas_accion(),
-                    'u_medida'      => $this->model_catalogos->get_unidades_medida($condicion),
+                    'u_medida'      =>  $this->model_catalogos->get_unidades_medida($condicion),
+                    'g_benef'       =>  $this->model_catalogos->get_grupos_beneficiados(),
+                    'mediciones'    =>  $this->model_catalogos->get_mediciones(),
                     'inputs'        => $this->inputs_actividad(),
                     'view'          => 'preproyectos/actividades'
                 );
@@ -129,7 +131,43 @@ class Preproyectos extends CI_Controller {
             } else 
                 $json = array('exito' => FALSE, 'error' => 'No se recuperó información sobre este preproyecto.');
         } else 
-            $json = array('exito' => FALSE, 'error' => 'No se recibió el folio de la preproyecto.');
+            $json = array('exito' => FALSE, 'error' => 'No se recibió el folio del preproyecto.');
+        return print(json_encode($json));    
+    }
+
+    public function editar_actividad()
+    {
+        $json = array('exito' => TRUE);
+        $actividad_id = $this->input->post('actividad_id');
+        if ( $actividad_id ){
+            $actividad    = $this->model_preproyectos->get_actividad($actividad_id);
+            if ( $actividad ){
+                // Área usuario
+                $preproyecto    = $this->model_preproyectos->get_preproyecto($actividad->preproyecto_id);
+                $area_usuario   = array('combinacion_area_id' => $this->session->userdata('combinacion_area'));
+                $combinacion    = $this->model_catalogos->get_areas( $area_usuario );
+
+                $condicion = ( $this->session->userdata('tuser') == 1 )? NULL : 
+                             array( 'direccion_id' => $combinacion->direccion_id );
+                             
+                $data = array(
+                    'titulo'        => 'Actividades - Preproyecto',
+                    'preproyecto'   => $preproyecto,
+                    'actividad'     => $actividad,
+                    'programas'     => $this->model_catalogos->get_programas(),
+                    'municipios'    => $this->model_catalogos->get_municipios(),
+                    'l_accion'      => $this->model_catalogos->get_lineas_accion(),
+                    'u_medida'      =>  $this->model_catalogos->get_unidades_medida($condicion),
+                    'g_benef'       =>  $this->model_catalogos->get_grupos_beneficiados(),
+                    'mediciones'    =>  $this->model_catalogos->get_mediciones(),
+                    'inputs'        => $this->inputs_actividad(),
+                    'view'          => 'preproyectos/editar_actividades'
+                );
+                $json['html'] = $this->load->view( $data['view'], $data, TRUE );
+            } else 
+                $json = array('exito' => FALSE, 'error' => 'No se recuperó información sobre esta actividad.');
+        } else 
+            $json = array('exito' => FALSE, 'error' => 'No se recibió el folio de la actividad.');
         return print(json_encode($json));    
     }
 
@@ -235,9 +273,43 @@ class Preproyectos extends CI_Controller {
                 'ejercicio'                 => date('Y')
             );
 
-            $json = $this->model_preproyectos->registrar_actividad($preproyecto_id, $datos, FALSE);
+            $json = $this->model_preproyectos->registrar_actividad($preproyecto_id, $datos);
         } else
-            $json   = array('exito' => FALSE, 'error' => 'No se recibió el fólio de preproyecto');
+            $json   = array('exito' => FALSE, 'error' => 'No se recibió el fólio del preproyecto');
+
+        return print(json_encode($json)); 
+    }
+
+    public function edicion_actividad(){
+        $json   = array('exito' => TRUE);
+
+        $actividad_id   = $this->input->post('actividad_id');
+        $actividad      = $this->model_preproyectos->get_actividad($actividad_id);
+
+        if ( $actividad ){
+            $datos  = array(
+                'linea_accion'              => $this->input->post('linea_accion'),
+                'municipio'                 => $this->input->post('municipio'),
+                'localidad'                 => $this->input->post('localidad'),
+                'detalle_preproyecto'       => $this->input->post('detalle_preproyecto'),
+                'unidad_medida'             => $this->input->post('unidad_medida'),
+                'tipo_medicion'             => $this->input->post('tipo_medicion'),
+                'grupo_beneficiado'         => $this->input->post('grupo_beneficiado'),
+                'cantidad_beneficiarios'    => $this->input->post('cantidad_beneficiarios'),
+                'inversion'                 => $this->input->post('inversion'),
+                'seccion'                   => $this->input->post('seccion'),
+                'incluido'                  => $this->input->post('incluido'),
+                'trimestre'                 => $this->input->post('trimestre'),
+                'fecha_inicio'              => $this->input->post('fecha_inicio'),
+                'fecha_termino'             => $this->input->post('fecha_termino'),
+                'url'                       => $this->input->post('url'),
+                'usuario_id'                => $this->session->userdata('uid'),
+                'ejercicio'                 => date('Y')
+            );
+
+            $json = $this->model_preproyectos->editar_actividad($actividad_id, $datos);
+        } else
+            $json   = array('exito' => FALSE, 'error' => 'No se recibió el fólio de la actividad');
 
         return print(json_encode($json)); 
     }

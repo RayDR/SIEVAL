@@ -1,3 +1,17 @@
+<style type="text/css" media="screen">
+    .nav-link:hover, .nav-link:focus {
+        background-color: #D1D5DB;
+    } 
+    .nav-pills .nav-link:hover{
+        background-color: #D1D5DB;
+    }
+    .accordion-button{
+        color: white;
+    }
+    .accordion-button:hover{
+        color: #262B40;
+    }
+</style>
 <div class="container">
     <div class="text-white">
     <div class="card card-body shadow-sm mb-4 mb-lg-0 bg-transparent">
@@ -29,10 +43,52 @@
                     ?>
                     </p>
                 </div>              
-                <div class="text-right">
-                    <a href="<?= base_url('index.php/Acuerdos/descargar_zip/' . $acuerdo[0]->acuerdo_id) ?>" class="px-4" title="Descargar archivos adjuntos" data-title="Descargar archivos adjuntos" data-toggle="tooltip">
-                        <i class="fas fa-cloud-download-alt text-white"></i>
-                    </a>
+                <div class="text-right text-white">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex align-items-center justify-content-end px-0 bg-transparent">
+                            <div class="nav-wrapper">
+                                <ul class="nav nav-pills nav-pill-circle flex-column flex-md-row">
+                                    <?php 
+                                    if ( $seguimiento[0]->estatus_acuerdo_id != 3 ): 
+                                    ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link editar-acuerdo" data-acuerdo="<?= $acuerdo[0]->acuerdo_id ?>" aria-label="Tab Editar" href="#editar-acuerdo" data-bs-toggle="tooltip" title="Editar Preproyecto">
+                                            <span class="nav-link-icon d-block"><span class="fas fa-pencil-alt fa-2x"></span></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link nuevo-seguimiento" data-acuerdo="<?= $acuerdo[0]->acuerdo_id ?>" aria-label="Tab Seguimiento" href="#contestacion" data-bs-toggle="tooltip" title="Nueva Actividad">
+                                            <span class="nav-link-icon d-block"><span class="fas fa-file-contract fa-2x"></span></span>
+                                        </a>
+                                    </li>
+                                    <?php endif ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link seguimiento-finalizar" data-acuerdo="<?= $acuerdo[0]->acuerdo_id ?>" aria-label="Tab Documentación" href="#<?= base_url('index.php/Acuerdos/descargar_zip/' . $acuerdo[0]->acuerdo_id) ?>" data-bs-toggle="tooltip" title="Descargar Documentación">
+                                            <span class="nav-link-icon d-block"><span class="fas fa-cloud-download-alt fa-2x"></span></span>
+                                        </a>
+                                    </li>
+                                    <?php 
+                                    if ( 
+                                        $seguimiento[0]->estatus_acuerdo_id != 3 && 
+                                        (
+                                            ( $this->session->userdata('tuser') == 1 ) // Solo administradores
+                                            ||
+                                            ( $combinacion->subdireccion_id   == 1 && 
+                                              $combinacion->departamento_id   == 1 && 
+                                              $combinacion->area_id           == 1  ) // Solo directores
+                                        )
+                                    ): 
+                                    ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link seguimiento-finalizar" data-acuerdo="<?= $acuerdo[0]->acuerdo_id ?>" aria-label="Tab Finalizar" href="#finalizar" data-bs-toggle="tooltip" title="Nueva Actividad">
+                                            <span class="nav-link-icon d-block"><span class="fas fa-check fa-2x"></span></span>
+                                        </a>
+                                    </li>
+                                    <?php endif ?>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                     <span class="badge badge-lg bg-secondary text-dark"><?= $seguimiento[0]->estatus_seguimiento ?></span>
                     <br>
                     <?php 

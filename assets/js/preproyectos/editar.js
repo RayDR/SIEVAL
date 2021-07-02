@@ -1,32 +1,13 @@
 $(document).ready(function() {
     $('#guardar').click(fguardar);    
     $('#linea_accion').change(flinea_accion);
-    $('#municipio').change(fget_localidades);
-    $('#trimestre').change(fset_trimestre);
     $('#url').blur(fset_url);
 
-    finicia_select2();
     finicia_edicion();
 });
 
 function finicia_edicion(){
     $('#linea_accion').val(linea_accion).trigger('change');
-    $('#unidad_medida').val(unidad_medida).trigger('change');
-    $('#tipo_medicion').val(tipo_medicion).trigger('change');
-    $('#grupo_beneficiado').val(gbeneficiado).trigger('change');
-
-    $('#fecha_inicio').val(fecha_inicio).trigger('change');
-    $('#fecha_termino').val(fecha_termino).trigger('change');
-}
-
-function finicia_select2(){    
-    $('#localidad').select2();
-    // Cargar Select2 y establecer Centro como Opción por defecto
-    $('#municipio').select2();
-    // Autocargar alcance estatal
-    $.when($("#municipio").val(municipio).change()).then(function() {
-        $("#localidad").val(localidad).select2();
-    });
 }
 
 function fguardar(e){
@@ -53,7 +34,8 @@ function fguardar(e){
             else if ( input.nombre == 'inversion' || input.nombre == 'cantidad_beneficiada'  ){
                 if ( valor < 0 )
                     errores += `El campo <a href="#${input.nombre}">${input.texto}</a> no puede ser menor 0.<br>`;
-            }
+            } else if ( input.nombre == 'incluido' )
+                datos[input.nombre] = $(`#${input.nombre}`).is(':checked')? true : false;
         });
         datos['preproyecto'] = $('#preproyecto').val();
         if ( ! errores ){
@@ -86,28 +68,5 @@ function flinea_accion(){
             <br>
             <label class="h6"><span class="text-secondary">Estrategia:</span> <small class="font-weight-bold">${seleccion.data('estrategia')}</small></label>
         `);
-    }
-}
-
-function fget_localidades(){
-    var municipio = $(this).val();
-    if ( municipio ){
-        var respuesta = fu_json_query(url('Preproyectos/select_localidades', true, false), {municipio: municipio});
-        if ( respuesta ){
-            if ( respuesta.exito ){
-                $('#localidad').html('<option selected disabled>Seleccione una opción</option>');
-                respuesta.localidades.forEach( function(localidad, index) {
-                    $('#localidad').append(`
-                        <option value="${localidad.localidad_id}">${localidad.descripcion}</option>
-                    `);
-                });
-                // Autocargar alcance estatal
-                if ( $("#municipio").val() == 18 )
-                    $("#localidad").val($("#localidad option:not([disabled]):first").val()).select2();
-            }
-            if ( respuesta.mensaje )
-                fu_notificacion(respuesta.mensaje, (!respuesta.exito)? 'danger' : 'warning');
-        } else 
-            fu_notificacion('No se obtuvo respuesta del servidor.', 'danger');
     }
 }

@@ -18,7 +18,8 @@ $(document).ready(function() {
 
     finicia_datatable();
 
-    $(`${dtNombre} tbody`).on('click', 'tr td', fdetalle_acuerdo);
+    //$(`${dtNombre} tbody`).on('click', 'tr td', fdetalle_acuerdo);
+    $(`${dtNombre} tbody`).on('click', 'tr td', fmodal_seguimiento_acuerdo); // Simplificado
 });
 
 function finicia_datatable(){
@@ -109,6 +110,19 @@ function fseguimiento_acuerdo(data){
    return html;
 }
 
+function fmodal_seguimiento_acuerdo(){
+    var tr   = $(this).closest('tr');
+        row  = dt.row( tr ),
+        data = dt.row( tr ).data(),
+        html = fu_muestra_vista(url('Acuerdos/seguimiento_detallado'), {acuerdo: data.acuerdo_id});
+    if ( html ){
+        fu_modal('Seguimiento de Acuerdos', 
+                html, 
+                ``);
+    } else 
+        fu_modal('404');
+}
+
 function fmuestra_registro(e){
     if ( e == null || e == undefined )
         return;
@@ -150,8 +164,10 @@ function fnuevo_seguimiento(e){
     var acuerdo     = $(this).data('acuerdo'),
         respuesta   = fu_json_query( url(`${vSeguimiento}/${acuerdo}`, true, false) );
     if ( respuesta ){
-        if ( respuesta.exito )
+        if ( respuesta.exito ){
+            fu_modal();
             $('#ajax-html').html(respuesta.html);
+        }
         else
             fu_notificacion(respuesta.error, 'danger', 5000);
     }
@@ -164,8 +180,10 @@ function feditar_acuerdo(e){
     var acuerdo     = $(this).data('acuerdo'),
         respuesta   = fu_json_query( url(`${vEdicion}/${acuerdo}`, true, false) );
     if ( respuesta ){
-        if ( respuesta.exito )
+        if ( respuesta.exito ){
+            fu_modal();
             $('#ajax-html').html(respuesta.html);
+        }
         else
             fu_notificacion(respuesta.error, 'danger', 5000);
     }
@@ -178,8 +196,10 @@ function ffinalizar_acuerdo(e){
     var acuerdo     = $(this).data('acuerdo'),
         respuesta   = fu_json_query( url(`${vFinalizar}/${acuerdo}`, true, false) );
     if ( respuesta ){
-        if ( respuesta.exito )
+        if ( respuesta.exito ){
+            fu_modal();
             $('#ajax-html').html(respuesta.html);
+        }
         else
             fu_notificacion(respuesta.error, 'danger', 5000);
     }

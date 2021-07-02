@@ -228,7 +228,7 @@ class Acuerdos extends CI_Controller {
         $acuerdo_id     = $this->input->post('acuerdo');
         $data = array(
             'historial'    => $this->model_acuerdos->get_acuerdos_detalle($acuerdo_id),
-            'view'         => 'acuerdos/ajax/historial'
+            'view'         => 'acuerdos/ajax/historial_seguimiento'
         );
         $json['html'] = $this->load->view( $data['view'], $data, TRUE );
         return print(json_encode( $json ));
