@@ -24,13 +24,11 @@
                 <thead class="thead-light">
                     <tr>
                         <th class="border-0">#</th>
-                        <th class="border-0">Unidad Administrativa</th>
-                        <th class="border-0">Departamento</th>
+                        <th class="border-0">Clave</th>
                         <th class="border-0">Programa Presupuestario</th>
-                        <th class="border-0">Objetivo</th>
-                        <th class="border-0">Estrategia</th>
-                        <th class="border-0">Progreso</th>                        
-                        <th class="border-0">Porcentaje de Avance</th>
+                        <th class="border-0">Descripción</th>
+                        <th class="border-0">Objetivo</th>                        
+                        <th class="border-0">Periodo</th>
                     </tr>
                 </thead>
             </table>

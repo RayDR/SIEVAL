@@ -17,7 +17,7 @@ function finicia_datatable(){
         buttons: [
             {
                 text: 'Actualizar',
-                action: function (e, dt, node, config) {                    
+                action: function (e, dt, node, config) {
                     $(this).prop({ disabled: true });
                     factualiza_datatable();
                     $(this).prop({ disabled: false });
@@ -39,27 +39,12 @@ function finicia_datatable(){
             dataSrc: ''
         },
         columns: [
-            { data: 'usuario_id' },
-            { data: 'usuario' },
-            { 
-            	data: null,
-            	render: function(data){
-            		return `${data.nombres} ${data.primer_apellido} ${data.segundo_apellido}`;
-            	} 
-            },
-            { 
-            	data: null,
-            	render: function(data){
-            		return `${data.direccion} ${data.subdireccion} ${data.departamento} ${data.area}`;
-            	} 
-            },
-            { 
-            	data: null,
-            	render: function(data){
-            		estatus = ( data.estatus == 1 )? 'ACTIVO': 'INACTIVO';
-            		return `${estatus}`;
-            	} 
-            },
+            { data: 'programa_presupuestario_id' },
+            { data: 'cve_programa' },
+            { data: 'nombre' },
+            { data: 'descripcion' },
+            { data: 'objetivo' },
+            { data: 'ejercicio' },
         ],
         drawCallback: function (settings) {
             $('[data-toggle="tooltip"]').tooltip({ boundary: 'window' });

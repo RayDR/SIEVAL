@@ -39,27 +39,14 @@ function finicia_datatable(){
             dataSrc: ''
         },
         columns: [
-            { data: 'usuario_id' },
-            { data: 'usuario' },
-            { 
-            	data: null,
-            	render: function(data){
-            		return `${data.nombres} ${data.primer_apellido} ${data.segundo_apellido}`;
-            	} 
-            },
-            { 
-            	data: null,
-            	render: function(data){
-            		return `${data.direccion} ${data.subdireccion} ${data.departamento} ${data.area}`;
-            	} 
-            },
-            { 
-            	data: null,
-            	render: function(data){
-            		estatus = ( data.estatus == 1 )? 'ACTIVO': 'INACTIVO';
-            		return `${estatus}`;
-            	} 
-            },
+            { data: 'proyecto_actividad_id' },
+            { data: 'cve_programa' },
+            { data: 'cve_fuente_financiamiento' },
+            { data: 'estrategia_programa' },
+            { data: 'objetivo_programa' },
+            { data: 'fecha_creacion_proyecto' },
+            { data: 'ejercicio' },
+            { data: 'estatus' },
         ],
         drawCallback: function (settings) {
             $('[data-toggle="tooltip"]').tooltip({ boundary: 'window' });

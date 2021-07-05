@@ -24,14 +24,12 @@
                 <thead class="thead-light">
                     <tr>
                         <th class="border-0">#</th>
-                        <th class="border-0">Clave</th>
                         <th class="border-0">Programa Presupuestario</th>
                         <th class="border-0">Fuente de Financimiento</th>
-                        <th class="border-0">Programa Presupuestario</th>
                         <th class="border-0">Estrategia</th>
                         <th class="border-0">Objetivo</th>
                         <th class="border-0">Fecha de Creación</th>
-                        <th class="border-0">Ejercicio</th>                        
+                        <th class="border-0">Ejercicio</th>
                         <th class="border-0">Estatus</th>
                     </tr>
                 </thead>
