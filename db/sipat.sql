@@ -182,7 +182,7 @@ CREATE TABLE `acuerdos` (
   KEY `tema_id` (`tema_id`),
   CONSTRAINT `acuerdos_ibfk_1` FOREIGN KEY (`tema_id`) REFERENCES `temas` (`tema_id`),
   CONSTRAINT `fk_combinacion_area` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,6 @@ CREATE TABLE `acuerdos` (
 
 LOCK TABLES `acuerdos` WRITE;
 /*!40000 ALTER TABLE `acuerdos` DISABLE KEYS */;
-INSERT INTO `acuerdos` VALUES (1,1,'sdasdsadsadasdsad',1,1,2021,1,'2021-06-29 06:49:05','2021-06-29 06:49:05'),(2,1,'sadsadasdasdasd',1,1,2021,1,'2021-06-29 06:49:42','2021-06-29 06:49:42');
 /*!40000 ALTER TABLE `acuerdos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -929,7 +928,7 @@ CREATE TABLE `preproyectos` (
   CONSTRAINT `fk_ums_preproyectos` FOREIGN KEY (`unidad_medida_id`) REFERENCES `unidades_medida` (`unidad_medida_id`),
   CONSTRAINT `fk_usuario_modifica_preproyecto` FOREIGN KEY (`usuario_id_modifica`) REFERENCES `usuarios` (`usuario_id`),
   CONSTRAINT `fk_usuarios_preproyecto` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -938,7 +937,6 @@ CREATE TABLE `preproyectos` (
 
 LOCK TABLES `preproyectos` WRITE;
 /*!40000 ALTER TABLE `preproyectos` DISABLE KEYS */;
-INSERT INTO `preproyectos` VALUES (1,5,'0000-00-00 00:00:00','0000-00-00 00:00:00','dsafdasdfsadasdasd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'https://psiqueyciencia.com/comming-soon/',1,1,1,1,1,NULL,'2021-06-28 12:33:44','2021-06-28 12:42:48'),(2,6,'0000-00-00 00:00:00','0000-00-00 00:00:00','asdsadasdsadasdfdfkvgb sdivnmv4ds451521sd dsfasddasd 6as21d6as2d3as0d3asd0 as63d',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'http://aplicaciones.setab.gob.mx/aprendeencasa/sources/img/Verano/Verano-00.png',2,1,1,1,1,NULL,'2021-06-28 12:35:39','2021-06-28 12:42:56'),(3,5,'0000-00-00 00:00:00','0000-00-00 00:00:00','sdfsd sdfsd5 4fsd5 3r342978339',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'https://youtu.be/FWwLZN3aRL0',0,0,1,1,NULL,NULL,'2021-06-28 12:36:19',NULL),(4,9,'0000-00-00 00:00:00','0000-00-00 00:00:00','z<dxz<xz<x<zx<zx<zx',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',0,1,1,1,1,NULL,'2021-06-28 12:36:53','2021-06-29 10:17:27'),(5,1,'0000-00-00 00:00:00','0000-00-00 00:00:00','Pinche preproyec5o vergas wey',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',1,0,1,1,1,NULL,'2021-06-29 11:33:29','2021-06-29 11:33:40');
 /*!40000 ALTER TABLE `preproyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -974,7 +972,7 @@ CREATE TABLE `preproyectos_actividades` (
   `fecha_modificacion` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `estatus_id` int(11) DEFAULT '1',
   PRIMARY KEY (`preproyecto_actividad_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -983,7 +981,6 @@ CREATE TABLE `preproyectos_actividades` (
 
 LOCK TABLES `preproyectos_actividades` WRITE;
 /*!40000 ALTER TABLE `preproyectos_actividades` DISABLE KEYS */;
-INSERT INTO `preproyectos_actividades` VALUES (1,2,'sadfaslkndoikasjndpkasdp´lkaspdokjaspkdpolaksdpkmaspdmaspdmaslpmdñlasmdñalsmdñlasm',6,2,466,76,2,2,100,NULL,15050.00,'https://psiqueyciencia.com/comming-soon/',2,'2021-04-01 00:00:00','2021-06-30 00:00:00',2,0,1,1,'2021-06-28 12:46:23','2021-06-29 11:23:09',1),(2,4,'sadasdasdsadasdasdasdsadsdasdasasa',9,15,2428,9,2,2,150,NULL,15000000.00,'https://psiqueyciencia.com/comming-soon/',2,'2021-04-01 00:00:00','2021-06-30 00:00:00',2,1,1,1,'2021-06-29 10:18:12','2021-06-29 11:37:05',1),(3,4,'Avemus cacao',9,15,2427,9,2,1,100,NULL,1556930.00,'https://psiqueyciencia.com/comming-soon/',3,'2021-07-01 00:00:00','2021-09-30 00:00:00',2,1,1,1,'2021-06-29 11:16:55','2021-06-29 11:33:00',1),(4,4,'asfkohaseu hsskasbdishanksa sndoijakd asa',9,14,2380,122,1,1,15151,NULL,5612650.00,'https://psiqueyciencia.com/comming-soon/',1,'2021-01-01 00:00:00','2021-03-31 00:00:00',1,0,1,NULL,'2021-06-29 11:18:21',NULL,1),(5,3,'Ashaushaushaushuahsuahsuahsua',5,18,2717,58,1,2,0,NULL,0.00,'',1,'2021-01-01 00:00:00','2021-03-31 00:00:00',0,1,1,1,'2021-06-29 11:42:21','2021-06-29 11:42:37',1),(6,3,'ahsauhsuahsuahsuahs por 2',5,14,2378,116,2,2,1000,NULL,15151515.00,'',1,'2021-01-01 00:00:00','2021-03-31 00:00:00',1,1,1,1,'2021-06-29 11:43:19','2021-06-29 11:43:39',1);
 /*!40000 ALTER TABLE `preproyectos_actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1049,7 +1046,7 @@ CREATE TABLE `proyectos_actividades` (
   CONSTRAINT `proyectos_actividades_ibfk_2` FOREIGN KEY (`programa_presupuestario_id`) REFERENCES `programas_presupuestarios` (`programa_presupuestario_id`),
   CONSTRAINT `proyectos_actividades_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`),
   CONSTRAINT `proyectos_actividades_ibfk_4` FOREIGN KEY (`linea_accion_id`) REFERENCES `lineas_accion` (`linea_accion_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1058,7 +1055,6 @@ CREATE TABLE `proyectos_actividades` (
 
 LOCK TABLES `proyectos_actividades` WRITE;
 /*!40000 ALTER TABLE `proyectos_actividades` DISABLE KEYS */;
-INSERT INTO `proyectos_actividades` VALUES (5,11,NULL,4,0,NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38','2021',1,1,NULL,0),(6,11,4,4,2,NULL,'2021-06-28 05:48:00','2021-06-28 07:22:44','2021',1,1,NULL,0);
 /*!40000 ALTER TABLE `proyectos_actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1152,7 +1148,7 @@ CREATE TABLE `seguimientos_acuerdos` (
   CONSTRAINT `fk_combinacion_area_sa` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`),
   CONSTRAINT `fk_estatus_acuerdos` FOREIGN KEY (`estatus_acuerdo_id`) REFERENCES `estatus_acuerdos` (`estatus_acuerdo_id`),
   CONSTRAINT `seguimientos_acuerdos_ibfk_1` FOREIGN KEY (`acuerdo_id`) REFERENCES `acuerdos` (`acuerdo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1161,7 +1157,6 @@ CREATE TABLE `seguimientos_acuerdos` (
 
 LOCK TABLES `seguimientos_acuerdos` WRITE;
 /*!40000 ALTER TABLE `seguimientos_acuerdos` DISABLE KEYS */;
-INSERT INTO `seguimientos_acuerdos` VALUES (1,1,1,2021,'sdasdsadsadasdsad',1,1,1,'beautiful-blur-casual-935756.jpg,MUESTRA - Manual de Imagen Corporativa Psique y Ciencia _ 2019.pdf','2021-06-29 06:49:05','2021-06-29 06:59:37',1),(2,2,1,2021,'sadsadasdasdasd',1,1,NULL,'care-connection-device-1282308.jpg','2021-06-29 06:49:42','2021-06-29 06:49:42',1),(3,1,2,2021,'Ya quedo',1,1,1,'Logo.png','2021-06-29 06:59:37','2021-06-29 07:00:04',2),(4,1,3,2021,'dsfsdfsdfsdfsdfdsf',1,1,1,NULL,'2021-06-29 07:00:04','2021-06-29 07:00:04',3);
 /*!40000 ALTER TABLE `seguimientos_acuerdos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2557,4 +2552,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-05  8:30:41
+-- Dump completed on 2021-07-05 14:51:36

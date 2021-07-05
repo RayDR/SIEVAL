@@ -1,6 +1,6 @@
 var dt, 
-    dtNombre     = '#dtUsuarios', 
-    dtAjaxUrl    = 'Configurador/datatable_usuarios';
+    dtNombre     = '#dtProyectos', 
+    dtAjaxUrl    = 'Configurador/datatable_proyectos';
 
 $(document).ready(function($) {
 	finicia_datatable();
@@ -17,7 +17,7 @@ function finicia_datatable(){
         buttons: [
             {
                 text: 'Actualizar',
-                action: function (e, dt, node, config) {
+                action: function (e, dt, node, config) {                    
                     $(this).prop({ disabled: true });
                     factualiza_datatable();
                     $(this).prop({ disabled: false });

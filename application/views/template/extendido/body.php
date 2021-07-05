@@ -46,7 +46,5 @@
     <script src="<?= base_url('assets/js/volt.js') ?>"></script>
     <!-- Utilerias JS -->
     <script src="<?= base_url('assets/js/utilerias.js') ?>" type="text/javascript" charset="utf-8" async defer></script>
-    <!-- Custom JS -->
-    <script src="<?= base_url('assets/js/custom.js') ?>" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>

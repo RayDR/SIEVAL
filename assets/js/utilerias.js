@@ -64,13 +64,13 @@ const notyf = new Notyf({
 
 // Función de animación de carga del sistema
 function loader(opcion = true){
-  // let loader = $("#loader");
-  // if ( opcion == true ){
-  //   if ( loader.is(":visible") == false )
-  //     loader.fadeIn('fast');
-  // }
-  // else 
-  //   loader.fadeOut(1500);  
+  let loader = $("#loader");
+  if ( opcion == true ){
+    if ( loader.is(":visible") == false )
+      loader.fadeIn('fast');
+  }
+  else 
+    loader.fadeOut(850);  
 }
 
 // Función para reducir la llamada a la url base del sistema
@@ -211,7 +211,7 @@ function fu_abrir_ventana(vUrl, nombre, opciones = "", objetoVentana){
 }
 
 // Función que dada un URL o propiedad data, carga una vista modo ajax
-function fu_muestra_vista(vUrl, datos = []){
+function fu_muestra_vista(vUrl, datos = [], async = false){
   vUrl = ( $(this).data("url") )? $(this).data("url") : vUrl;
   var html = "";
   if ( vUrl ){
@@ -219,7 +219,7 @@ function fu_muestra_vista(vUrl, datos = []){
   		url:    vUrl,
   		type:   'POST',
   		cache:  true,
-  		async:  false,
+  		async:  async,
   		global: false,
   		data:   datos,
   		success: function(data, textStatus, xhr) {

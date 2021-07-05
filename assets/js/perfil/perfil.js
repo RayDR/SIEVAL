@@ -1,6 +1,8 @@
 $(document).ready(function() {
     $('#actualizar_perfil').click(factualizar_perfil);
     $('#cambiar_password').click(fcambiar_password);
+
+    loader(false);
 });
 
 function factualizar_perfil(e){

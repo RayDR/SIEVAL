@@ -19,14 +19,15 @@
     <div class="card card-body shadow-sm mb-4 mb-lg-0 bg-transparent">
         <!-- Botonera -->
         <div class="row d-flex justify-content-between">
-            <div class="col my-auto">
+            <div class="col-lg-6 my-auto">
                 <h2 class="h5 mb-4 text-center">DETALLE DE PREPROYECTO</h2>
+                <hr class="ml-3">
             </div>
             <div class="col">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex align-items-center justify-content-end px-0 bg-transparent">
+                    <li class="list-group-item d-inline-flex align-items-center justify-content-end px-0 bg-transparent">
                         <div class="nav-wrapper">
-                            <ul class="nav nav-pills nav-pill-circle flex-column flex-md-row">
+                            <ul class="nav nav-pills nav-pill-circle flex-row">
                                 <li class="nav-item">
                                     <a id="editar" class="nav-link" aria-label="Tab Editar" href="#editar-preproyecto" data-bs-toggle="tooltip" title="Editar Preproyecto">
                                         <span class="nav-link-icon d-block"><span class="fas fa-pencil-alt fa-2x"></span></span>
@@ -35,6 +36,16 @@
                                 <li class="nav-item">
                                     <a id="actividad" class="nav-link" aria-label="Tab Reporte" href="#actividad-preproyecto" data-bs-toggle="tooltip" title="Nueva Actividad">
                                         <span class="nav-link-icon d-block"><span class="fas fa-file-contract fa-2x"></span></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="concluido" class="nav-link disabled" disabled aria-label="Tab Concluído" href="#concluido-preproyecto" data-bs-toggle="tooltip" title="Concluído Preproyecto">
+                                        <span class="nav-link-icon d-block"><span class="fas fa-check fa-2x"></span></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="cancelar" class="nav-link disabled" disabled aria-label="Tab Cancelar" href="#cancelar-preproyecto" data-bs-toggle="tooltip" title="Cancelar Preproyecto">
+                                        <span class="nav-link-icon d-block"><span class="fas fa-ban fa-2x"></span></span>
                                     </a>
                                 </li>
                             </ul>
@@ -50,9 +61,9 @@
             <li class="list-group-item d-flex align-items-center justify-content-center px-0 bg-transparent">
                 <div class="accordion my-3 w-100" id="preproyecto">
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="titulo_preproyecto">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#encabezado-preproyecto" aria-expanded="false" aria-controls="encabezado-preproyecto">
-                                <strong>PREPROYECTO:</strong>&nbsp;<?= $preproyecto->actividad ?>
+                        <h2 class="accordion-header text-wrap" id="titulo_preproyecto">
+                            <button class="accordion-button collapsed text-wrap" type="button" data-bs-toggle="collapse" data-bs-target="#encabezado-preproyecto" aria-expanded="false" aria-controls="encabezado-preproyecto">
+                                <strong>PREPROYECTO: </strong>&nbsp;<?= $preproyecto->actividad ?>
                             </button>
                         </h2>
                         <div id="encabezado-preproyecto" class="accordion-collapse collapse" aria-labelledby="titulo_preproyecto" data-bs-parent="#preproyecto">

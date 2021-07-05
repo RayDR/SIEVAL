@@ -220,6 +220,17 @@ class Model_preproyectos extends CI_Model {
             $this->db->trans_begin();
 
             if ( is_array($datos) ){
+                $this->db->where('preproyecto_id', $preproyecto_id);
+                $dbPreproyecto = $this->db->get('preproyectos');
+
+                if ( $dbPreproyecto->num_rows() > 0 ){
+                    if ( $dbPreproyecto->row('estatus_id') == 1 )
+                        $this->set_estatus_preproyecto($preproyecto_id, 2);
+                    else
+                        $this->set_estatus_preproyecto($preproyecto_id, 3);
+                } else
+                    throw new Exception("No se encontró el preproyecto.", 1);                  
+
                 $db_datos = array(
                     'preproyecto_id'            => $preproyecto_id,
                     'municipio_id'              => $datos['municipio'],
@@ -327,6 +338,91 @@ class Model_preproyectos extends CI_Model {
             $resultado['error'] = $e;
         }
         return $resultado;
+    }
+
+    /**
+        * Finalizar preproyecto
+        *
+        * @access public
+        * @param  integer  preproyecto_actividad_id      ID
+        *
+        * @return resultado[]
+    */
+    function finalizar_preproyecto($preproyecto_actividad_id){
+        $resultado = array('exito' => TRUE);
+        try {
+            $this->db->trans_begin();
+
+            $this->db->where('preproyecto_id', $preproyecto_id);
+            $dbPreproyecto = $this->db->get('preproyectos');
+
+            if ( $dbPreproyecto->num_rows() > 0 ){
+                $this->set_estatus_preproyecto($preproyecto_id, 4);
+            } else
+                throw new Exception("No se encontró el preproyecto.", 1);
+
+            $this->db->trans_commit();
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
+            $resultado['exito'] = FALSE;
+            $resultado['error'] = $e;
+        }
+        return $resultado;
+    }
+
+    /**
+        * Cancelar preproyecto
+        *
+        * @access public
+        * @param  integer  preproyecto_actividad_id      ID
+        *
+        * @return resultado[]
+    */
+    function cancelar_preproyecto($preproyecto_actividad_id){
+        $resultado = array('exito' => TRUE);
+        try {
+            $this->db->trans_begin();
+
+            $this->db->where('preproyecto_id', $preproyecto_id);
+            $dbPreproyecto = $this->db->get('preproyectos');
+
+            if ( $dbPreproyecto->num_rows() > 0 ){
+                $this->set_estatus_preproyecto($preproyecto_id, 5);
+            } else
+                throw new Exception("No se encontró el preproyecto.", 1);
+
+            $this->db->trans_commit();
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
+            $resultado['exito'] = FALSE;
+            $resultado['error'] = $e;
+        }
+        return $resultado;
+    }
+
+    /**
+        * Fijar estatus de preproyecto
+        *
+        * @access private
+        * @param  integer  preproyecto_actividad_id
+        * @param  integer  estatus_id
+        *
+        * @return boolean
+    */
+    private function set_estatus_preproyecto($preproyecto_id, $estatus_id){
+        try {
+            $this->db->trans_begin();
+
+            $this->db->where('preproyecto_id', $preproyecto_id);
+            $db_datos = array('estatus_id' => 5);
+            $this->db->update('preproyectos', $db_datos);
+
+            $this->db->trans_commit();
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
+            return FALSE;
+        }
+        return TRUE;            
     }
 
 }

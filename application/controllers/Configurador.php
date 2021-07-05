@@ -190,11 +190,11 @@ class Configurador extends CI_Controller {
     // ----------- DATATABLES
 
     public function datatable_programas(){
-        return print(json_encode($this->model_catalogos->get_areas()));
+        return print(json_encode($this->model_catalogos->get_programas()));
     }
 
     public function datatable_proyectos(){
-        return print(json_encode($this->model_catalogos->get_areas()));
+        return print(json_encode($this->model_catalogos->get_proyectos()));
     }
 
     public function datatable_usuarios(){

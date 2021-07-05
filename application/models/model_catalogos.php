@@ -133,6 +133,33 @@ class Model_catalogos extends CI_Model {
 	}
 
 	/**
+		* Devuelve el catalogo de proyectos
+		*
+		* @access public
+		* @param  array   $filtros 			filtros a iterar
+		* @param  boolean $tipo_retorno 	Modo de retonro: 
+		*								 		TRUE - Objeto
+		*								 		FALSE - Array
+		* @return resultado
+	*/
+	public function get_proyectos($filtros = NULL, $tipo_retorno = TRUE){
+		try {			
+			if ( is_array($filtros) ){
+				foreach ($filtros as $key => $filtro) {
+					$this->db->where($key, $filtro);
+				}
+			}
+			$resultado = $this->db->get('vw_preproyectos');
+			if ( $tipo_retorno )
+				return $resultado->result();
+			else
+				return $resultado->result_array();
+		} catch (Exception $e) {
+			return [];
+		}
+	}
+
+	/**
 		* Devuelve el catalogo de fuentes de financiamiento
 		*
 		* @access public
