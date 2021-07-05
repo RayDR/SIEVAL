@@ -31,57 +31,61 @@
                      </li>';
                $submenuActivo = FALSE;
             }
-
-            switch ($opcion->clave) {
-               case 'EL':
-                  ?>
-                  <li class="nav-item">
-                     <a href="<?= base_url($opcion->url) ?>" class="nav-link">
-                        <span class="sidebar-icon"><span class="<?= $opcion->icono ?>"></span></span>
-                        <span class="sidebar-text"><?= $opcion->menu ?></span>
-                     </a>
-                  </li>
-                  <?php
-                  break;
-               case 'EE':
-                  ?>
-                  <li class="nav-item">
-                     <a href="$opcion->url" class="nav-link">
-                        <span class="sidebar-icon"><span class="<?= $opcion->icono ?>"></span></span>
-                        <span class="sidebar-text"><?= $opcion->menu ?></span>
-                     </a>
-                  </li>
-                  <?php
-                  break;
-               case 'SM':
-                  ?>
-                  <li class="nav-item">
-                     <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-<?= $opcion->menu_id ?>">
-                        <span>
+            if( ( $opcion->solo_admin == 1 && $this->session->userdata('tuser') == 1 ) ||   // Solo admin
+                ( $opcion->solo_admin == 0 && $this->session->userdata('tuser') == 1 ) ||   // User admin  - acceso general
+                ( $opcion->solo_admin == 0 && $this->session->userdata('tuser') != 1 )      // Acceso general
+            ){
+               switch ($opcion->clave) {
+                  case 'EL':
+                     ?>
+                     <li class="nav-item">
+                        <a href="<?= base_url($opcion->url) ?>" class="nav-link">
                            <span class="sidebar-icon"><span class="<?= $opcion->icono ?>"></span></span>
                            <span class="sidebar-text"><?= $opcion->menu ?></span>
+                        </a>
+                     </li>
+                     <?php
+                     break;
+                  case 'EE':
+                     ?>
+                     <li class="nav-item">
+                        <a href="$opcion->url" class="nav-link">
+                           <span class="sidebar-icon"><span class="<?= $opcion->icono ?>"></span></span>
+                           <span class="sidebar-text"><?= $opcion->menu ?></span>
+                        </a>
+                     </li>
+                     <?php
+                     break;
+                  case 'SM':
+                     ?>
+                     <li class="nav-item">
+                        <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-<?= $opcion->menu_id ?>">
+                           <span>
+                              <span class="sidebar-icon"><span class="<?= $opcion->icono ?>"></span></span>
+                              <span class="sidebar-text"><?= $opcion->menu ?></span>
+                           </span>
+                           <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
                         </span>
-                        <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
-                     </span>
-                     <div class="multi-level collapse" role="list" id="submenu-<?= $opcion->menu_id ?>" aria-expanded="false">
-                        <ul class="flex-column nav">
-                  <?php $submenuActivo = TRUE;
-                  break;
-               case 'AP':
-                  ?>
-                  <li class="nav-item">
-                     <a href="#<?= $opcion->url ?>" data-url="<?= $opcion->url ?>" class="nav-link link-personalizado">
-                        <span class="sidebar-icon"><span class="<?= $opcion->icono ?>"></span></span>
-                        <span class="sidebar-text"><?= $opcion->menu ?></span>
-                     </a>
-                  </li>
-                  <?php
-                  break;
-               case 'SP':
-                  ?>
-                  <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
-                  <?php 
-                  break;
+                        <div class="multi-level collapse" role="list" id="submenu-<?= $opcion->menu_id ?>" aria-expanded="false">
+                           <ul class="flex-column nav">
+                     <?php $submenuActivo = TRUE;
+                     break;
+                  case 'AP':
+                     ?>
+                     <li class="nav-item">
+                        <a href="#<?= $opcion->url ?>" data-url="<?= $opcion->url ?>" class="nav-link link-personalizado">
+                           <span class="sidebar-icon"><span class="<?= $opcion->icono ?>"></span></span>
+                           <span class="sidebar-text"><?= $opcion->menu ?></span>
+                        </a>
+                     </li>
+                     <?php
+                     break;
+                  case 'SP':
+                     ?>
+                     <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
+                     <?php 
+                     break;
+               }
             }?>            
          <?php endforeach;
             if ( $submenuActivo ){

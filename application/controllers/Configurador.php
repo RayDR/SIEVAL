@@ -1,4 +1,12 @@
-<?php
+ <?php
+/* ================================================================================================================
+ *  @Filename:  Controllers/Configurador.php
+ * ================================================================================================================
+ *  @author:    Domodigital 
+ *  @version:   V1.0
+ *  @revision:  07-2021
+ * =====================================================================*/
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Configurador extends CI_Controller {
@@ -180,6 +188,14 @@ class Configurador extends CI_Controller {
     }
 
     // ----------- DATATABLES
+
+    public function datatable_programas(){
+        return print(json_encode($this->model_catalogos->get_areas()));
+    }
+
+    public function datatable_proyectos(){
+        return print(json_encode($this->model_catalogos->get_areas()));
+    }
 
     public function datatable_usuarios(){
         $this->load->model('model_usuarios');

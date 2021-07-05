@@ -742,6 +742,7 @@ CREATE TABLE `menu` (
   `menu` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Nombre del menú. \nSe mostrará en las cintas de navegación.',
   `icono` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Icono a colocar antes del nombre. Este debe estar disponible para mostrar en el CSS o JS de la página.',
   `url` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Ruta de redirección, su comportamiento esta dado según el tipo_menu_id.',
+  `solo_admin` int(1) NOT NULL DEFAULT '0',
   `tipo_menu_id` int(11) NOT NULL COMMENT 'Catálogo de tipos de menú',
   `submenu_id` int(11) DEFAULT NULL COMMENT 'Autorelación',
   `orden` float NOT NULL COMMENT 'Usado para el ordenamiendo o jerarquía de los botones',
@@ -762,7 +763,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,'Tablero','fas fa-chart-pie','',1,NULL,1,'2021-03-10 01:32:29','2021-03-10 03:06:38',1),(2,'Actividades','far fa-calendar-alt','index.php/Actividades',1,NULL,3,'2021-03-10 01:32:29','2021-06-07 03:56:43',1),(3,'Acuerdos','far fa-handshake','index.php/Acuerdos',1,NULL,4,'2021-03-10 01:32:29','2021-06-07 03:56:43',1),(4,'Separador',NULL,'',5,NULL,5,'2021-03-10 01:32:29','2021-06-07 03:56:44',1),(5,'Configurador','fas fa-cogs',NULL,3,NULL,6,'2021-03-10 01:32:29','2021-06-07 03:56:44',1),(6,'Programas','fas fa-clipboard-list','index.php/Configurador/programas',1,5,6.2,'2021-03-10 01:32:29','2021-06-07 04:17:34',1),(7,'Usuarios','fas fa-user','index.php/Configurador/usuarios',1,5,6.3,'2021-03-24 17:32:14','2021-06-07 04:17:37',1),(8,'Preproyectos','fas fa-clipboard-list','index.php/Preproyectos',1,NULL,2,'2021-06-07 03:56:41','2021-06-07 03:56:41',1),(12,'Proyectos','fas fa-clipboard-list','index.php/Configurador/proyectos',1,5,6.1,'2021-06-07 04:17:31','2021-06-07 04:17:31',1);
+INSERT INTO `menu` VALUES (1,'Tablero','fas fa-chart-pie','',0,1,NULL,1,'2021-03-10 01:32:29','2021-03-10 03:06:38',1),(2,'Actividades','far fa-calendar-alt','index.php/Actividades',0,1,NULL,3,'2021-03-10 01:32:29','2021-06-07 03:56:43',1),(3,'Acuerdos','far fa-handshake','index.php/Acuerdos',0,1,NULL,4,'2021-03-10 01:32:29','2021-06-07 03:56:43',1),(4,'Separador',NULL,'',0,5,NULL,5,'2021-03-10 01:32:29','2021-06-07 03:56:44',1),(5,'Configurador','fas fa-cogs',NULL,1,3,NULL,6,'2021-03-10 01:32:29','2021-07-05 11:32:36',1),(6,'Programas','fas fa-clipboard-list','index.php/Configurador/programas',1,1,5,6.2,'2021-03-10 01:32:29','2021-07-05 11:32:42',1),(7,'Usuarios','fas fa-user','index.php/Configurador/usuarios',1,1,5,6.3,'2021-03-24 17:32:14','2021-07-05 11:32:43',1),(8,'Preproyectos','fas fa-tasks','index.php/Preproyectos',0,1,NULL,2,'2021-06-07 03:56:41','2021-07-05 11:27:48',1),(12,'Proyectos','fas fa-project-diagram','index.php/Configurador/proyectos',1,1,5,6.1,'2021-06-07 04:17:31','2021-07-05 11:32:49',1);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1623,6 +1624,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `tipo_menu_id`,
  1 AS `tipo_menu`,
  1 AS `clave`,
+ 1 AS `solo_admin`,
  1 AS `submenu_id`,
  1 AS `orden`,
  1 AS `fecha_creacion`,
@@ -2307,7 +2309,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_menu` AS select `menu`.`menu_id` AS `menu_id`,`menu`.`menu` AS `menu`,`menu`.`icono` AS `icono`,`menu`.`url` AS `url`,`tipos_menu`.`tipo_menu_id` AS `tipo_menu_id`,`tipos_menu`.`tipo_menu` AS `tipo_menu`,`tipos_menu`.`clave` AS `clave`,`menu`.`submenu_id` AS `submenu_id`,`menu`.`orden` AS `orden`,`menu`.`fecha_creacion` AS `fecha_creacion`,`menu`.`fecha_modificacion` AS `fecha_modificacion`,`menu`.`estatus` AS `estatus` from (`menu` join `tipos_menu` on((`tipos_menu`.`tipo_menu_id` = `menu`.`tipo_menu_id`))) order by `menu`.`orden` */;
+/*!50001 VIEW `vw_menu` AS select `menu`.`menu_id` AS `menu_id`,`menu`.`menu` AS `menu`,`menu`.`icono` AS `icono`,`menu`.`url` AS `url`,`tipos_menu`.`tipo_menu_id` AS `tipo_menu_id`,`tipos_menu`.`tipo_menu` AS `tipo_menu`,`tipos_menu`.`clave` AS `clave`,`menu`.`solo_admin` AS `solo_admin`,`menu`.`submenu_id` AS `submenu_id`,`menu`.`orden` AS `orden`,`menu`.`fecha_creacion` AS `fecha_creacion`,`menu`.`fecha_modificacion` AS `fecha_modificacion`,`menu`.`estatus` AS `estatus` from (`menu` join `tipos_menu` on((`tipos_menu`.`tipo_menu_id` = `menu`.`tipo_menu_id`))) order by `menu`.`orden` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2555,4 +2557,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-02  7:07:49
+-- Dump completed on 2021-07-05  8:30:41
