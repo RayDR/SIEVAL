@@ -79,7 +79,7 @@
                     <!-- DATOS DE ACTIVIDAD -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="my-1 me-2" for="unidad_medida">Unidad de Medida</label>
+                            <label class="my-1 me-2" for="unidad_medida">Unidad de Análisis</label>
                             <select class="form-select" id="unidad_medida" aria-label="Default select example">
                                 <option selected disabled>Seleccione una opción</option>
                                 <?php foreach ($u_medida as $key => $um): ?>
@@ -106,7 +106,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="cantidad_beneficiarios">Cantidad de Beneficiarios</label>
+                            <label for="cantidad_beneficiarios">Población Objetivo</label>
                             <input type="number" class="form-control" id="cantidad_beneficiarios" value="0" required>
                         </div>
                     </div>

@@ -64,7 +64,7 @@ const notyf = new Notyf({
 
 // Función de animación de carga del sistema
 function loader(opcion = true){
-  let loader = $("#loader");
+  const loader = $("#loader");
   if ( opcion == true ){
     if ( loader.is(":visible") == false )
       loader.fadeIn('fast');
@@ -80,6 +80,21 @@ function url(url = "", comodin = true, hash = true){
     return $("#base_url").val() + url + fu_cache_buster();
   else
     return $("#base_url").val() + url;
+}
+
+// Activar opción de menú seleccionado
+function fu_activa_menu(_opcion){
+  if ( _opcion ){
+    var opciones    = $('.sidebar-text'),
+        desplegable;
+
+    opciones.each(function(index, opcion) {
+      if ( $(opcion).text() == _opcion ){
+          $(opcion).parents('.nav-item').addClass('active');
+          $(opcion).trigger('click');
+      }
+    });
+  }
 }
 
 function fu_cache_buster(){

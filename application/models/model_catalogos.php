@@ -149,7 +149,7 @@ class Model_catalogos extends CI_Model {
 					$this->db->where($key, $filtro);
 				}
 			}
-			$resultado = $this->db->get('vw_preproyectos');
+			$resultado = $this->db->get('vw_proyectos');
 			if ( $tipo_retorno )
 				return $resultado->result();
 			else

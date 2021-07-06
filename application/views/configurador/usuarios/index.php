@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="btn-toolbar dropdown">
-      <a href="<?= base_url('index.php/Usuarios/registrar') ?>" class="btn btn-dark btn-sm me-2 dropdown-toggle disabled">
+      <a href="<?= base_url('index.php/Configurador/registrar/Usuario') ?>" class="btn btn-dark btn-sm me-2 dropdown-toggle disabled">
         <span class="fas fa-plus me-2"></span>Nuevo Usuario
       </a>
     </div>
@@ -35,4 +35,6 @@
     </div>
 </div>
 
+
+<script src="<?= base_url('assets/js/configurador/configurador.js') ?>?<?= date('dmYHis') ?>" type="text/javascript" charset="utf-8" async defer></script>
 <script src="<?= base_url('assets/js/configurador/usuarios/usuarios.js') ?>?" type="text/javascript" charset="utf-8" async defer></script>

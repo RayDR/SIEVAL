@@ -362,7 +362,7 @@ class Actividades extends CI_Controller {
             ],
             [
                 'nombre'=> 'unidad_medida',
-                'texto' => 'Unidad de Medida',
+                'texto' => 'Unidad de Análisis',
                 'tipo'  => 'select'
             ],
             [
@@ -377,7 +377,7 @@ class Actividades extends CI_Controller {
             ],
             [
                 'nombre'=> 'cantidad_beneficiarios',
-                'texto' => 'Cantidad Beneficiarios'
+                'texto' => 'Población Objetivo'
             ],
             [
                 'nombre'=> 'fisico_objetivo_anual',

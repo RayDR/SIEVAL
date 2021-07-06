@@ -5,6 +5,7 @@ var dt,
 $(document).ready(function($) {
 	finicia_datatable();
     loader(false);
+    activar_menu_desplegable();
 });
 
 function finicia_datatable(){
@@ -41,11 +42,18 @@ function finicia_datatable(){
         columns: [
             { data: 'proyecto_actividad_id' },
             { data: 'cve_programa' },
-            { data: 'cve_fuente_financiamiento' },
+            { data: 'linea_accion' },
             { data: 'estrategia_programa' },
             { data: 'objetivo_programa' },
-            { data: 'fecha_creacion_proyecto' },
+            { data: 'fuente_financiamiento' },
+            { data: 'fecha_creacion' },
             { data: 'ejercicio' },
+            { 
+                data: null,
+                render: function(data){
+                    return `${data.usuario_registro_nombres} ${data.usuario_registro_primer_apellido} ${data.usuario_registro_segundo_apellido}`;
+                }
+            },
             { data: 'estatus' },
         ],
         drawCallback: function (settings) {

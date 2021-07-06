@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="btn-toolbar dropdown">
-      <a href="<?= base_url('index.php/Programas/registrar') ?>" class="btn btn-dark btn-sm me-2 dropdown-toggle">
+      <a href="<?= base_url('index.php/Configurador/registrar/ProgramaPresupuestario') ?>" class="btn btn-dark btn-sm me-2 dropdown-toggle">
         <span class="fas fa-plus me-2"></span>Nuevo Programa
       </a>
     </div>
@@ -36,4 +36,6 @@
     </div>
 </div>
 
+
+<script src="<?= base_url('assets/js/configurador/configurador.js') ?>?<?= date('dmYHis') ?>" type="text/javascript" charset="utf-8" async defer></script>
 <script src="<?= base_url('assets/js/configurador/programas/programas.js'); ?>?<?= date('dmYHis') ?>" type="text/javascript" charset="utf-8" async defer></script>

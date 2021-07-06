@@ -61,6 +61,59 @@ class Configurador extends CI_Controller {
 /*--------------------------------------------------------------------------*
 * ---- FUNCIONES AJAX 
 * --------------------------------------------------*/
+
+    /*------------------------------
+    * -- VISTAS AJAX
+    * ---------------------*/
+
+    public function registrar($opcion){
+        $json  = array('exito' => TRUE);
+        if ( is_string($opcion) ){
+            switch ($opcion) {
+                case 'Proyecto':
+                    $titulo = 'Registrar Proyecto';
+                    $data   = array(
+                        'titulo'    => $titulo  . ' | ' . EMPRESA,
+                        'menu'      => $this->model_catalogos->get_menus(),
+                        'view'      => 'configurador/proyectos/registrar'
+                    );
+                    break;
+                case 'ProgramaPresupuestario':
+                    $titulo = 'Registrar Programa Presupuestario';
+                    $data   = array(
+                        'titulo'    => $titulo  . ' | ' . EMPRESA,
+                        'menu'      => $this->model_catalogos->get_menus(),
+                        'view'      => 'configurador/programas/registrar'
+                    );
+                    break;
+                case 'Usuario':
+                    $titulo = 'Registrar Usuario';
+                    $data   = array(
+                        'titulo'    => $titulo  . ' | ' . EMPRESA,
+                        'menu'      => $this->model_catalogos->get_menus(),
+                        'view'      => 'configurador/usuarios/registrar'
+                    );
+                    break;
+                default:
+                    $opcion = NULL;
+                    $json   = array('exito' => FALSE, 'error' => 'Se ha recibido una opción inválida');
+                    break;
+            }
+            // Abrir la vista
+            if ( $opcion ){
+                $this->load->view( RUTA_TEMA . 'body', $data, FALSE);
+            }
+        } else 
+            $json  = array('exito' => FALSE, 'error' => 'Opción inválida.');
+        
+        if ( !$json['exito'] )
+            redirect(base_url(), 'refresh');
+        
+    }
+
+    /*------------------------------
+    * --- DATOS AJAX
+    * ---------------------*/
     
     // Catálogo de Áreas - SELECT2
     public function get_areas_select2(){
