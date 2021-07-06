@@ -108,7 +108,7 @@ CREATE TABLE `actividades` (
   KEY `medicion_id` (`medicion_id`),
   KEY `proyecto_actividad_id` (`proyecto_actividad_id`),
   KEY `beneficiado_id` (`beneficiado_id`),
-  CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`proyecto_actividad_id`) REFERENCES `proyectos_actividades` (`proyecto_actividad_id`),
+  CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`proyecto_actividad_id`) REFERENCES `proyectos` (`proyecto_actividad_id`),
   CONSTRAINT `actividades_ibfk_2` FOREIGN KEY (`beneficiado_id`) REFERENCES `beneficiados` (`beneficiado_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1015,13 +1015,13 @@ INSERT INTO `programas_presupuestarios` VALUES (1,'E058','Prestaciones médicas 
 UNLOCK TABLES;
 
 --
--- Table structure for table `proyectos_actividades`
+-- Table structure for table `proyectos`
 --
 
-DROP TABLE IF EXISTS `proyectos_actividades`;
+DROP TABLE IF EXISTS `proyectos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `proyectos_actividades` (
+CREATE TABLE `proyectos` (
   `proyecto_actividad_id` int(11) NOT NULL AUTO_INCREMENT,
   `combinacion_area_id` int(11) DEFAULT NULL,
   `programa_presupuestario_id` int(11) DEFAULT NULL,
@@ -1043,19 +1043,20 @@ CREATE TABLE `proyectos_actividades` (
   KEY `linea_accion_id` (`linea_accion_id`),
   KEY `proyecto_ca` (`combinacion_area_id`),
   CONSTRAINT `proyecto_ca` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`),
-  CONSTRAINT `proyectos_actividades_ibfk_2` FOREIGN KEY (`programa_presupuestario_id`) REFERENCES `programas_presupuestarios` (`programa_presupuestario_id`),
-  CONSTRAINT `proyectos_actividades_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`),
-  CONSTRAINT `proyectos_actividades_ibfk_4` FOREIGN KEY (`linea_accion_id`) REFERENCES `lineas_accion` (`linea_accion_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `proyectos_ibfk_2` FOREIGN KEY (`programa_presupuestario_id`) REFERENCES `programas_presupuestarios` (`programa_presupuestario_id`),
+  CONSTRAINT `proyectos_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`),
+  CONSTRAINT `proyectos_ibfk_4` FOREIGN KEY (`linea_accion_id`) REFERENCES `lineas_accion` (`linea_accion_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `proyectos_actividades`
+-- Dumping data for table `proyectos`
 --
 
-LOCK TABLES `proyectos_actividades` WRITE;
-/*!40000 ALTER TABLE `proyectos_actividades` DISABLE KEYS */;
-/*!40000 ALTER TABLE `proyectos_actividades` ENABLE KEYS */;
+LOCK TABLES `proyectos` WRITE;
+/*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
+INSERT INTO `proyectos` VALUES (1,1,1,1,1,1,'2021-07-06 07:32:04','2021-07-06 07:32:04','2021',1,1,NULL,0);
+/*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1782,7 +1783,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `techo_financiero`,
  1 AS `fuente_financiamiento_id`,
  1 AS `cve_fuente_financiamiento`,
- 1 AS `descripcion`,
+ 1 AS `fuente_financiamiento`,
  1 AS `usuario_proyecto_id`,
  1 AS `fecha_creacion_proyecto`,
  1 AS `fecha_actualizacion_proyecto`,
@@ -1819,39 +1820,48 @@ DROP TABLE IF EXISTS `vw_proyectos`;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `vw_proyectos` AS SELECT 
- 1 AS `cve_programa`,
- 1 AS `programa_presupuestario_id`,
- 1 AS `programa_presupuestario`,
- 1 AS `techo_financiero`,
- 1 AS `fuente_financiamiento_id`,
- 1 AS `cve_fuente_financiamiento`,
- 1 AS `descripcion`,
- 1 AS `ejercicio`,
- 1 AS `estatus`,
- 1 AS `usuario_id`,
- 1 AS `fecha_creacion_proyecto`,
- 1 AS `fecha_actualizacion_proyecto`,
  1 AS `proyecto_actividad_id`,
- 1 AS `objetivo_presupuestario_id`,
+ 1 AS `programa_presupuestario_id`,
+ 1 AS `cve_programa`,
+ 1 AS `nombre_programa`,
+ 1 AS `programa_presupuestario`,
+ 1 AS `programa_objetivo`,
+ 1 AS `techo_financiero`,
  1 AS `linea_accion_id`,
  1 AS `linea_accion`,
+ 1 AS `estrategia_programa_id`,
+ 1 AS `estrategia_programa`,
  1 AS `objetivo_programa_id`,
  1 AS `cve_objetivo`,
  1 AS `objetivo_programa`,
- 1 AS `estrategia_programa_id`,
- 1 AS `estrategia_programa`,
- 1 AS `cve_direccion_proyecto`,
- 1 AS `direccion_proyecto`,
- 1 AS `cve_subdireccion_proyecto`,
- 1 AS `subdireccion_proyecto`,
- 1 AS `cve_departamento_proyecto`,
- 1 AS `departamento_proyecto`,
- 1 AS `cve_area_proyecto`,
- 1 AS `area_proyecto`,
- 1 AS `direccion_proyecto_id`,
- 1 AS `subdireccion_proyecto_id`,
- 1 AS `departamento_proyecto_id`,
- 1 AS `area_proyecto_id`*/;
+ 1 AS `fuente_financiamiento_id`,
+ 1 AS `cve_fuente_financiamiento`,
+ 1 AS `fuente_financiamiento`,
+ 1 AS `objetivo_presupuestario_id`,
+ 1 AS `fecha_creacion`,
+ 1 AS `fecha_actualizacion`,
+ 1 AS `ejercicio`,
+ 1 AS `estatus`,
+ 1 AS `usuario_id`,
+ 1 AS `usuario_registro_nombres`,
+ 1 AS `usuario_registro_primer_apellido`,
+ 1 AS `usuario_registro_segundo_apellido`,
+ 1 AS `usuario_registro_combinación_area_id`,
+ 1 AS `secuencia_actividad`,
+ 1 AS `preproyecto`,
+ 1 AS `combinacion_area_id`,
+ 1 AS `direccion_id`,
+ 1 AS `cve_direccion`,
+ 1 AS `direccion`,
+ 1 AS `subdireccion_id`,
+ 1 AS `cve_subdireccion`,
+ 1 AS `subdireccion`,
+ 1 AS `departamento_id`,
+ 1 AS `cve_departamento`,
+ 1 AS `departamento`,
+ 1 AS `area_id`,
+ 1 AS `cve_area`,
+ 1 AS `area`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -2376,7 +2386,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_proyecto_actividades` AS select `act`.`actividad_id` AS `actividad_id`,`act`.`descripcion` AS `actividad`,`act`.`beneficiado_id` AS `beneficiado_id`,`b`.`descripcion` AS `beneficiados`,`act`.`cantidad_beneficiario` AS `cantidad_beneficiario`,`act`.`estatus` AS `estatus_actividad`,`act`.`fecha_creacion` AS `fecha_creacion_actividad`,`act`.`fecha_actualizacion` AS `fecha_actualizacion_actividad`,`act`.`medicion_id` AS `medicion_id`,`medic`.`descripcion` AS `medicion`,`act`.`unidad_medida_id` AS `unidad_medida_id`,`uni_med`.`descripcion` AS `unidad_medida`,`act`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`act`.`descripcion` AS `actividad_general`,concat_ws('-',`proy`.`proyecto_actividad_id`,`act`.`actividad_id`) AS `folio`,`proy`.`programa_presupuestario_id` AS `programa_presupuestario_id`,`proy`.`cve_programa` AS `cve_programa`,`proy`.`programa_presupuestario` AS `programa_presupuestario`,`proy`.`techo_financiero` AS `techo_financiero`,`proy`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`proy`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`proy`.`descripcion` AS `descripcion`,`proy`.`usuario_id` AS `usuario_proyecto_id`,`proy`.`fecha_creacion_proyecto` AS `fecha_creacion_proyecto`,`proy`.`fecha_actualizacion_proyecto` AS `fecha_actualizacion_proyecto`,`proy`.`cve_direccion_proyecto` AS `cve_direccion_proyecto`,`proy`.`direccion_proyecto` AS `direccion_proyecto`,`proy`.`cve_subdireccion_proyecto` AS `cve_subdireccion_proyecto`,`proy`.`subdireccion_proyecto` AS `subdireccion_proyecto`,`proy`.`cve_departamento_proyecto` AS `cve_departamento_proyecto`,`proy`.`departamento_proyecto` AS `departamento_proyecto`,`proy`.`cve_area_proyecto` AS `cve_area_proyecto`,`proy`.`area_proyecto` AS `area_proyecto`,`proy`.`direccion_proyecto_id` AS `direccion_proyecto_id`,`proy`.`subdireccion_proyecto_id` AS `subdireccion_proyecto_id`,`proy`.`departamento_proyecto_id` AS `departamento_proyecto_id`,`proy`.`area_proyecto_id` AS `area_proyecto_id`,`proy`.`linea_accion_id` AS `linea_accion_id`,`proy`.`linea_accion` AS `linea_accion`,`proy`.`objetivo_programa_id` AS `objetivo_programa_id`,`proy`.`objetivo_programa` AS `objetivo_programa`,`proy`.`estrategia_programa_id` AS `estrategia_programa_id`,`proy`.`estrategia_programa` AS `estrategia_programa`,(select sum(`vw_seguimiento_actividades`.`programado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_fisico`,(select sum(`vw_seguimiento_actividades`.`realizado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_fisico`,(select sum(`vw_seguimiento_actividades`.`programado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_financiero`,(select sum(`vw_seguimiento_actividades`.`realizado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_financiero` from ((((`actividades` `act` join `vw_proyectos` `proy` on((`act`.`proyecto_actividad_id` = `proy`.`proyecto_actividad_id`))) join `unidades_medida` `uni_med` on((`act`.`unidad_medida_id` = `uni_med`.`unidad_medida_id`))) join `mediciones` `medic` on((`act`.`medicion_id` = `medic`.`medicion_id`))) join `beneficiados` `b` on((`act`.`beneficiado_id` = `b`.`beneficiado_id`))) order by `proy`.`proyecto_actividad_id`,`act`.`actividad_id` desc */;
+/*!50001 VIEW `vw_proyecto_actividades` AS select `act`.`actividad_id` AS `actividad_id`,`act`.`descripcion` AS `actividad`,`act`.`beneficiado_id` AS `beneficiado_id`,`b`.`descripcion` AS `beneficiados`,`act`.`cantidad_beneficiario` AS `cantidad_beneficiario`,`act`.`estatus` AS `estatus_actividad`,`act`.`fecha_creacion` AS `fecha_creacion_actividad`,`act`.`fecha_actualizacion` AS `fecha_actualizacion_actividad`,`act`.`medicion_id` AS `medicion_id`,`medic`.`descripcion` AS `medicion`,`act`.`unidad_medida_id` AS `unidad_medida_id`,`uni_med`.`descripcion` AS `unidad_medida`,`act`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`act`.`descripcion` AS `actividad_general`,concat_ws('-',`proy`.`proyecto_actividad_id`,`act`.`actividad_id`) AS `folio`,`proy`.`programa_presupuestario_id` AS `programa_presupuestario_id`,`proy`.`cve_programa` AS `cve_programa`,`proy`.`programa_presupuestario` AS `programa_presupuestario`,`proy`.`techo_financiero` AS `techo_financiero`,`proy`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`proy`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`proy`.`fuente_financiamiento` AS `fuente_financiamiento`,`proy`.`usuario_id` AS `usuario_proyecto_id`,`proy`.`fecha_creacion` AS `fecha_creacion_proyecto`,`proy`.`fecha_actualizacion` AS `fecha_actualizacion_proyecto`,`proy`.`cve_direccion` AS `cve_direccion_proyecto`,`proy`.`direccion` AS `direccion_proyecto`,`proy`.`cve_subdireccion` AS `cve_subdireccion_proyecto`,`proy`.`subdireccion` AS `subdireccion_proyecto`,`proy`.`cve_departamento` AS `cve_departamento_proyecto`,`proy`.`departamento` AS `departamento_proyecto`,`proy`.`cve_area` AS `cve_area_proyecto`,`proy`.`area` AS `area_proyecto`,`proy`.`direccion_id` AS `direccion_proyecto_id`,`proy`.`subdireccion_id` AS `subdireccion_proyecto_id`,`proy`.`departamento_id` AS `departamento_proyecto_id`,`proy`.`area_id` AS `area_proyecto_id`,`proy`.`linea_accion_id` AS `linea_accion_id`,`proy`.`linea_accion` AS `linea_accion`,`proy`.`objetivo_programa_id` AS `objetivo_programa_id`,`proy`.`objetivo_programa` AS `objetivo_programa`,`proy`.`estrategia_programa_id` AS `estrategia_programa_id`,`proy`.`estrategia_programa` AS `estrategia_programa`,(select sum(`vw_seguimiento_actividades`.`programado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_fisico`,(select sum(`vw_seguimiento_actividades`.`realizado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_fisico`,(select sum(`vw_seguimiento_actividades`.`programado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_financiero`,(select sum(`vw_seguimiento_actividades`.`realizado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_financiero` from ((((`actividades` `act` join `vw_proyectos` `proy` on((`act`.`proyecto_actividad_id` = `proy`.`proyecto_actividad_id`))) join `unidades_medida` `uni_med` on((`act`.`unidad_medida_id` = `uni_med`.`unidad_medida_id`))) join `mediciones` `medic` on((`act`.`medicion_id` = `medic`.`medicion_id`))) join `beneficiados` `b` on((`act`.`beneficiado_id` = `b`.`beneficiado_id`))) order by `proy`.`proyecto_actividad_id`,`act`.`actividad_id` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2394,7 +2404,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_proyectos` AS select `pp`.`cve_programa` AS `cve_programa`,`pp`.`programa_presupuestario_id` AS `programa_presupuestario_id`,`pp`.`descripcion` AS `programa_presupuestario`,`pp`.`techo_financiero` AS `techo_financiero`,`ff`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`ff`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`ff`.`descripcion` AS `descripcion`,`pa`.`ejercicio` AS `ejercicio`,`pa`.`estatus` AS `estatus`,`pa`.`usuario_id` AS `usuario_id`,`pa`.`fecha_creacion` AS `fecha_creacion_proyecto`,`pa`.`fecha_actualizacion` AS `fecha_actualizacion_proyecto`,`pa`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`pa`.`objetivo_presupuestario_id` AS `objetivo_presupuestario_id`,`pa`.`linea_accion_id` AS `linea_accion_id`,`la`.`descripcion` AS `linea_accion`,`la`.`objetivo_programa_id` AS `objetivo_programa_id`,`op`.`cve_objetivo` AS `cve_objetivo`,`op`.`descripcion` AS `objetivo_programa`,`la`.`estrategia_programa_id` AS `estrategia_programa_id`,`ep`.`descripcion` AS `estrategia_programa`,`ca`.`cve_direccion` AS `cve_direccion_proyecto`,`ca`.`direccion` AS `direccion_proyecto`,`ca`.`cve_subdireccion` AS `cve_subdireccion_proyecto`,`ca`.`subdireccion` AS `subdireccion_proyecto`,`ca`.`cve_departamento` AS `cve_departamento_proyecto`,`ca`.`departamento` AS `departamento_proyecto`,`ca`.`cve_area` AS `cve_area_proyecto`,`ca`.`area` AS `area_proyecto`,`ca`.`direccion_id` AS `direccion_proyecto_id`,`ca`.`subdireccion_id` AS `subdireccion_proyecto_id`,`ca`.`departamento_id` AS `departamento_proyecto_id`,`ca`.`area_id` AS `area_proyecto_id` from (((((((`proyectos_actividades` `pa` left join `programas_presupuestarios` `pp` on((`pa`.`programa_presupuestario_id` = `pp`.`programa_presupuestario_id`))) left join `fuentes_financiamiento` `ff` on((`pa`.`fuente_financiamiento_id` = `ff`.`fuente_financiamiento_id`))) join `lineas_accion` `la` on((`la`.`linea_accion_id` = `pa`.`linea_accion_id`))) left join `estrategias_programa` `ep` on((`ep`.`estrategia_programa_id` = `la`.`estrategia_programa_id`))) left join `objetivos_programas` `op` on((`op`.`objetivo_programa_id` = `la`.`objetivo_programa_id`))) join `combinaciones_areas` `ca` on((`pa`.`combinacion_area_id` = `ca`.`combinacion_area_id`))) join `vw_usuarios` `u` on((`u`.`usuario_id` = `pa`.`usuario_id`))) */;
+/*!50001 VIEW `vw_proyectos` AS select `proyectos`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`proyectos`.`programa_presupuestario_id` AS `programa_presupuestario_id`,`programas`.`cve_programa` AS `cve_programa`,`programas`.`nombre` AS `nombre_programa`,`programas`.`descripcion` AS `programa_presupuestario`,`programas`.`objetivo` AS `programa_objetivo`,`programas`.`techo_financiero` AS `techo_financiero`,`proyectos`.`linea_accion_id` AS `linea_accion_id`,`lineas`.`descripcion` AS `linea_accion`,`lineas`.`estrategia_programa_id` AS `estrategia_programa_id`,`estrategias`.`descripcion` AS `estrategia_programa`,`lineas`.`objetivo_programa_id` AS `objetivo_programa_id`,`objetivos`.`cve_objetivo` AS `cve_objetivo`,`objetivos`.`descripcion` AS `objetivo_programa`,`proyectos`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`financiamiento`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`financiamiento`.`descripcion` AS `fuente_financiamiento`,`proyectos`.`objetivo_presupuestario_id` AS `objetivo_presupuestario_id`,`proyectos`.`fecha_creacion` AS `fecha_creacion`,`proyectos`.`fecha_actualizacion` AS `fecha_actualizacion`,`proyectos`.`ejercicio` AS `ejercicio`,`proyectos`.`estatus` AS `estatus`,`proyectos`.`usuario_id` AS `usuario_id`,`usuarios`.`nombres` AS `usuario_registro_nombres`,`usuarios`.`primer_apellido` AS `usuario_registro_primer_apellido`,`usuarios`.`segundo_apellido` AS `usuario_registro_segundo_apellido`,`usuarios`.`combinacion_area_id` AS `usuario_registro_combinación_area_id`,`proyectos`.`secuencia_actividad` AS `secuencia_actividad`,`proyectos`.`preproyecto` AS `preproyecto`,`proyectos`.`combinacion_area_id` AS `combinacion_area_id`,`combo_area`.`direccion_id` AS `direccion_id`,`direcciones`.`cve_direccion` AS `cve_direccion`,`direcciones`.`descripcion` AS `direccion`,`combo_area`.`subdireccion_id` AS `subdireccion_id`,`subdirecciones`.`cve_subdireccion` AS `cve_subdireccion`,`subdirecciones`.`descripcion` AS `subdireccion`,`combo_area`.`departamento_id` AS `departamento_id`,`departamentos`.`cve_departamento` AS `cve_departamento`,`departamentos`.`descripcion` AS `departamento`,`combo_area`.`area_id` AS `area_id`,`areas`.`cve_area` AS `cve_area`,`areas`.`descripcion` AS `area` from (((((((((((`proyectos` join `programas_presupuestarios` `programas` on((`programas`.`programa_presupuestario_id` = `proyectos`.`programa_presupuestario_id`))) join `lineas_accion` `lineas` on((`lineas`.`linea_accion_id` = `proyectos`.`linea_accion_id`))) join `estrategias_programa` `estrategias` on((`estrategias`.`estrategia_programa_id` = `lineas`.`estrategia_programa_id`))) join `objetivos_programas` `objetivos` on((`objetivos`.`objetivo_programa_id` = `lineas`.`objetivo_programa_id`))) join `combinaciones_areas` `combo_area` on((`combo_area`.`combinacion_area_id` = `proyectos`.`combinacion_area_id`))) join `direcciones` on((`direcciones`.`direccion_id` = `combo_area`.`direccion_id`))) left join `subdirecciones` on((`subdirecciones`.`subdireccion_id` = `combo_area`.`subdireccion_id`))) left join `departamentos` on((`departamentos`.`departamento_id` = `combo_area`.`departamento_id`))) left join `areas` on((`areas`.`area_id` = `combo_area`.`area_id`))) join `fuentes_financiamiento` `financiamiento` on((`financiamiento`.`fuente_financiamiento_id` = `proyectos`.`fuente_financiamiento_id`))) join `usuarios` on((`usuarios`.`usuario_id` = `proyectos`.`usuario_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2552,4 +2562,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-05 14:51:36
+-- Dump completed on 2021-07-06  8:51:33
