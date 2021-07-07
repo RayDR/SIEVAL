@@ -1,14 +1,14 @@
 <div class="py-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-            <li class="breadcrumb-item"><a href="<?= base_url() ?>"><span class="fas fa-home"></span></a></li>v
+            <li class="breadcrumb-item"><a href="<?= base_url() ?>"><span class="fas fa-home"></span></a></li>
             <li class="breadcrumb-item"><a href="<?= base_url() ?>">Configurador</a></li>
             <li class="breadcrumb-item active" aria-current="page">Proyectos</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Proyectos registrados</h1>
+            <h1 class="h4">Proyectos Registrados</h1>
         </div>
     </div>
     <div class="btn-toolbar dropdown">

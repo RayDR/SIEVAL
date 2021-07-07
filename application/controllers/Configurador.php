@@ -75,6 +75,10 @@ class Configurador extends CI_Controller {
                     $data   = array(
                         'titulo'    => $titulo  . ' | ' . EMPRESA,
                         'menu'      => $this->model_catalogos->get_menus(),
+                        'programas' =>  $this->model_catalogos->get_programas(),
+                        'l_accion'  =>  $this->model_catalogos->get_lineas_accion(),
+                        'f_financia'=>  $this->model_catalogos->get_fuentes_financiamiento(),
+                        'g_benef'   =>  $this->model_catalogos->get_grupos_beneficiados(),
                         'view'      => 'configurador/proyectos/registrar'
                     );
                     break;
