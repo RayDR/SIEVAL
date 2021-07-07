@@ -2,14 +2,13 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-            <li class="breadcrumb-item"><a href="#">Programas</a></li>
+            <li class="breadcrumb-item"><a href="#">Proyecto</a></li>
             <li class="breadcrumb-item active" aria-current="page">Registrar</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Registrar Programa</h1>
-            <p class="mb-0">Rellene el siguiente formulario</p>
+            <h1 class="h4">Registrar Proyecto</h1>
         </div>
     </div>
 </div>
