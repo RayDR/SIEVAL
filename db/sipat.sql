@@ -91,26 +91,40 @@ DROP TABLE IF EXISTS `actividades`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `actividades` (
   `actividad_id` int(11) NOT NULL AUTO_INCREMENT,
+  `programa_presupuestario_id` int(11) DEFAULT NULL,
+  `proyecto_id` int(11) DEFAULT NULL,
+  `linea_accion_id` int(11) DEFAULT NULL,
+  `fuente_financiamiento_id` int(11) DEFAULT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `fecha_creacion` datetime DEFAULT CURRENT_TIMESTAMP,
-  `fecha_actualizacion` datetime DEFAULT CURRENT_TIMESTAMP,
-  `proyecto_actividad_id` int(11) DEFAULT NULL,
-  `estatus` int(11) DEFAULT '1',
   `unidad_medida_id` int(11) DEFAULT NULL,
   `medicion_id` int(11) DEFAULT NULL,
   `beneficiado_id` int(11) DEFAULT NULL,
   `cantidad_beneficiario` float(11,2) DEFAULT NULL,
-  `usuario_id` int(11) DEFAULT NULL,
   `monto_presupuestado` float(11,2) DEFAULT NULL,
   `ejercicio` int(6) DEFAULT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `fecha_creacion` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fecha_actualizacion` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estatus` int(11) DEFAULT '1',
+  `combinacion_area_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`actividad_id`) USING BTREE,
   KEY `unidad_medida_id` (`unidad_medida_id`),
   KEY `medicion_id` (`medicion_id`),
-  KEY `proyecto_actividad_id` (`proyecto_actividad_id`),
+  KEY `proyecto_actividad_id` (`proyecto_id`),
   KEY `beneficiado_id` (`beneficiado_id`),
-  CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`proyecto_actividad_id`) REFERENCES `proyectos` (`proyecto_actividad_id`),
-  CONSTRAINT `actividades_ibfk_2` FOREIGN KEY (`beneficiado_id`) REFERENCES `beneficiados` (`beneficiado_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  KEY `linea_accion_id` (`linea_accion_id`),
+  KEY `fuente_financiamiento_id` (`fuente_financiamiento_id`),
+  KEY `usuario_id` (`usuario_id`),
+  KEY `combinacion_area_id` (`combinacion_area_id`),
+  CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`proyecto_actividad_id`),
+  CONSTRAINT `actividades_ibfk_2` FOREIGN KEY (`beneficiado_id`) REFERENCES `beneficiados` (`beneficiado_id`),
+  CONSTRAINT `actividades_ibfk_3` FOREIGN KEY (`linea_accion_id`) REFERENCES `lineas_accion` (`linea_accion_id`),
+  CONSTRAINT `actividades_ibfk_4` FOREIGN KEY (`fuente_financiamiento_id`) REFERENCES `fuentes_financiamiento` (`fuente_financiamiento_id`),
+  CONSTRAINT `actividades_ibfk_5` FOREIGN KEY (`unidad_medida_id`) REFERENCES `unidades_medida` (`unidad_medida_id`),
+  CONSTRAINT `actividades_ibfk_6` FOREIGN KEY (`medicion_id`) REFERENCES `mediciones` (`medicion_id`),
+  CONSTRAINT `actividades_ibfk_7` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`),
+  CONSTRAINT `actividades_ibfk_8` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +133,7 @@ CREATE TABLE `actividades` (
 
 LOCK TABLES `actividades` WRITE;
 /*!40000 ALTER TABLE `actividades` DISABLE KEYS */;
-INSERT INTO `actividades` VALUES (1,'Pague este sistema para que quedara mas perrón','2021-06-28 00:49:38','2021-06-28 00:49:38',5,1,103,1,1,100.00,1,1500000.00,NULL),(2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ','2021-06-28 05:48:00','2021-06-28 05:48:00',6,1,54,1,4,100.00,1,15000.00,2021);
+INSERT INTO `actividades` VALUES (1,1,5,2,3,'Pague este sistema para que quedara mas perrón',103,1,1,100.00,1500000.00,2021,1,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,106),(2,3,6,4,4,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',54,1,4,100.00,15000.00,2021,1,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,90),(3,2,1,1,2,'asuidgsauihdsioadjosiajdpsioakdpsoa',114,1,2,100.00,155500.00,2021,1,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,104);
 /*!40000 ALTER TABLE `actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +161,7 @@ CREATE TABLE `actividades_detalladas` (
   PRIMARY KEY (`actividad_detallada_id`) USING BTREE,
   KEY `actividad_id` (`actividad_id`),
   CONSTRAINT `actividades_detalladas_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `actividades` (`actividad_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +170,7 @@ CREATE TABLE `actividades_detalladas` (
 
 LOCK TABLES `actividades_detalladas` WRITE;
 /*!40000 ALTER TABLE `actividades_detalladas` DISABLE KEYS */;
-INSERT INTO `actividades_detalladas` VALUES (1,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,1,10.00,NULL,1000000.00,NULL,1),(2,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,2,10.00,NULL,100000.00,NULL,1),(3,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,3,50.00,NULL,100000.00,NULL,1),(4,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,4,30.00,NULL,300000.00,NULL,1),(5,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,5,0.00,NULL,0.00,NULL,1),(6,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,6,0.00,NULL,0.00,NULL,1),(7,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,7,0.00,NULL,0.00,NULL,1),(8,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,8,0.00,NULL,0.00,NULL,1),(9,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,9,0.00,NULL,0.00,NULL,1),(10,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,10,0.00,NULL,0.00,NULL,1),(11,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,11,0.00,NULL,0.00,NULL,1),(12,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,12,0.00,NULL,0.00,NULL,1),(13,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,1,10.00,NULL,1000.00,NULL,1),(14,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,2,10.00,NULL,1000.00,NULL,1),(15,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,3,10.00,NULL,1000.00,NULL,1),(16,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,4,10.00,NULL,1000.00,NULL,1),(17,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,5,10.00,NULL,1000.00,NULL,1),(18,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,6,10.00,NULL,1000.00,NULL,1),(19,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,7,10.00,NULL,5000.00,NULL,1),(20,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,8,10.00,NULL,1000.00,NULL,1),(21,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,9,10.00,NULL,2000.00,NULL,1),(22,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,10,10.00,NULL,1000.00,NULL,1),(23,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,11,0.00,NULL,0.00,NULL,1),(24,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,12,0.00,NULL,0.00,NULL,1);
+INSERT INTO `actividades_detalladas` VALUES (1,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,1,10.00,NULL,1000000.00,NULL,1),(2,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,2,10.00,NULL,100000.00,NULL,1),(3,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,3,50.00,NULL,100000.00,NULL,1),(4,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,4,30.00,NULL,300000.00,NULL,1),(5,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,5,0.00,NULL,0.00,NULL,1),(6,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,6,0.00,NULL,0.00,NULL,1),(7,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,7,0.00,NULL,0.00,NULL,1),(8,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,8,0.00,NULL,0.00,NULL,1),(9,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,9,0.00,NULL,0.00,NULL,1),(10,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,10,0.00,NULL,0.00,NULL,1),(11,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,11,0.00,NULL,0.00,NULL,1),(12,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,12,0.00,NULL,0.00,NULL,1),(13,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,1,10.00,NULL,1000.00,NULL,1),(14,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,2,10.00,NULL,1000.00,NULL,1),(15,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,3,10.00,NULL,1000.00,NULL,1),(16,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,4,10.00,NULL,1000.00,NULL,1),(17,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,5,10.00,NULL,1000.00,NULL,1),(18,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,6,10.00,NULL,1000.00,NULL,1),(19,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,7,10.00,NULL,5000.00,NULL,1),(20,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,8,10.00,NULL,1000.00,NULL,1),(21,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,9,10.00,NULL,2000.00,NULL,1),(22,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,10,10.00,NULL,1000.00,NULL,1),(23,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,11,0.00,NULL,0.00,NULL,1),(24,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,12,0.00,NULL,0.00,NULL,1),(25,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,1,15.00,NULL,50000.00,NULL,1),(26,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,2,15.00,NULL,50000.00,NULL,1),(27,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,3,15.00,NULL,30000.00,NULL,1),(28,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,4,15.00,NULL,1500.00,NULL,1),(29,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,5,15.00,NULL,1500.00,NULL,1),(30,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,6,10.00,NULL,1500.00,NULL,1),(31,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,7,10.00,NULL,11000.00,NULL,1),(32,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,8,5.00,NULL,10000.00,NULL,1),(33,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,9,0.00,NULL,0.00,NULL,1),(34,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:14','2021-07-07 14:40:14',1,10,0.00,NULL,0.00,NULL,1),(35,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:14','2021-07-07 14:40:14',1,11,0.00,NULL,0.00,NULL,1),(36,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:14','2021-07-07 14:40:14',1,12,0.00,NULL,0.00,NULL,1);
 /*!40000 ALTER TABLE `actividades_detalladas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +196,7 @@ CREATE TABLE `acuerdos` (
   KEY `tema_id` (`tema_id`),
   CONSTRAINT `acuerdos_ibfk_1` FOREIGN KEY (`tema_id`) REFERENCES `temas` (`tema_id`),
   CONSTRAINT `fk_combinacion_area` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,6 +205,7 @@ CREATE TABLE `acuerdos` (
 
 LOCK TABLES `acuerdos` WRITE;
 /*!40000 ALTER TABLE `acuerdos` DISABLE KEYS */;
+INSERT INTO `acuerdos` VALUES (1,9,'Puente de Grijalva 3',5,1,2021,35,'2021-07-07 11:32:42','2021-07-07 11:32:42');
 /*!40000 ALTER TABLE `acuerdos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -928,7 +943,7 @@ CREATE TABLE `preproyectos` (
   CONSTRAINT `fk_ums_preproyectos` FOREIGN KEY (`unidad_medida_id`) REFERENCES `unidades_medida` (`unidad_medida_id`),
   CONSTRAINT `fk_usuario_modifica_preproyecto` FOREIGN KEY (`usuario_id_modifica`) REFERENCES `usuarios` (`usuario_id`),
   CONSTRAINT `fk_usuarios_preproyecto` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -937,6 +952,7 @@ CREATE TABLE `preproyectos` (
 
 LOCK TABLES `preproyectos` WRITE;
 /*!40000 ALTER TABLE `preproyectos` DISABLE KEYS */;
+INSERT INTO `preproyectos` VALUES (1,9,'0000-00-00 00:00:00','0000-00-00 00:00:00','Nuevo Proyecto  de Desarrollo de Vacas Locas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',2,1,5,3,5,NULL,'2021-07-07 16:15:19','2021-07-07 16:27:47');
 /*!40000 ALTER TABLE `preproyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -972,7 +988,7 @@ CREATE TABLE `preproyectos_actividades` (
   `fecha_modificacion` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `estatus_id` int(11) DEFAULT '1',
   PRIMARY KEY (`preproyecto_actividad_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -981,6 +997,7 @@ CREATE TABLE `preproyectos_actividades` (
 
 LOCK TABLES `preproyectos_actividades` WRITE;
 /*!40000 ALTER TABLE `preproyectos_actividades` DISABLE KEYS */;
+INSERT INTO `preproyectos_actividades` VALUES (1,1,'Compra de las Vacas ',9,4,872,0,1,3,15,NULL,255000.00,'',3,'2021-07-01 00:00:00','2021-09-30 00:00:00',2,0,5,5,'2021-07-07 16:18:53','2021-07-07 16:24:58',1),(2,1,'Gastarlo que otra queda',9,4,872,0,1,4,17,NULL,35000.00,'',4,'2021-10-01 00:00:00','2021-12-31 00:00:00',2,0,5,NULL,'2021-07-07 16:23:48',NULL,1),(3,1,'Avances',9,4,872,0,1,2,10,NULL,25000.00,'',3,'2021-07-01 00:00:00','2021-09-30 00:00:00',0,0,5,NULL,'2021-07-07 16:27:47',NULL,1);
 /*!40000 ALTER TABLE `preproyectos_actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1023,29 +1040,20 @@ DROP TABLE IF EXISTS `proyectos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proyectos` (
   `proyecto_actividad_id` int(11) NOT NULL AUTO_INCREMENT,
+  `proyecto_nombre` varchar(255) DEFAULT NULL,
   `combinacion_area_id` int(11) DEFAULT NULL,
-  `programa_presupuestario_id` int(11) DEFAULT NULL,
-  `linea_accion_id` int(11) DEFAULT NULL,
-  `fuente_financiamiento_id` int(11) NOT NULL,
-  `objetivo_presupuestario_id` int(11) DEFAULT NULL,
+  `techo_financiero` double DEFAULT NULL,
+  `ejercicio` varchar(4) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `preproyecto` int(11) DEFAULT '0',
   `fecha_creacion` datetime DEFAULT CURRENT_TIMESTAMP,
   `fecha_actualizacion` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ejercicio` varchar(4) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `estatus` int(11) DEFAULT '1',
   `usuario_id` int(11) DEFAULT NULL,
-  `secuencia_actividad` int(11) DEFAULT NULL,
-  `preproyecto` int(11) DEFAULT '0',
+  `estatus` int(11) DEFAULT '1',
   PRIMARY KEY (`proyecto_actividad_id`) USING BTREE,
-  KEY `fuente_finaciamiento_id` (`fuente_financiamiento_id`),
-  KEY `objetivo_presupuestario_id` (`objetivo_presupuestario_id`),
-  KEY `programa_presupuestario_id` (`programa_presupuestario_id`),
   KEY `usuario_id` (`usuario_id`),
-  KEY `linea_accion_id` (`linea_accion_id`),
   KEY `proyecto_ca` (`combinacion_area_id`),
   CONSTRAINT `proyecto_ca` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`),
-  CONSTRAINT `proyectos_ibfk_2` FOREIGN KEY (`programa_presupuestario_id`) REFERENCES `programas_presupuestarios` (`programa_presupuestario_id`),
-  CONSTRAINT `proyectos_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`),
-  CONSTRAINT `proyectos_ibfk_4` FOREIGN KEY (`linea_accion_id`) REFERENCES `lineas_accion` (`linea_accion_id`)
+  CONSTRAINT `proyectos_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1055,7 +1063,7 @@ CREATE TABLE `proyectos` (
 
 LOCK TABLES `proyectos` WRITE;
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` VALUES (1,1,1,1,1,1,'2021-07-06 07:32:04','2021-07-06 07:32:04','2021',1,1,NULL,0);
+INSERT INTO `proyectos` VALUES (1,NULL,1,NULL,'2021',0,'2021-07-06 07:32:04','2021-07-06 07:32:04',1,1);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1149,7 +1157,7 @@ CREATE TABLE `seguimientos_acuerdos` (
   CONSTRAINT `fk_combinacion_area_sa` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`),
   CONSTRAINT `fk_estatus_acuerdos` FOREIGN KEY (`estatus_acuerdo_id`) REFERENCES `estatus_acuerdos` (`estatus_acuerdo_id`),
   CONSTRAINT `seguimientos_acuerdos_ibfk_1` FOREIGN KEY (`acuerdo_id`) REFERENCES `acuerdos` (`acuerdo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1158,6 +1166,7 @@ CREATE TABLE `seguimientos_acuerdos` (
 
 LOCK TABLES `seguimientos_acuerdos` WRITE;
 /*!40000 ALTER TABLE `seguimientos_acuerdos` DISABLE KEYS */;
+INSERT INTO `seguimientos_acuerdos` VALUES (1,1,1,2021,'Puente de Grijalva 3',104,5,5,'puente.jpg','2021-07-07 11:32:42','2021-07-07 11:35:12',1),(2,1,2,2021,'Construcción de un puente sencillito',71,5,NULL,'puente.jpg','2021-07-07 11:35:12','2021-07-07 11:35:12',2);
 /*!40000 ALTER TABLE `seguimientos_acuerdos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1765,6 +1774,8 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `actividad_id`,
  1 AS `actividad`,
  1 AS `beneficiado_id`,
+ 1 AS `fuente_financiamiento_id`,
+ 1 AS `descripcion`,
  1 AS `beneficiados`,
  1 AS `cantidad_beneficiario`,
  1 AS `estatus_actividad`,
@@ -1774,37 +1785,17 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `medicion`,
  1 AS `unidad_medida_id`,
  1 AS `unidad_medida`,
- 1 AS `proyecto_actividad_id`,
+ 1 AS `proyecto_id`,
  1 AS `actividad_general`,
- 1 AS `folio`,
- 1 AS `programa_presupuestario_id`,
- 1 AS `cve_programa`,
- 1 AS `programa_presupuestario`,
- 1 AS `techo_financiero`,
- 1 AS `fuente_financiamiento_id`,
- 1 AS `cve_fuente_financiamiento`,
- 1 AS `fuente_financiamiento`,
- 1 AS `usuario_proyecto_id`,
- 1 AS `fecha_creacion_proyecto`,
- 1 AS `fecha_actualizacion_proyecto`,
- 1 AS `cve_direccion_proyecto`,
- 1 AS `direccion_proyecto`,
- 1 AS `cve_subdireccion_proyecto`,
- 1 AS `subdireccion_proyecto`,
- 1 AS `cve_departamento_proyecto`,
- 1 AS `departamento_proyecto`,
- 1 AS `cve_area_proyecto`,
- 1 AS `area_proyecto`,
- 1 AS `direccion_proyecto_id`,
- 1 AS `subdireccion_proyecto_id`,
- 1 AS `departamento_proyecto_id`,
- 1 AS `area_proyecto_id`,
  1 AS `linea_accion_id`,
  1 AS `linea_accion`,
+ 1 AS `cve_objetivo`,
  1 AS `objetivo_programa_id`,
  1 AS `objetivo_programa`,
  1 AS `estrategia_programa_id`,
  1 AS `estrategia_programa`,
+ 1 AS `folio`,
+ 1 AS `programa_presupuestario_id`,
  1 AS `programado_fisico`,
  1 AS `realizado_fisico`,
  1 AS `programado_financiero`,
@@ -1821,23 +1812,8 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `vw_proyectos` AS SELECT 
  1 AS `proyecto_actividad_id`,
- 1 AS `programa_presupuestario_id`,
- 1 AS `cve_programa`,
- 1 AS `nombre_programa`,
- 1 AS `programa_presupuestario`,
- 1 AS `programa_objetivo`,
+ 1 AS `proyecto_nombre`,
  1 AS `techo_financiero`,
- 1 AS `linea_accion_id`,
- 1 AS `linea_accion`,
- 1 AS `estrategia_programa_id`,
- 1 AS `estrategia_programa`,
- 1 AS `objetivo_programa_id`,
- 1 AS `cve_objetivo`,
- 1 AS `objetivo_programa`,
- 1 AS `fuente_financiamiento_id`,
- 1 AS `cve_fuente_financiamiento`,
- 1 AS `fuente_financiamiento`,
- 1 AS `objetivo_presupuestario_id`,
  1 AS `fecha_creacion`,
  1 AS `fecha_actualizacion`,
  1 AS `ejercicio`,
@@ -1847,7 +1823,6 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `usuario_registro_primer_apellido`,
  1 AS `usuario_registro_segundo_apellido`,
  1 AS `usuario_registro_combinación_area_id`,
- 1 AS `secuencia_actividad`,
  1 AS `preproyecto`,
  1 AS `combinacion_area_id`,
  1 AS `direccion_id`,
@@ -2386,7 +2361,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_proyecto_actividades` AS select `act`.`actividad_id` AS `actividad_id`,`act`.`descripcion` AS `actividad`,`act`.`beneficiado_id` AS `beneficiado_id`,`b`.`descripcion` AS `beneficiados`,`act`.`cantidad_beneficiario` AS `cantidad_beneficiario`,`act`.`estatus` AS `estatus_actividad`,`act`.`fecha_creacion` AS `fecha_creacion_actividad`,`act`.`fecha_actualizacion` AS `fecha_actualizacion_actividad`,`act`.`medicion_id` AS `medicion_id`,`medic`.`descripcion` AS `medicion`,`act`.`unidad_medida_id` AS `unidad_medida_id`,`uni_med`.`descripcion` AS `unidad_medida`,`act`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`act`.`descripcion` AS `actividad_general`,concat_ws('-',`proy`.`proyecto_actividad_id`,`act`.`actividad_id`) AS `folio`,`proy`.`programa_presupuestario_id` AS `programa_presupuestario_id`,`proy`.`cve_programa` AS `cve_programa`,`proy`.`programa_presupuestario` AS `programa_presupuestario`,`proy`.`techo_financiero` AS `techo_financiero`,`proy`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`proy`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`proy`.`fuente_financiamiento` AS `fuente_financiamiento`,`proy`.`usuario_id` AS `usuario_proyecto_id`,`proy`.`fecha_creacion` AS `fecha_creacion_proyecto`,`proy`.`fecha_actualizacion` AS `fecha_actualizacion_proyecto`,`proy`.`cve_direccion` AS `cve_direccion_proyecto`,`proy`.`direccion` AS `direccion_proyecto`,`proy`.`cve_subdireccion` AS `cve_subdireccion_proyecto`,`proy`.`subdireccion` AS `subdireccion_proyecto`,`proy`.`cve_departamento` AS `cve_departamento_proyecto`,`proy`.`departamento` AS `departamento_proyecto`,`proy`.`cve_area` AS `cve_area_proyecto`,`proy`.`area` AS `area_proyecto`,`proy`.`direccion_id` AS `direccion_proyecto_id`,`proy`.`subdireccion_id` AS `subdireccion_proyecto_id`,`proy`.`departamento_id` AS `departamento_proyecto_id`,`proy`.`area_id` AS `area_proyecto_id`,`proy`.`linea_accion_id` AS `linea_accion_id`,`proy`.`linea_accion` AS `linea_accion`,`proy`.`objetivo_programa_id` AS `objetivo_programa_id`,`proy`.`objetivo_programa` AS `objetivo_programa`,`proy`.`estrategia_programa_id` AS `estrategia_programa_id`,`proy`.`estrategia_programa` AS `estrategia_programa`,(select sum(`vw_seguimiento_actividades`.`programado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_fisico`,(select sum(`vw_seguimiento_actividades`.`realizado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_fisico`,(select sum(`vw_seguimiento_actividades`.`programado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_financiero`,(select sum(`vw_seguimiento_actividades`.`realizado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_financiero` from ((((`actividades` `act` join `vw_proyectos` `proy` on((`act`.`proyecto_actividad_id` = `proy`.`proyecto_actividad_id`))) join `unidades_medida` `uni_med` on((`act`.`unidad_medida_id` = `uni_med`.`unidad_medida_id`))) join `mediciones` `medic` on((`act`.`medicion_id` = `medic`.`medicion_id`))) join `beneficiados` `b` on((`act`.`beneficiado_id` = `b`.`beneficiado_id`))) order by `proy`.`proyecto_actividad_id`,`act`.`actividad_id` desc */;
+/*!50001 VIEW `vw_proyecto_actividades` AS select `act`.`actividad_id` AS `actividad_id`,`act`.`descripcion` AS `actividad`,`act`.`beneficiado_id` AS `beneficiado_id`,`act`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`f`.`descripcion` AS `descripcion`,`b`.`descripcion` AS `beneficiados`,`act`.`cantidad_beneficiario` AS `cantidad_beneficiario`,`act`.`estatus` AS `estatus_actividad`,`act`.`fecha_creacion` AS `fecha_creacion_actividad`,`act`.`fecha_actualizacion` AS `fecha_actualizacion_actividad`,`act`.`medicion_id` AS `medicion_id`,`medic`.`descripcion` AS `medicion`,`act`.`unidad_medida_id` AS `unidad_medida_id`,`uni_med`.`descripcion` AS `unidad_medida`,`act`.`proyecto_id` AS `proyecto_id`,`act`.`descripcion` AS `actividad_general`,`act`.`linea_accion_id` AS `linea_accion_id`,`vla`.`linea_accion` AS `linea_accion`,`vla`.`cve_objetivo` AS `cve_objetivo`,`vla`.`objetivo_programa_id` AS `objetivo_programa_id`,`vla`.`objetivo_programa` AS `objetivo_programa`,`vla`.`estrategia_programa_id` AS `estrategia_programa_id`,`vla`.`estrategia_programa` AS `estrategia_programa`,concat_ws('-',`act`.`proyecto_id`,`act`.`actividad_id`) AS `folio`,`act`.`programa_presupuestario_id` AS `programa_presupuestario_id`,(select sum(`vw_seguimiento_actividades`.`programado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_fisico`,(select sum(`vw_seguimiento_actividades`.`realizado_fisico`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_fisico`,(select sum(`vw_seguimiento_actividades`.`programado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `programado_financiero`,(select sum(`vw_seguimiento_actividades`.`realizado_financiero`) from `vw_seguimiento_actividades` where (`vw_seguimiento_actividades`.`actividad_id` = `act`.`actividad_id`)) AS `realizado_financiero` from ((((((((`actividades` `act` join `vw_proyectos` `proy` on((`act`.`proyecto_id` = `proy`.`proyecto_actividad_id`))) join `unidades_medida` `uni_med` on((`act`.`unidad_medida_id` = `uni_med`.`unidad_medida_id`))) join `mediciones` `medic` on((`act`.`medicion_id` = `medic`.`medicion_id`))) join `lineas_accion` `la` on((`la`.`linea_accion_id` = `act`.`linea_accion_id`))) join `beneficiados` `b` on((`act`.`beneficiado_id` = `b`.`beneficiado_id`))) join `fuentes_financiamiento` `f` on((`f`.`fuente_financiamiento_id` = `act`.`fuente_financiamiento_id`))) join `usuarios` `u` on((`u`.`usuario_id` = `act`.`usuario_id`))) join `vw_linea_accion` `vla` on((`vla`.`linea_accion_id` = `act`.`linea_accion_id`))) order by `act`.`proyecto_id`,`act`.`actividad_id` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2404,7 +2379,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_proyectos` AS select `proyectos`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`proyectos`.`programa_presupuestario_id` AS `programa_presupuestario_id`,`programas`.`cve_programa` AS `cve_programa`,`programas`.`nombre` AS `nombre_programa`,`programas`.`descripcion` AS `programa_presupuestario`,`programas`.`objetivo` AS `programa_objetivo`,`programas`.`techo_financiero` AS `techo_financiero`,`proyectos`.`linea_accion_id` AS `linea_accion_id`,`lineas`.`descripcion` AS `linea_accion`,`lineas`.`estrategia_programa_id` AS `estrategia_programa_id`,`estrategias`.`descripcion` AS `estrategia_programa`,`lineas`.`objetivo_programa_id` AS `objetivo_programa_id`,`objetivos`.`cve_objetivo` AS `cve_objetivo`,`objetivos`.`descripcion` AS `objetivo_programa`,`proyectos`.`fuente_financiamiento_id` AS `fuente_financiamiento_id`,`financiamiento`.`cve_fuente_financiamiento` AS `cve_fuente_financiamiento`,`financiamiento`.`descripcion` AS `fuente_financiamiento`,`proyectos`.`objetivo_presupuestario_id` AS `objetivo_presupuestario_id`,`proyectos`.`fecha_creacion` AS `fecha_creacion`,`proyectos`.`fecha_actualizacion` AS `fecha_actualizacion`,`proyectos`.`ejercicio` AS `ejercicio`,`proyectos`.`estatus` AS `estatus`,`proyectos`.`usuario_id` AS `usuario_id`,`usuarios`.`nombres` AS `usuario_registro_nombres`,`usuarios`.`primer_apellido` AS `usuario_registro_primer_apellido`,`usuarios`.`segundo_apellido` AS `usuario_registro_segundo_apellido`,`usuarios`.`combinacion_area_id` AS `usuario_registro_combinación_area_id`,`proyectos`.`secuencia_actividad` AS `secuencia_actividad`,`proyectos`.`preproyecto` AS `preproyecto`,`proyectos`.`combinacion_area_id` AS `combinacion_area_id`,`combo_area`.`direccion_id` AS `direccion_id`,`direcciones`.`cve_direccion` AS `cve_direccion`,`direcciones`.`descripcion` AS `direccion`,`combo_area`.`subdireccion_id` AS `subdireccion_id`,`subdirecciones`.`cve_subdireccion` AS `cve_subdireccion`,`subdirecciones`.`descripcion` AS `subdireccion`,`combo_area`.`departamento_id` AS `departamento_id`,`departamentos`.`cve_departamento` AS `cve_departamento`,`departamentos`.`descripcion` AS `departamento`,`combo_area`.`area_id` AS `area_id`,`areas`.`cve_area` AS `cve_area`,`areas`.`descripcion` AS `area` from (((((((((((`proyectos` join `programas_presupuestarios` `programas` on((`programas`.`programa_presupuestario_id` = `proyectos`.`programa_presupuestario_id`))) join `lineas_accion` `lineas` on((`lineas`.`linea_accion_id` = `proyectos`.`linea_accion_id`))) join `estrategias_programa` `estrategias` on((`estrategias`.`estrategia_programa_id` = `lineas`.`estrategia_programa_id`))) join `objetivos_programas` `objetivos` on((`objetivos`.`objetivo_programa_id` = `lineas`.`objetivo_programa_id`))) join `combinaciones_areas` `combo_area` on((`combo_area`.`combinacion_area_id` = `proyectos`.`combinacion_area_id`))) join `direcciones` on((`direcciones`.`direccion_id` = `combo_area`.`direccion_id`))) left join `subdirecciones` on((`subdirecciones`.`subdireccion_id` = `combo_area`.`subdireccion_id`))) left join `departamentos` on((`departamentos`.`departamento_id` = `combo_area`.`departamento_id`))) left join `areas` on((`areas`.`area_id` = `combo_area`.`area_id`))) join `fuentes_financiamiento` `financiamiento` on((`financiamiento`.`fuente_financiamiento_id` = `proyectos`.`fuente_financiamiento_id`))) join `usuarios` on((`usuarios`.`usuario_id` = `proyectos`.`usuario_id`))) */;
+/*!50001 VIEW `vw_proyectos` AS select `proyectos`.`proyecto_actividad_id` AS `proyecto_actividad_id`,`proyectos`.`proyecto_nombre` AS `proyecto_nombre`,`proyectos`.`techo_financiero` AS `techo_financiero`,`proyectos`.`fecha_creacion` AS `fecha_creacion`,`proyectos`.`fecha_actualizacion` AS `fecha_actualizacion`,`proyectos`.`ejercicio` AS `ejercicio`,`proyectos`.`estatus` AS `estatus`,`proyectos`.`usuario_id` AS `usuario_id`,`usuarios`.`nombres` AS `usuario_registro_nombres`,`usuarios`.`primer_apellido` AS `usuario_registro_primer_apellido`,`usuarios`.`segundo_apellido` AS `usuario_registro_segundo_apellido`,`usuarios`.`combinacion_area_id` AS `usuario_registro_combinación_area_id`,`proyectos`.`preproyecto` AS `preproyecto`,`proyectos`.`combinacion_area_id` AS `combinacion_area_id`,`combo_area`.`direccion_id` AS `direccion_id`,`direcciones`.`cve_direccion` AS `cve_direccion`,`direcciones`.`descripcion` AS `direccion`,`combo_area`.`subdireccion_id` AS `subdireccion_id`,`subdirecciones`.`cve_subdireccion` AS `cve_subdireccion`,`subdirecciones`.`descripcion` AS `subdireccion`,`combo_area`.`departamento_id` AS `departamento_id`,`departamentos`.`cve_departamento` AS `cve_departamento`,`departamentos`.`descripcion` AS `departamento`,`combo_area`.`area_id` AS `area_id`,`areas`.`cve_area` AS `cve_area`,`areas`.`descripcion` AS `area` from ((((((`proyectos` join `combinaciones_areas` `combo_area` on((`combo_area`.`combinacion_area_id` = `proyectos`.`combinacion_area_id`))) join `direcciones` on((`direcciones`.`direccion_id` = `combo_area`.`direccion_id`))) left join `subdirecciones` on((`subdirecciones`.`subdireccion_id` = `combo_area`.`subdireccion_id`))) left join `departamentos` on((`departamentos`.`departamento_id` = `combo_area`.`departamento_id`))) left join `areas` on((`areas`.`area_id` = `combo_area`.`area_id`))) join `usuarios` on((`usuarios`.`usuario_id` = `proyectos`.`usuario_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2562,4 +2537,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-06  8:51:33
+-- Dump completed on 2021-07-07 16:09:18

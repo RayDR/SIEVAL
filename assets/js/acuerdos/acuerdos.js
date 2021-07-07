@@ -111,16 +111,19 @@ function fseguimiento_acuerdo(data){
 }
 
 function fmodal_seguimiento_acuerdo(){
+    fu_modal();
     var tr   = $(this).closest('tr');
         row  = dt.row( tr ),
         data = dt.row( tr ).data(),
         html = fu_muestra_vista(url('Acuerdos/seguimiento_detallado'), {acuerdo: data.acuerdo_id});
-    if ( html ){
-        fu_modal('Seguimiento de Acuerdos', 
-                html, 
-                ``);
-    } else 
-        fu_modal('404');
+    setTimeout(function() {        
+        if ( html ){
+            fu_modal('Seguimiento de Acuerdos', 
+                    html, 
+                    ``);
+        } else 
+            fu_modal('404');
+    }, 10);
 }
 
 function fmuestra_registro(e){

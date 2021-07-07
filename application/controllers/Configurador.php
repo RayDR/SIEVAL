@@ -118,6 +118,14 @@ class Configurador extends CI_Controller {
     /*------------------------------
     * --- DATOS AJAX
     * ---------------------*/
+
+    public function registrar_proyecto(){
+
+    }
+
+    /*------------------------------
+    * --- CATALOGOS AJAX
+    * ---------------------*/
     
     // Catálogo de Áreas - SELECT2
     public function get_areas_select2(){
@@ -261,6 +269,39 @@ class Configurador extends CI_Controller {
 
     public function datatable_areas(){
         return print(json_encode($this->model_catalogos->get_areas()));
+    }
+
+/*--------------------------------------------------------------------------*
+* ---- FUNCIONES PRIVADAS 
+* --------------------------------------------------*/
+
+    private function inputs_proyecto(){
+        return array(
+            [
+                'nombre'=> 'nombre_proyecto',
+                'texto' => 'Nombre del Proyecto',
+            ],
+            [
+                'nombre'=> 'area_responsable',
+                'texto' => 'Área Responsable',
+                'tipo'  => 'select'
+            ],
+            [
+                'nombre'=> 'programa_presupuestario',
+                'texto' => 'Programa Presupuestario',
+                'tipo'  => 'select'
+            ],
+            [
+                'nombre'=> 'linea_accion',
+                'texto' => 'Línea de Acción',
+                'tipo'  => 'select'
+            ],
+            [
+                'nombre'=> 'fuente_financiamiento',
+                'texto' => 'Fuente de Financiamiento',
+                'tipo'  => 'select'
+            ]
+        );
     }
 
 }

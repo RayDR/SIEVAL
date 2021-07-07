@@ -115,32 +115,25 @@ class Model_actividades extends CI_Model {
             $this->db->trans_begin();
 
             if ( is_array($datos) ){
-                // REGISTRO DE PROYECTO
-                $db_datos = array(
-                    'combinacion_area_id'           => $datos['area_origen'],
-                    'linea_accion_id'               => $datos['linea_accion'],
-                    'usuario_id'                    => $datos['usuario_id'],
-                    'ejercicio'                     => $datos['ejercicio'],
-                    'programa_presupuestario_id'    => $datos['programa_presupuestario'],
-                    'fuente_financiamiento_id'      => $datos['fuente_financiamiento']
-                );
-
-                $this->db->insert('proyectos_actividades', $db_datos);
-                $proyecto = $this->db->insert_id();
+                $proyecto = 1;
                 $resultado['proyecto'] = $proyecto;
                 
                 // REGISTRO DE ACTIVIDAD
                 $db_datos = array(
-                    'descripcion'           => $datos['detalle_actividad'],
-                    'proyecto_actividad_id' => $proyecto,
-                    'unidad_medida_id'      => $datos['unidad_medida'],
-                    'medicion_id'           => $datos['tipo_medicion'],
-                    'beneficiado_id'        => $datos['grupo_beneficiado'],
-                    'cantidad_beneficiario' => $datos['programado_fisico'],
-                    'monto_presupuestado'   => $datos['programado_financiero'],
-                    'usuario_id'            => $datos['usuario_id'],
-                    'unidad_medida_id'      => $datos['unidad_medida'],
-                    'ejercicio'             => $datos['ejercicio']
+                    'descripcion'                   => $datos['detalle_actividad'],
+                    'proyecto_id'                   => $proyecto,
+                    'unidad_medida_id'              => $datos['unidad_medida'],
+                    'medicion_id'                   => $datos['tipo_medicion'],
+                    'beneficiado_id'                => $datos['grupo_beneficiado'],
+                    'cantidad_beneficiario'         => $datos['programado_fisico'],
+                    'monto_presupuestado'           => $datos['programado_financiero'],
+                    'usuario_id'                    => $datos['usuario_id'],
+                    'unidad_medida_id'              => $datos['unidad_medida'],
+                    'ejercicio'                     => $datos['ejercicio'],
+                    'combinacion_area_id'           => $datos['area_origen'],
+                    'linea_accion_id'               => $datos['linea_accion'],
+                    'programa_presupuestario_id'    => $datos['programa_presupuestario'],
+                    'fuente_financiamiento_id'      => $datos['fuente_financiamiento']
                 );
                 $this->db->insert('actividades', $db_datos);
                 $actividad = $this->db->insert_id();

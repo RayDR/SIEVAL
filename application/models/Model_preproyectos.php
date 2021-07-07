@@ -414,7 +414,7 @@ class Model_preproyectos extends CI_Model {
             $this->db->trans_begin();
 
             $this->db->where('preproyecto_id', $preproyecto_id);
-            $db_datos = array('estatus_id' => 5);
+            $db_datos = array('estatus_id' => $estatus_id);
             $this->db->update('preproyectos', $db_datos);
 
             $this->db->trans_commit();

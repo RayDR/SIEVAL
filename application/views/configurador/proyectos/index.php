@@ -19,23 +19,22 @@
 </div>
 <div class="card border-light shadow-sm mb-4">
     <div class="card-body">
-        <div class="table-responsive-md">
-            <table id="dtProyectos" class="table table-centered table-nowrap mb-0 rounded">
-                <thead class="thead-light">
-                    <tr>
-                        <th class="border-0">#</th>
-                        <th class="border-0">Clave Programa Presupuestario</th>
-                        <th class="border-0">Línea de Acción</th>
-                        <th class="border-0">Objetivos</th>
-                        <th class="border-0">Estrategia</th>
-                        <th class="border-0">Fuente de Financiamiento</th>
-                        <th class="border-0">Usuario Registró</th>
-                        <th class="border-0">Fecha de Creación</th>
-                        <th class="border-0">Ejercicio</th>
-                        <th class="border-0">Estatus</th>
-                    </tr>
-                </thead>
-            </table>
+        <div class="container-fluid">
+            <div class="table-responsive-md">
+                <table id="dtProyectos" class="table table-centered table-nowrap mb-0 rounded w-100">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="border-0">#</th>
+                            <th class="border-0">Proyecto</th>
+                            <th class="border-0">Techo Financiero</th>
+                            <th class="border-0">Usuario Registró</th>
+                            <th class="border-0">Fecha de Creación</th>
+                            <th class="border-0">Ejercicio</th>
+                            <th class="border-0">Estatus</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 </div>

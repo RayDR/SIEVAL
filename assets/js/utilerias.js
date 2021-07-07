@@ -346,20 +346,8 @@ function fu_form_controller(fUrl, formconf = [], inputs = [], contenedor = "main
  */
 function fu_modal(titulo, contenido = "", botones = "", anchura = "xl", tipo = '', static = true){
   var contenedor  = $("#modales"),
-      modal       = $("#modal"),
-      tiempo      = 100;
-
-  modal.on('hidden.bs.modal', function (event) {
-      $("#modal #modal-title-notification").html('');
-      $("#modal #modal-contenido").html('');
-      modal.modal('dispose');
-  });
-
-  if( modal.is(':visible') ){
-    $("#modal").modal('hide');
-    tiempo = 500;
-  }
-
+      modal       = $("#modal");
+      
   if ( titulo == "ERR"){
     titulo    = "ERROR NO CONTROLADO";
     contenido = (contenido != "")? contenido: "Ha ocurrido un error al intentar ingresar al sistema, por favor, comunique al administrador del sistema.";
@@ -388,37 +376,35 @@ function fu_modal(titulo, contenido = "", botones = "", anchura = "xl", tipo = '
   modal       = $("#modal");
 
   if ( contenedor ){
-    setTimeout(function() {
-      if ( anchura == "lg" ){
-        $("#modal .modal-dialog").removeClass('modal-xl');
-        $("#modal .modal-dialog").addClass('modal-lg');
-      } else if ( anchura == "xl" ){
-        $("#modal .modal-dialog").removeClass('modal-lg');
-        $("#modal .modal-dialog").addClass('modal-xl');
-      } else {
-        $("#modal .modal-dialog").removeClass('modal-xl');
-        $("#modal .modal-dialog").removeClass('modal-lg');
-      }
+    if ( anchura == "lg" ){
+      $("#modal .modal-dialog").removeClass('modal-xl');
+      $("#modal .modal-dialog").addClass('modal-lg');
+    } else if ( anchura == "xl" ){
+      $("#modal .modal-dialog").removeClass('modal-lg');
+      $("#modal .modal-dialog").addClass('modal-xl');
+    } else {
+      $("#modal .modal-dialog").removeClass('modal-xl');
+      $("#modal .modal-dialog").removeClass('modal-lg');
+    }
 
-      $("#modal #modal-title-notification").html(titulo);
-      $("#modal #modal-contenido").html(contenido);
+    $("#modal #modal-title-notification").html(titulo);
+    $("#modal #modal-contenido").html(contenido);
 
-      let color = (tipo != 'login' && tipo != 'notificacion' )? 'text-secondary' : 'text-primary';
-      if ( botones == "" )
-        $("#modal #modal-botones").html(`<button type="button" class="btn btn-link ${color} ms-auto" data-bs-dismiss="modal">Cerrar</button>`);
-      else if ( botones == "salir" )
-        $("#modal #modal-botones").html(`<a href="${ url() }" class="btn btn-secondary">Salir</a>`);
-      else 
-        $("#modal #modal-botones").html(botones);  
+    let color = (tipo != 'login' && tipo != 'notificacion' )? 'text-secondary' : 'text-primary';
+    if ( botones == "" )
+      $("#modal #modal-botones").html(`<button type="button" class="btn btn-link ${color} ms-auto" data-bs-dismiss="modal">Cerrar</button>`);
+    else if ( botones == "salir" )
+      $("#modal #modal-botones").html(`<a href="${ url() }" class="btn btn-secondary">Salir</a>`);
+    else 
+      $("#modal #modal-botones").html(botones);  
 
-      if ( static )
-        modal.modal({
-          backdrop: 'static',
-          keyboard: false
-        });
-      
-      modal.modal('show');
-    }, tiempo);
+    if ( static )
+      modal.modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+    
+    modal.modal('show');
   }
 }
 

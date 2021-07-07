@@ -83,12 +83,15 @@ function fnuevo_preproyecto(e){
 }
 
 function fmostrar_detalle(){
+    fu_modal();
     var preproyecto = dt.row($(this).closest('tr')).data();
     var html = fu_muestra_vista(url('Preproyectos/detalles_preproyecto'), { preproyecto_id: preproyecto.preproyecto_id });
-    if ( html ){
-        fu_modal('Detalle de Preproyecto', html );
-    } else 
-        fu_modal('404');
+    setTimeout(function() {
+        if ( html ){
+            fu_modal('Detalle de Preproyecto', html );
+        } else 
+            fu_modal('404');
+    }, 10);
 }
 
 function frecargar(){

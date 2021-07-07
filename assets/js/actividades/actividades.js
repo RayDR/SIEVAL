@@ -144,12 +144,15 @@ function fnueva_actividad(e){
 }
 
 function fmostrar_detalle(){
+    fu_modal();
     var actividad = dt.row($(this).closest('tr')).data();
     var html = fu_muestra_vista(url('Actividades/detalles_actividad'), { actividad_id: actividad.actividad_id });
-    if ( html ){
-        fu_modal('Detalle de Actividad', html );
-    } else 
-        fu_modal('404');
+    setTimeout(function() {
+        if ( html ){
+            fu_modal('Detalle de Actividad', html );
+        } else 
+            fu_modal('404');
+    }, 10);
 }
 
 function frecargar(){

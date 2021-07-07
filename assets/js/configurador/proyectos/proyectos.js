@@ -41,19 +41,16 @@ function finicia_datatable(){
         },
         columns: [
             { data: 'proyecto_actividad_id' },
-            { data: 'cve_programa' },
-            { data: 'linea_accion' },
-            { data: 'estrategia_programa' },
-            { data: 'objetivo_programa' },
-            { data: 'fuente_financiamiento' },
-            { data: 'fecha_creacion' },
-            { data: 'ejercicio' },
+            { data: 'proyecto_nombre' },
+            { data: 'techo_financiero' },
             { 
                 data: null,
                 render: function(data){
                     return `${data.usuario_registro_nombres} ${data.usuario_registro_primer_apellido} ${data.usuario_registro_segundo_apellido}`;
                 }
             },
+            { data: 'fecha_creacion' },
+            { data: 'ejercicio' },
             { data: 'estatus' },
         ],
         drawCallback: function (settings) {
