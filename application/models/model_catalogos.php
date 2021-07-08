@@ -148,7 +148,8 @@ class Model_catalogos extends CI_Model {
 				foreach ($filtros as $key => $filtro) {
 					$this->db->where($key, $filtro);
 				}
-			}
+			} else 
+				$this->db->where('estatus', 1);
 			$resultado = $this->db->get('vw_proyectos');
 			if ( $tipo_retorno )
 				return $resultado->result();

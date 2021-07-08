@@ -1,7 +1,5 @@
  $(document).ready(function() {
     $('#guardar').click(fguardar);
-    $('#linea_accion').change(flinea_accion);
-    $('.objetivos').change(faObjetivos);
 
     finicia_select2();
 });
@@ -40,7 +38,7 @@ function fguardar(e){
         inputs.forEach( function(input, index) {
             let valor           = $(`#${input.nombre}`).val();
             datos[input.nombre] = valor;
-            if( valor == '' || valor == null || valor == undefined )
+            if( (valor == '' || valor == null || valor == undefined) && $(`#${input.nombre}`).prop('required') )
                 errores += `El campo <a href="#${input.nombre}">${input.texto}</a> es requerido.<br>`;            
         });
         if ( ! errores ){
@@ -63,24 +61,4 @@ function fguardar(e){
 
     $('#guardar').prop({disabled: false});
     $('#guardar').html(`Guardar`);
-}
-
-function flinea_accion(){
-    var seleccion = $(this).find(':selected');
-    if ( seleccion ){
-        $('#datos_linea_accion').html(`
-            <label class="h6"><span class="text-secondary">Objetivo:</span> <small class="font-weight-bold">${seleccion.data('objetivo')}</small></label>
-            <br>
-            <label class="h6"><span class="text-secondary">Estrategia:</span> <small class="font-weight-bold">${seleccion.data('estrategia')}</small></label>
-        `);
-    }
-    $('#programados').show();
-}
-
-function faObjetivos(){
-    var objetivo = $(this).val();
-    if ( $.isNumeric(objetivo) ){
-        if ( objetivo > 0 )
-            $(this).closest('.card').find('.meses').attr({readonly: false});
-    }
 }

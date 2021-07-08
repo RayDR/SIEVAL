@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="btn-toolbar dropdown">
-      <a href="<?= base_url('index.php/Configurador/registrar/Usuario') ?>" class="btn btn-dark btn-sm me-2 dropdown-toggle disabled">
+      <a href="<?= base_url('index.php/Configurador/registrar/Usuario') ?>" class="btn btn-dark btn-sm me-2 dropdown-toggle">
         <span class="fas fa-plus me-2"></span>Nuevo Usuario
       </a>
     </div>

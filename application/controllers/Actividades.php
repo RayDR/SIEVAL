@@ -65,6 +65,7 @@ class Actividades extends CI_Controller {
         $data = array(
             'titulo'    => 'Registrar',
             'programas' =>  $this->model_catalogos->get_programas(),
+            'proyectos' =>  $this->model_catalogos->get_proyectos(),
             'l_accion'  =>  $this->model_catalogos->get_lineas_accion(),
             'f_financia'=>  $this->model_catalogos->get_fuentes_financiamiento(),
             'u_medida'  =>  $this->model_catalogos->get_unidades_medida($condicion),
@@ -99,6 +100,7 @@ class Actividades extends CI_Controller {
                 'encabezado'=> $encabezado,
                 'detalles'  => $detalles,
                 'programas' => $this->model_catalogos->get_programas(),
+                'proyectos' =>  $this->model_catalogos->get_proyectos(),
                 'l_accion'  => $this->model_catalogos->get_lineas_accion(),
                 'f_financia'=> $this->model_catalogos->get_fuentes_financiamiento(),
                 'g_benef'   => $this->model_catalogos->get_grupos_beneficiados(),
@@ -344,6 +346,11 @@ class Actividades extends CI_Controller {
             [
                 'nombre'=> 'programa_presupuestario',
                 'texto' => 'Programa Presupuestario',
+                'tipo'  => 'select'
+            ],
+            [
+                'nombre'=> 'proyecto',
+                'texto' => 'Proyecto',
                 'tipo'  => 'select'
             ],
             [

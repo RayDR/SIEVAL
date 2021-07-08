@@ -75,10 +75,7 @@ class Configurador extends CI_Controller {
                     $data   = array(
                         'titulo'    => $titulo  . ' | ' . EMPRESA,
                         'menu'      => $this->model_catalogos->get_menus(),
-                        'programas' =>  $this->model_catalogos->get_programas(),
-                        'l_accion'  =>  $this->model_catalogos->get_lineas_accion(),
-                        'f_financia'=>  $this->model_catalogos->get_fuentes_financiamiento(),
-                        'g_benef'   =>  $this->model_catalogos->get_grupos_beneficiados(),
+                        'inputs'    => $this->inputs_proyecto(),
                         'view'      => 'configurador/proyectos/registrar'
                     );
                     break;
@@ -86,6 +83,10 @@ class Configurador extends CI_Controller {
                     $titulo = 'Registrar Programa Presupuestario';
                     $data   = array(
                         'titulo'    => $titulo  . ' | ' . EMPRESA,
+                        'programas' => $this->model_catalogos->get_programas(),
+                        'l_accion'  => $this->model_catalogos->get_lineas_accion(),
+                        'f_financia'=> $this->model_catalogos->get_fuentes_financiamiento(),
+                        'g_benef'   => $this->model_catalogos->get_grupos_beneficiados(),
                         'menu'      => $this->model_catalogos->get_menus(),
                         'view'      => 'configurador/programas/registrar'
                     );
@@ -119,8 +120,25 @@ class Configurador extends CI_Controller {
     * --- DATOS AJAX
     * ---------------------*/
 
-    public function registrar_proyecto(){
+    public function registra_proyecto(){
+        $this->load->model('model_proyectos');
 
+        $json  = array('exito' => FALSE);
+
+        $proyecto_nombre        = $this->input->post('proyecto_nombre');
+        $techo_financiero       = $this->input->post('techo_financiero');
+        $area_responsable       = $this->input->post('area_responsable');
+
+        $datos  = array(
+            'proyecto_nombre'           => $proyecto_nombre,
+            'techo_financiero'          => $techo_financiero,
+            'combinacion_area'          => ($area_responsable)? $area_responsable : null,
+            'usuario_id'                => $this->session->userdata('uid'),
+            'ejercicio'                 => date('Y')
+        );
+
+        $json = $this->model_proyectos->set_proyecto($datos);
+        return print(json_encode($json));
     }
 
     /*------------------------------
@@ -278,28 +296,79 @@ class Configurador extends CI_Controller {
     private function inputs_proyecto(){
         return array(
             [
-                'nombre'=> 'nombre_proyecto',
+                'nombre'=> 'proyecto_nombre',
                 'texto' => 'Nombre del Proyecto',
+            ],
+            [
+                'nombre'=> 'techo_financiero',
+                'texto' => 'Techo Financiero'
             ],
             [
                 'nombre'=> 'area_responsable',
                 'texto' => 'Área Responsable',
                 'tipo'  => 'select'
+            ]
+        );
+    }
+
+    private function inputs_programas(){
+        return array(
+            [
+                'nombre'=> 'nombre_programa',
+                'texto' => 'Nombre del Programa',
             ],
             [
-                'nombre'=> 'programa_presupuestario',
-                'texto' => 'Programa Presupuestario',
-                'tipo'  => 'select'
+                'nombre'=> 'clave_programa',
+                'texto' => 'Clave del Programa'
             ],
             [
-                'nombre'=> 'linea_accion',
-                'texto' => 'Línea de Acción',
-                'tipo'  => 'select'
+                'nombre'=> 'descripcion',
+                'texto' => 'Descripción'
             ],
             [
-                'nombre'=> 'fuente_financiamiento',
-                'texto' => 'Fuente de Financiamiento',
-                'tipo'  => 'select'
+                'nombre'=> 'objetivo',
+                'texto' => 'Objetivo'
+            ],
+            [
+                'nombre'=> 'techo_financiero',
+                'texto' => 'Techo Financiero'
+            ]
+        );
+    }
+
+    private function inputs_usuarios(){
+        return array(
+            [
+                'nombre'=> 'nombres',
+                'texto' => 'Nombre(s)',
+            ],
+            [
+                'nombre'=> 'primer_apellido',
+                'texto' => 'Primer Apellido'
+            ],
+            [
+                'nombre'=> 'segundo_apellido',
+                'texto' => 'Segundo Apellido'
+            ],
+            [
+                'nombre'=> 'sexo',
+                'texto' => 'Sexo'
+            ],
+            [
+                'nombre'=> 'usuario',
+                'texto' => 'Número de Cuenta'
+            ],
+            [
+                'nombre'=> 'password',
+                'texto' => 'Contraseña'
+            ],
+            [
+                'nombre'=> 'correo',
+                'texto' => 'Correo Electrónico'
+            ],
+            [
+                'nombre'=> 'telefono',
+                'texto' => 'Teléfono'
             ]
         );
     }

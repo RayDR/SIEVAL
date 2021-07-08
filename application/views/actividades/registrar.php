@@ -47,6 +47,15 @@
                             </select>
                         </div>
                         <div class="col-12 mb-3">
+                            <label class="my-1 me-2" for="proyecto">Proyecto</label>
+                            <select class="form-select" id="proyecto" aria-label="Programas Presupuestarios" required>
+                                <option selected disabled>Seleccione una opción</option>
+                                <?php foreach ($proyectos as $key => $proyecto): ?>
+                                <option value="<?= $proyecto->proyecto_actividad_id ?>"><?= $proyecto->proyecto_nombre ?></option>
+                                <?php endforeach; ?>  
+                            </select>
+                        </div>
+                        <div class="col-12 mb-3">
                             <label class="my-1 me-2" for="linea_accion">Línea de Acción</label>
                             <select class="form-select" id="linea_accion" aria-label="Líneas de Acción" required>
                                 <option selected disabled>Seleccione una opción</option>
