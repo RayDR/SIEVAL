@@ -136,6 +136,17 @@ class Actividades extends CI_Controller {
             $json = array('exito' => FALSE, 'error' => 'No se recibió el folio de la actividad.');
         return print(json_encode($json));    
     }
+
+
+    public function generar_reporte(){
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
+        $spreadsheet = $reader->load( FCPATH . 'uploads/FORMATO_PAT.xlsx' );
+     
+        $sheet      = $spreadsheet->getActiveSheet();
+     
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer->save('Reporte_'.date('dmY_Hi').'.xlsx');
+    }
 //  ------- FIN DE VISTAS ------
 
 /*--------------------------------------------------------------------------*
@@ -161,7 +172,6 @@ class Actividades extends CI_Controller {
             $json = array('exito' => FALSE, 'error' => 'No se obtuvo el número de actividad.');
         return print(json_encode($json));
     }
-
 
     /*------------------------------
     * --- DATOS AJAX
@@ -330,6 +340,7 @@ class Actividades extends CI_Controller {
         }
         return print(json_encode( $json ));
     }
+
 //  ------- FIN DE FUNCIONES AJAX ------
 
 /*--------------------------------------------------------------------------*
