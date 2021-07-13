@@ -141,11 +141,14 @@ class Actividades extends CI_Controller {
     public function generar_reporte(){
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
         $spreadsheet = $reader->load( FCPATH . 'uploads/FORMATO_PAT.xlsx' );
-     
+
+        $reporte    = "Reporte_".date('dmY_hi').".xlsx";     
         $sheet      = $spreadsheet->getActiveSheet();
      
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
-        $writer->save('Reporte_'.date('dmY_Hi').'.xlsx');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. urlencode($reporte).'"');
+        $writer->save('php://output');
     }
 //  ------- FIN DE VISTAS ------
 
