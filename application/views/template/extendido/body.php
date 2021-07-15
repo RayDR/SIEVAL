@@ -13,6 +13,7 @@
 	</main>
 
     <input type="hidden" id="base_url" value="<?=base_url()?>">
+    <?php $this->load->view( RUTA_TEMA_UTIL . '/chambianding'); ?>
 
     <!-- Fontawesome JS -->
     <script src="https://kit.fontawesome.com/8cca2ecc5a.js" crossorigin="anonymous"></script>

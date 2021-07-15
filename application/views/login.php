@@ -1,4 +1,4 @@
-<section class="d-flex align-items-center my-5 mt-lg-6 mb-lg-5 fondo-cuadros">
+<section class="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
     <div class="container">
         <div class="row justify-content-center form-bg-image" data-background-lg="<?= base_url('assets/img/illustrations/signin.svg') ?>">
             <div class="col-12 d-flex align-items-center justify-content-center">
