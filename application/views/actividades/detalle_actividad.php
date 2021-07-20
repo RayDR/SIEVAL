@@ -31,12 +31,23 @@
                             <ul class="nav nav-pills nav-pill-circle flex-column flex-md-row">
                                 <li class="nav-item">
                                     <a id="editar" class="nav-link" aria-label="Tab Editar" href="#editar-actividad" data-bs-toggle="tooltip" title="Editar Actividad">
-                                        <span class="nav-link-icon d-block"><span class="fas fa-pencil-alt fa-2x"></span></span>
+                                        <span class="nav-link-icon d-block">
+                                            <span class="fas fa-pencil-alt fa-2x"></span>
+                                        </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a id="reporte" class="nav-link" aria-label="Tab Reporte" href="#reporte-actividad" data-bs-toggle="tooltip" title="Reportar Actividad">
-                                        <span class="nav-link-icon d-block"><span class="fas fa-file-contract fa-2x"></span></span>
+                                        <span class="nav-link-icon d-block">
+                                            <span class="fas fa-file-contract fa-2x"></span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="imprimir" class="nav-link" aria-label="Tab Imprimir" href="<?= base_url('index.php/Actividades/generar_reporte/' . $encabezado->actividad_id) ?>" data-bs-toggle="tooltip" title="Imprimir" target="_blank">
+                                        <span class="nav-link-icon d-block">
+                                            <span class="fas fa-print fa-2x"></span>
+                                        </span>
                                     </a>
                                 </li>
                             </ul>
@@ -55,7 +66,7 @@
                             </button>
                         </h2>
                         <div id="datos_actividad" class="accordion-collapse collapse" aria-labelledby="titulo_actividad" data-bs-parent="#encabezado">
-                            <div class="accordion-body">                                
+                            <div class="accordion-body">
                                 <div class="card card-body shadow-sm bg-transparent border-gray-300 p-0 p-md-4">
                                     <div class="card-body px-0 py-0">
                                         <ul class="list-group bg-transparent">
@@ -94,7 +105,7 @@
                                         </button>
                                     </h2>
                                     <div id="reporte_fisico" class="accordion-collapse collapse" aria-labelledby="encabezado-rfisico" data-bs-parent="#reportes">
-                                        <div class="accordion-body">                                            
+                                        <div class="accordion-body">
                                             <div class="card-body">
                                                 <div class="row">
                                                 <?php foreach ($detalles as $key => $detalle): ?>
@@ -178,7 +189,7 @@
                                         </button>
                                     </h2>
                                     <div id="reporte_financiero" class="accordion-collapse collapse" aria-labelledby="encabezado-rfinanciero" data-bs-parent="#reportes">
-                                        <div class="accordion-body">                                            
+                                        <div class="accordion-body">
                                             <div class="card-body">
                                                 <div class="row">
                                                 <?php foreach ($detalles as $key => $detalle): ?>
