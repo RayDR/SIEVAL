@@ -141,6 +141,26 @@ class Configurador extends CI_Controller {
         return print(json_encode($json));
     }
 
+    public function registra_usuario(){
+        $this->load->model('model_usuarios');
+
+        $json  = array('exito' => FALSE);
+
+        $datos = array(
+            'nombres'           =>  $this->input->post('nombres'),
+            'primer_apellido'   =>  $this->input->post('primer_apellido'),
+            'segundo_apellido'  =>  $this->input->post('segundo_apellido'),
+            'sexo'              =>  $this->input->post('sexo'),
+            'email'             =>  $this->input->post('email'),
+            'telefono'          =>  $this->input->post('telefono'),
+            'usuario'           =>  $this->input->post('usuario'),
+            'password'          =>  $this->input->post('password')
+        );
+
+        $json = $this->model_usuarios->set_usuario($datos);
+        return print(json_encode($json));
+    }
+
     /*------------------------------
     * --- CATALOGOS AJAX
     * ---------------------*/

@@ -21,6 +21,8 @@
         <div class="row d-flex justify-content-between">
             <div class="col my-auto">
                 <h2 class="h5 mb-4 text-center">DETALLE DE ACTIVIDAD</h2>
+                <br>
+                <?= $encabezado->estatus_actividad ?>
             </div>
             <div class="col">
                 <ul class="list-group list-group-flush">

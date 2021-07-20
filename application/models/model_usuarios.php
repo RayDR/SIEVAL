@@ -52,6 +52,62 @@ class Model_usuarios extends CI_Model {
     // ------------------------- SETTERS
 
     /**
+        * Crear usuario
+        *
+        * @access public
+        * @param  string   $datos        Datos del usuario
+        * @return resultado
+    */
+    public function set_usuario($datos){
+        $resultado = array('exito' => TRUE);
+        try {
+            $this->db->trans_begin(); 
+
+            if ( !is_array($datos) )
+                throw new Exception("No se recibieron datos");
+
+            // Buscar si el usuario ya existe
+            if ( !isset($datos['usuario']) )
+                throw new Exception("Se requiere ingresar un número de cuenta válido.", 1);
+                
+            $this->db->where('usuario', $datos['usuario']);
+            $_db_usuario = $this->db->get('usuario')->row();
+            if ( $_db_usuario )
+                throw new Exception("Este número de cuenta ya se encuentra registrado.", 1);
+            // Buscar si el correo ya esta asociado a una cuenta
+            if ( !isset($datos['email']) )
+                throw new Exception("Un correo electrónico válido es requerido para la creación de la cuenta.", 1);
+                
+            $this->db->where('email', $datos['email']);
+            $_db_usuario = $this->db->get('usuario')->row();
+            if ( $_db_usuario )
+                throw new Exception("Este correo electrónico ya se encuentra ligado a otro número de cuenta.", 1);
+
+            // Realizar la inserción
+            $db_datos = array(
+                'sexo'              => $datos['sexo'],
+                'nombres'           => $datos['nombres'],
+                'primer_apellido'   => $datos['primer_apellido'],
+                'segundo_apellido'  => $datos['segundo_apellido'],
+                'segundo_apellido'  => $datos['email'],
+                'segundo_apellido'  => $datos['telefono'],
+                'segundo_apellido'  => $datos['usuario'],
+                'segundo_apellido'  => $datos['password'],
+            );
+
+            $this->db->insert('usuarios', $datos);
+            $usuario_id = $this->db->insert_id();
+
+            $this->db->trans_commit();
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
+            $resultado['exito'] = FALSE;
+            $resultado['error'] = $e->getMessage();
+        }
+        return $resultado;
+    }
+
+    /**
         * Actualizar datos del usuario
         *
         * @access public
@@ -62,7 +118,7 @@ class Model_usuarios extends CI_Model {
     public function set_datos_usuario($usuario_id, $datos){
         $resultado = array('exito' => TRUE);
         try {
-            $this->db->trans_begin();
+            $this->db->trans_begin(); 
 
             if ( !is_array($datos) )
                 throw new Exception("No se recibieron datos");

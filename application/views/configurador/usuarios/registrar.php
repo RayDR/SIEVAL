@@ -35,8 +35,8 @@
                                 <input type="text" id="primer_apellido" name="primer_apellido" class="form-control" required>
                             </div>
                             <div class="mb-3 col-lg-4">
-                                <label class="my-1 me-2" for="segundo_apellido"><span class="text-danger">*</span> Segundo Apellido</label>
-                                <input type="text" id="segundo_apellido" name="segundo_apellido" class="form-control" required>
+                                <label class="my-1 me-2" for="segundo_apellido">Segundo Apellido</label>
+                                <input type="text" id="segundo_apellido" name="segundo_apellido" class="form-control">
                             </div>
                             <div class="mb-3 col-lg-4">
                                 <label class="my-1 me-2" for="sexo"><span class="text-danger">*</span> Sexo</label>
@@ -66,7 +66,7 @@
                             </div>
                             <div class="mb-3 col-lg-4">
                                 <label class="my-1 me-2" for="telefono"><span class="text-danger">*</span> Teléfono</label>
-                                <input type="email" id="telefono" name="telefono" class="form-control" placeholder="Ej: 9930000000" required>
+                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Ej: 9930000000" size="10" maxlength="10" pattern="[0-9]{10}" required>
                             </div>
                         </div>
                         <div class="row">
