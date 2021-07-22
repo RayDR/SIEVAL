@@ -144,6 +144,16 @@ class Actividades extends CI_Controller {
 
         $reporte    = "Reporte_".date('dmY_hi').".xlsx";     
         $sheet      = $spreadsheet->getActiveSheet();
+
+        $sheetMapping = array(
+            'E3'  => 'direccion',
+            'E4'  => 'subdireccion',
+            'E5'  => 'departamento',
+            'E6'  => 'objetivo_programa',
+            'E8'  => 'linea_accion',
+            'E9'  => 'programa_presupuestario',
+            'M7'  => 'estrategia',
+        );
      
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
