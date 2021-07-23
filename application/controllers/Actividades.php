@@ -7,7 +7,6 @@
  *  @revision:  07-2021
  * =====================================================================*/
 
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Actividades extends CI_Controller {
