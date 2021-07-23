@@ -138,27 +138,45 @@ class Actividades extends CI_Controller {
     }
 
 
-    public function generar_reporte(){
-        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
-        $spreadsheet = $reader->load( FCPATH . 'uploads/FORMATO_PAT.xlsx' );
+    public function generar_reporte($actividad_id){
+        $actividad_id = $this->input->post('actividad');
+        if ( $actividad_id ){
+            $encabezado   = $this->model_actividades->get_actividad($actividad_id);
+            $detalles     = $this->model_actividades->get_seguimiento_actividades($actividad_id);
+            $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
+            $spreadsheet = $reader->load( FCPATH . 'uploads/FORMATO_PAT.xlsx' );
 
-        $reporte    = "Reporte_".date('dmY_hi').".xlsx";     
-        $sheet      = $spreadsheet->getActiveSheet();
+            $reporte    = "Reporte_".date('dmY_hi').".xlsx";     
+            $sheet      = $spreadsheet->getActiveSheet();
 
-        $sheetMapping = array(
-            'E3'  => 'direccion',
-            'E4'  => 'subdireccion',
-            'E5'  => 'departamento',
-            'E6'  => 'objetivo_programa',
-            'E8'  => 'linea_accion',
-            'E9'  => 'programa_presupuestario',
-            'M7'  => 'estrategia',
-        );
-     
-        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="'. urlencode($reporte).'"');
-        $writer->save('php://output');
+            $sheetMapping = array(
+                'X4'  => 'mostrar_fecha',
+                'E3'  => 'direccion',
+                'E4'  => 'subdireccion',
+                'E5'  => 'departamento',
+                'E6'  => 'objetivo_programa',
+                'E8'  => 'linea_accion',
+                'E9'  => 'programa_presupuestario',
+                'M7'  => 'estrategia',
+            );
+         
+            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename="'. urlencode($reporte).'"');
+            $writer->save('php://output');
+        } else {
+            print(
+                json_encode(
+                    array('exito'   => FALSE, 
+                          'error'   => 'No se pudo generar el reporte.',
+                          'estatus' => 'error_reporte', 
+                          'mensaje' => 'No se ha recibido el folio de la actividad.'
+                    )
+                )
+            );
+            redirect(base_url('index.php/Home/login'),'refresh');
+        }
+
     }
 //  ------- FIN DE VISTAS ------
 
