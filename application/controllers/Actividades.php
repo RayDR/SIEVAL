@@ -137,15 +137,15 @@ class Actividades extends CI_Controller {
     }
 
 
-    public function generar_reporte($actividad_id){
-        $actividad_id = $this->input->post('actividad');
+    public function generar_reporte($actividad_id = NULL){
+        $actividad_id = ( $actividad_id )? $actividad_id : $this->input->post('actividad');
         if ( $actividad_id ){
-            $encabezado   = $this->model_actividades->get_actividad($actividad_id);
-            $detalles     = $this->model_actividades->get_seguimiento_actividades($actividad_id);
-            $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
-            $spreadsheet = $reader->load( FCPATH . 'uploads/FORMATO_PAT.xlsx' );
+            $encabezado     = $this->model_actividades->get_actividad($actividad_id, NULL, FALSE);
+            $detalles       = $this->model_actividades->get_seguimiento_actividades($actividad_id, NULL, FALSE);
+            $reader         = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
+            $spreadsheet    = $reader->load( FCPATH . 'uploads/FORMATO_PAT.xlsx' );
 
-            $reporte    = "Reporte_".date('dmY_hi').".xlsx";     
+            $reporte    = "ReporteActividad_{$actividad_id}_".date('dmY_His').".xlsx";     
             $sheet      = $spreadsheet->getActiveSheet();
 
             $sheetMapping = array(
@@ -155,10 +155,53 @@ class Actividades extends CI_Controller {
                 'E5'  => 'departamento',
                 'E6'  => 'objetivo_programa',
                 'E8'  => 'linea_accion',
-                'E9'  => 'programa_presupuestario',
-                'M7'  => 'estrategia',
+                'E9'  => 'programa_presupuestario_clave',
+                'M7'  => 'estrategia_programa',
+                'A11' => 'actividad_id',
+                'B11' => 'actividad_general',
+                'F11' => 'programado_financiero',
+                'G11' => 'proyecto_nombre',
+                'O11' => 'unidad_medida',
+                'X11' => 'cantidad_beneficiario'
             );
-         
+
+            foreach ($sheetMapping as $celda => $campo) {
+                switch ($campo) {
+                    case 'mostrar_fecha':
+                        $valor = date('d-m-Y');
+                        break;
+                    
+                    default:
+                        $valor = $encabezado[$campo];
+                        break;
+                }
+                if ( $valor )
+                    $sheet->setCellValue($celda, $valor);
+            }
+
+            $presupuesto = array(); $metas = array();
+            $programadoPresupuesto  = array();
+            $ejercidoPresupuesto    = array();
+            $programadoMetas        = array();
+            $ejercidoMetas          = array();
+            foreach ($detalles as $key => $detalle) {    
+                array_push($programadoPresupuesto, ($detalle['programado_financiero'])? $detalle['programado_financiero'] : 0);
+                array_push($ejercidoPresupuesto, ($detalle['realizado_financiero'])? $detalle['realizado_financiero'] : 0);
+
+                array_push($programadoMetas, ($detalle['programado_fisico'])? $detalle['programado_fisico'] : 0);
+                array_push($ejercidoMetas, ($detalle['realizado_fisico'])? $detalle['realizado_fisico'] : 0);
+            }
+            array_push($presupuesto, $programadoPresupuesto);
+            array_push($presupuesto, $ejercidoPresupuesto);
+
+            array_push($metas, $programadoMetas);
+            array_push($metas, $ejercidoMetas);
+            // print_r($presupuesto);
+
+            // echo '<hr>';
+            // print_r($metas);
+            $sheet->fromArray($presupuesto, 0,'H15');
+            $sheet->fromArray($metas, 0,'H19');
             $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="'. urlencode($reporte).'"');
