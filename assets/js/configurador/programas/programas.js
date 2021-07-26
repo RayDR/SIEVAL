@@ -5,6 +5,8 @@ var dt,
 $(document).ready(function($) {
 	finicia_datatable();
     loader(false);
+
+    $(`${dtNombre} tbody`).on('click', 'tr td', fcModal); 
 });
 
 function finicia_datatable(){
@@ -53,4 +55,8 @@ function finicia_datatable(){
             url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
         }
     });
+}
+
+function fcModal(){
+    
 }
