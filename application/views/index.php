@@ -83,18 +83,6 @@
             <div class="d-block">
               <h2 class="h5">Progreso de Actividades</h2>
               <div class="d-flex">
-                <div class="d-flex align-items-center me-3 lh-130">
-                  <span class="shape-xs rounded-circle bg-tertiary me-2"></span> 
-                  <span class="fw-normal small">Concl</span>
-                </div>
-                <div class="d-flex align-items-center me-3 lh-130">
-                  <span class="shape-xs rounded-circle bg-secondary me-2"></span> 
-                  <span class="fw-normal small">Subdirección</span>
-                </div>
-                <div class="d-flex align-items-center me-3 lh-130">
-                  <span class="shape-xs rounded-circle bg-dark me-2"></span> 
-                  <span class="fw-normal small">Departamento</span>
-                </div>
               </div>
             </div>
           </div>
@@ -108,85 +96,35 @@
           </div>
         </div>
         <div class="col-12 col-xl-6 mb-4">
-          <div class="row">
-            <div class="col-12 mb-4">
-              <div class="card border-light shadow-sm">
-                <div class="card-body">
-                  <div class="row d-block d-md-flex align-items-center">
-                    <div class="col-12 col-md-5">
-                      <h2 class="h5 mb-1">Gráfico Ejemplo 2</h2>
-                      <h3 class="h1 mb-1">Total</h3>
-                      <span class="small">Datos del conteo</span>
-                    </div>
-                    <div class="col-12 col-md-7 mt-3 mt-md-0">
-                      <div class="col-12">
-                        <div class="row d-flex align-items-center mb-1">
-                          <div class="col-2 text-gray fw-bold px-0 small">5
-                          </div>
-                          <div class="col-10 px-0">
-                            <div class="progress progress-lg rounded mb-0">
-                              <div class="progress-bar bg-success rounded" role="progressbar" aria-valuenow="51" aria-valuemin="0" aria-valuemax="100" style="width: 51%;">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row d-flex align-items-center mb-1">
-                          <div class="col-2 text-gray fw-bold px-0 small">4
-                          </div>
-                          <div class="col-10 px-0">
-                            <div class="progress progress-lg rounded mb-0">
-                              <div class="progress-bar bg-cyan rounded" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" style="width: 31%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row d-flex align-items-center mb-1">
-                          <div class="col-2 text-gray fw-bold px-0 small">3
-                          </div>
-                          <div class="col-10 px-0">
-                            <div class="progress progress-lg rounded mb-0">
-                              <div class="progress-bar bg-warning rounded" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-                                
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row d-flex align-items-center mb-1">
-                          <div class="col-2 text-gray fw-bold px-0 small">2
-                          </div>
-                          <div class="col-10 px-0">
-                            <div class="progress progress-lg rounded mb-0">
-                              <div class="progress-bar bg-pink rounded" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-                                
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row d-flex align-items-center mb-1">
-                          <div class="col-2 text-gray fw-bold px-0 small">1
-                          </div>
-                          <div class="col-10 px-0">
-                            <div class="progress progress-lg rounded mb-0">
-                              <div class="progress-bar bg-danger rounded" role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100" style="width: 6%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+          <div class="card border-light shadow-sm">
+            <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+              <div class="d-block">
+                <h2 class="h5">Progreso de Preproyectos</h2>
+                <div class="d-flex">
+                  <div class="d-flex align-items-center me-3 lh-130">
+                    <span class="shape-xs rounded-circle bg-tertiary me-2"></span> 
+                    <span class="fw-normal small">Con Acciones</span>
+                  </div>
+                  <div class="d-flex align-items-center me-3 lh-130">
+                    <span class="shape-xs rounded-circle bg-secondary me-2"></span> 
+                    <span class="fw-normal small">Con Avances</span>
+                  </div>
+                  <div class="d-flex align-items-center me-3 lh-130">
+                    <span class="shape-xs rounded-circle bg-dark me-2"></span> 
+                    <span class="fw-normal small">Cumplidos</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-sm-6 mb-4 mb-md-0">
-              <div class="card border-light shadow-sm">
-                <div class="card-body">
-                  <h2 class="h5">Otro contador</h2>
-                  <h3 class="h2 mb-1">0367,567</h3>
-                  <div class="small mb-3">Enero 1 - Abril 1, <span class="icon icon-small">
-                    <span class="fas fa-globe-europe"></span>
-                  </span> Actividades</div>
+            <div class="card-body p-2">
+              <div class="ct-chart-app-ranking ct-major-tenth ct-series-a">
+                <div class="chartist-tooltip" style="top: -22px; left: 628px;">
+                  <span class="chartist-tooltip-value">10</span>
                 </div>
               </div>
+              </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
