@@ -31,12 +31,12 @@ class MY_Session extends CI_Session
         if ( $datos ){ 
             // Almacenar las variables enviadas
             $datos_usuario = array(
-                'uid'       => $datos->usuario_id,
-                'ulogin'    => TRUE,
-                'usuario'   => $datos->usuario,
-                'tuser'     => $datos->tipo_usuario_id,
-                'sexo'      => $datos->sexo,
-                'nombres'   => $datos->nombres,
+                'uid'               => $datos->usuario_id,
+                'ulogin'            => TRUE,
+                'usuario'           => $datos->usuario,
+                'tuser'             => $datos->tipo_usuario_id,
+                'sexo'              => $datos->sexo,
+                'nombres'           => $datos->nombres,
                 'primer_apellido'   => $datos->primer_apellido,
                 'combinacion_area'  => $datos->combinacion_area_usuario_id
             );
@@ -61,9 +61,19 @@ class MY_Session extends CI_Session
             $usuario        = array('usuario_id' => $this->userdata('uid'));
             $estatus_usr    = $this->ci->model_usuarios->get_usuarios($usuario);
             if ( $estatus_usr ){
-                if ( $estatus_usr->estatus == 1 )
+                if ( $estatus_usr->estatus == 1 ){
                     $sesion_activa = TRUE;
-                else 
+                    $datos_usuario = array(
+                        'ulogin'            => $sesion_activa,
+                        'usuario'           => $estatus_usr->usuario,
+                        'tuser'             => $estatus_usr->tipo_usuario_id,
+                        'sexo'              => $estatus_usr->sexo,
+                        'nombres'           => $estatus_usr->nombres,
+                        'primer_apellido'   => $estatus_usr->primer_apellido,
+                        'combinacion_area'  => $estatus_usr->combinacion_area_usuario_id
+                    );
+                    $this->var_sesion( $datos_usuario );
+                } else 
                     $sesion_activa = FALSE;
             } else 
                 $sesion_activa = FALSE;

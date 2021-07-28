@@ -22,6 +22,7 @@
             <div class="col-lg-6 my-auto">
                 <h2 class="h5 mb-4 text-center">DETALLE DE PREPROYECTO</h2>
                 <hr class="ml-3">
+                <span><?= $preproyecto->estatus_html ?></span>
             </div>
             <div class="col">
                 <ul class="list-group list-group-flush">

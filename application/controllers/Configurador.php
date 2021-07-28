@@ -88,6 +88,7 @@ class Configurador extends CI_Controller {
                   'f_financia'=> $this->model_catalogos->get_fuentes_financiamiento(),
                   'g_benef'   => $this->model_catalogos->get_grupos_beneficiados(),
                   'menu'      => $this->model_catalogos->get_menus(),
+                  'inputs'    => $this->inputs_programas(),
                   'view'      => 'configurador/programas/registrar'
                );
                break;
@@ -96,6 +97,8 @@ class Configurador extends CI_Controller {
                $data   = array(
                   'titulo'    => $titulo  . ' | ' . EMPRESA,
                   'menu'      => $this->model_catalogos->get_menus(),
+                  'categorias'=> $this->model_catalogos->get_categorias(),
+                  'inputs'    => $this->inputs_usuarios(),
                   'view'      => 'configurador/usuarios/registrar'
                );
                break;
@@ -167,11 +170,11 @@ class Configurador extends CI_Controller {
       $area_responsable       = $this->input->post('area_responsable');
 
       $datos  = array(
-         'proyecto_nombre'           => $proyecto_nombre,
-         'techo_financiero'          => $techo_financiero,
-         'combinacion_area'          => ($area_responsable)? $area_responsable : null,
-         'usuario_id'                => $this->session->userdata('uid'),
-         'ejercicio'                 => date('Y')
+         'proyecto_nombre'       => $proyecto_nombre,
+         'techo_financiero'      => $techo_financiero,
+         'combinacion_area'      => ($area_responsable)? $area_responsable : null,
+         'usuario_id'            => $this->session->userdata('uid'),
+         'ejercicio'             => date('Y')
       );
 
       $json = $this->model_proyectos->set_proyecto($datos);
@@ -184,14 +187,17 @@ class Configurador extends CI_Controller {
       $json  = array('exito' => FALSE);
 
       $datos = array(
-         'nombres'           =>  $this->input->post('nombres'),
-         'primer_apellido'   =>  $this->input->post('primer_apellido'),
-         'segundo_apellido'  =>  $this->input->post('segundo_apellido'),
-         'sexo'              =>  $this->input->post('sexo'),
-         'email'             =>  $this->input->post('email'),
-         'telefono'          =>  $this->input->post('telefono'),
-         'usuario'           =>  $this->input->post('usuario'),
-         'password'          =>  $this->input->post('password')
+         'area_usuaria'       =>  $this->input->post('area_usuaria'),
+         'nombres'            =>  $this->input->post('nombres'),
+         'primer_apellido'    =>  $this->input->post('primer_apellido'),
+         'segundo_apellido'   =>  $this->input->post('segundo_apellido'),
+         'categoria'          =>  $this->input->post('categoria'),
+         'sexo'               =>  $this->input->post('sexo'),
+         'correo'             =>  $this->input->post('correo'),
+         'telefono'           =>  $this->input->post('telefono'),
+         'usuario'            =>  $this->input->post('usuario'),
+         'cve_cuenta'         =>  $this->input->post('usuario'),
+         'password'           =>  $this->input->post('password')
       );
 
       $json = $this->model_usuarios->set_usuario($datos);
@@ -396,6 +402,11 @@ class Configurador extends CI_Controller {
    private function inputs_usuarios(){
       return array(
          [
+            'nombre'=> 'area_usuaria',
+            'texto' => 'Área Usuaria',
+            'tipo'  => 'select'
+         ],
+         [
             'nombre'=> 'nombres',
             'texto' => 'Nombre(s)',
          ],
@@ -418,6 +429,10 @@ class Configurador extends CI_Controller {
          [
             'nombre'=> 'password',
             'texto' => 'Contraseña'
+         ],         
+         [
+            'nombre'=> 'categoria',
+            'texto' => 'Categoría'
          ],
          [
             'nombre'=> 'correo',

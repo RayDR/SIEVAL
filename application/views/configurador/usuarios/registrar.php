@@ -26,6 +26,12 @@
                         <div class="card-text fs-5 my-3">Los campos marcados con <span class="text-danger">*</span> son requeridos</div>
                         <div class="row mb-3">
                             <legend class="col-12">Información del Responsable</legend>
+                            <div class="col-12 mb-3">
+                                <label class="my-1 me-2" for="area_usuaria">Área Usuaria</label>
+                                <select class="form-select areas_select2" id="area_usuaria" aria-label="Áreas">
+                                    <option selected disabled>Seleccione una opción</option>
+                                </select>
+                            </div>
                             <div class="mb-3 col-lg-4">
                                 <label class="my-1 me-2" for="nombres"><span class="text-danger">*</span> Nombre(s)</label>
                                 <input type="text" id="nombres" name="nombres" class="form-control" required>
@@ -37,6 +43,15 @@
                             <div class="mb-3 col-lg-4">
                                 <label class="my-1 me-2" for="segundo_apellido">Segundo Apellido</label>
                                 <input type="text" id="segundo_apellido" name="segundo_apellido" class="form-control">
+                            </div>
+                            <div class="mb-3 col-lg-4">
+                                <label class="my-1 me-2" for="categoria"><span class="text-danger">*</span> Categoría</label>
+                                <select class="form-select" id="categoria" aria-label="categoria">
+                                    <option selected disabled>Seleccione una opción</option>
+                                    <?php foreach ($categorias as $key => $categoria): ?>
+                                    <option value="<?= $categoria->categoria_id ?>"><?= $categoria->descripcion ?></option>
+                                    <?php endforeach ?>
+                                </select>
                             </div>
                             <div class="mb-3 col-lg-4">
                                 <label class="my-1 me-2" for="sexo"><span class="text-danger">*</span> Sexo</label>
@@ -81,7 +96,7 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript">    
     var inputs = JSON.parse('<?php print(json_encode($inputs, JSON_HEX_TAG)); ?>');
 </script>
 <script src="<?= base_url('assets/js/configurador/configurador.js') ?>?<?= date('dmYHis') ?>" type="text/javascript" charset="utf-8" async defer></script>

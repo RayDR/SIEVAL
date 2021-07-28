@@ -28,7 +28,46 @@
     </div>
     <div class="col-md-4"></div>
   </div>
+  <!-- Sección Estadística -->
   <div class="col-12">
+    <!-- Contadores por Módulo -->
+    <div class="row mb-3">
+      <div class="col-12 col-lg-4 mb-4 mb-md-0">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Actividades</h2>
+            <h3 id="counter-actividades" class="h2 mb-1"></h3>
+            <div class="small mb-3">Periodo: Enero 1 - <?= mdate('%F %d', strtotime('now')); ?>, <span class="icon icon-small">
+              <span class="fas fa-globe-europe"></span>
+            </span> <a href="<?= base_url('Actividades') ?>">Actividades</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 mb-4 mb-md-0">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Preproyectos</h2>
+            <h3 class="h2 mb-1">367,567</h3>
+            <div class="small mb-3">Periodo: Enero 1 - Abril 1, <span class="icon icon-small">
+              <span class="fas fa-globe-europe"></span>
+            </span> <a href="<?= base_url('Preproyectos') ?>">Preproyectos</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 mb-4 mb-md-0">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Acuerdos</h2>
+            <h3 class="h2 mb-1">367,567</h3>
+            <div class="small mb-3">Periodo: Enero 1 - Abril 1, <span class="icon icon-small">
+              <span class="fas fa-globe-europe"></span>
+            </span> <a href="<?= base_url('Acuerdos') ?>">Acuerdos</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Contadores por Módulo -->
+    <!-- Gráficas de Finanzas -->
     <div class="row">
       <div class="col-12 col-xl-6 mb-4">
         <div class="card border-light shadow-sm">
@@ -192,7 +231,9 @@
         </div>
       </div>
     </div>
+    <!-- /Gráficas de Finanzas -->
   </div>
+  <!-- /Sección Estadística -->
 </div>
 
 <script src="<?= base_url('assets/js/dashboard.js') ?>" type="text/javascript" charset="utf-8" async defer></script>

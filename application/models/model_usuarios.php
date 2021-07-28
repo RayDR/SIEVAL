@@ -71,31 +71,35 @@ class Model_usuarios extends CI_Model {
                 throw new Exception("Se requiere ingresar un número de cuenta válido.", 1);
                 
             $this->db->where('usuario', $datos['usuario']);
-            $_db_usuario = $this->db->get('usuario')->row();
+            $_db_usuario = $this->db->get('usuarios')->row();
             if ( $_db_usuario )
                 throw new Exception("Este número de cuenta ya se encuentra registrado.", 1);
-            // Buscar si el correo ya esta asociado a una cuenta
-            if ( !isset($datos['email']) )
+            if ( !isset($datos['correo']) )
                 throw new Exception("Un correo electrónico válido es requerido para la creación de la cuenta.", 1);
-                
-            $this->db->where('email', $datos['email']);
-            $_db_usuario = $this->db->get('usuario')->row();
+            
+            // Buscar si el correo ya esta asociado a una cuenta
+            $this->db->where('correo', $datos['correo']);
+            $_db_usuario = $this->db->get('usuarios')->row();
             if ( $_db_usuario )
                 throw new Exception("Este correo electrónico ya se encuentra ligado a otro número de cuenta.", 1);
 
             // Realizar la inserción
             $db_datos = array(
-                'sexo'              => $datos['sexo'],
-                'nombres'           => $datos['nombres'],
-                'primer_apellido'   => $datos['primer_apellido'],
-                'segundo_apellido'  => $datos['segundo_apellido'],
-                'segundo_apellido'  => $datos['email'],
-                'segundo_apellido'  => $datos['telefono'],
-                'segundo_apellido'  => $datos['usuario'],
-                'segundo_apellido'  => $datos['password'],
+                'combinacion_area_id'=> $datos['area_usuaria'],
+                'sexo'               => $datos['sexo'],
+                'nombres'            => $datos['nombres'],
+                'primer_apellido'    => $datos['primer_apellido'],
+                'segundo_apellido'   => $datos['segundo_apellido'],
+                'correo'             => $datos['correo'],
+                'telefono'           => $datos['telefono'],
+                'usuario'            => $datos['usuario'],
+                'cve_cuenta'         => $datos['cve_cuenta'],
+                'categoria_id'       => $datos['categoria'],
+                'contrasena'         => password_hash($datos['password'], PASSWORD_DEFAULT),
+                'tipo_usuario_id'    => 3,
             );
 
-            $this->db->insert('usuarios', $datos);
+            $this->db->insert('usuarios', $db_datos);
             $usuario_id = $this->db->insert_id();
 
             $this->db->trans_commit();
