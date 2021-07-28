@@ -124,7 +124,7 @@ CREATE TABLE `actividades` (
   CONSTRAINT `actividades_ibfk_6` FOREIGN KEY (`medicion_id`) REFERENCES `mediciones` (`medicion_id`),
   CONSTRAINT `actividades_ibfk_7` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`),
   CONSTRAINT `actividades_ibfk_8` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +133,6 @@ CREATE TABLE `actividades` (
 
 LOCK TABLES `actividades` WRITE;
 /*!40000 ALTER TABLE `actividades` DISABLE KEYS */;
-INSERT INTO `actividades` VALUES (1,1,5,2,3,'Pague este sistema para que quedara mas perrón',103,1,1,100.00,1500000.00,2021,1,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,106),(2,3,6,4,4,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',54,1,4,100.00,15000.00,2021,1,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,90),(3,2,1,1,2,'asuidgsauihdsioadjosiajdpsioakdpsoa',114,1,2,100.00,155500.00,2021,1,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,104),(4,1,1,1,4,'sadsdasdasdas',122,1,3,10.00,15.00,2021,1,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,1);
 /*!40000 ALTER TABLE `actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +160,7 @@ CREATE TABLE `actividades_detalladas` (
   PRIMARY KEY (`actividad_detallada_id`) USING BTREE,
   KEY `actividad_id` (`actividad_id`),
   CONSTRAINT `actividades_detalladas_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `actividades` (`actividad_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +169,6 @@ CREATE TABLE `actividades_detalladas` (
 
 LOCK TABLES `actividades_detalladas` WRITE;
 /*!40000 ALTER TABLE `actividades_detalladas` DISABLE KEYS */;
-INSERT INTO `actividades_detalladas` VALUES (1,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,1,10.00,NULL,1000000.00,NULL,1),(2,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,2,10.00,NULL,100000.00,NULL,1),(3,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,3,50.00,NULL,100000.00,NULL,1),(4,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,4,30.00,NULL,300000.00,NULL,1),(5,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,5,0.00,NULL,0.00,NULL,1),(6,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,6,0.00,NULL,0.00,NULL,1),(7,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,7,0.00,NULL,0.00,NULL,1),(8,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,8,0.00,NULL,0.00,NULL,1),(9,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,9,0.00,NULL,0.00,NULL,1),(10,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,10,0.00,NULL,0.00,NULL,1),(11,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,11,0.00,NULL,0.00,NULL,1),(12,1,'Pague este sistema para que quedara mas perrón',NULL,'2021-06-28 00:49:38','2021-06-28 00:49:38',1,12,0.00,NULL,0.00,NULL,1),(13,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,1,10.00,NULL,1000.00,NULL,1),(14,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,2,10.00,NULL,1000.00,NULL,1),(15,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,3,10.00,NULL,1000.00,NULL,1),(16,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,4,10.00,NULL,1000.00,NULL,1),(17,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,5,10.00,NULL,1000.00,NULL,1),(18,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,6,10.00,NULL,1000.00,NULL,1),(19,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,7,10.00,NULL,5000.00,NULL,1),(20,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,8,10.00,NULL,1000.00,NULL,1),(21,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,9,10.00,NULL,2000.00,NULL,1),(22,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,10,10.00,NULL,1000.00,NULL,1),(23,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,11,0.00,NULL,0.00,NULL,1),(24,2,'PROYECTO CON DINERO DE AQUÍ PARA POTENCIAR LA CHIDEZ',NULL,'2021-06-28 05:48:00','2021-06-28 05:48:00',1,12,0.00,NULL,0.00,NULL,1),(25,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,1,15.00,NULL,50000.00,NULL,1),(26,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,2,15.00,NULL,50000.00,NULL,1),(27,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,3,15.00,NULL,30000.00,NULL,1),(28,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,4,15.00,NULL,1500.00,NULL,1),(29,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,5,15.00,NULL,1500.00,NULL,1),(30,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,6,10.00,NULL,1500.00,NULL,1),(31,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,7,10.00,NULL,11000.00,NULL,1),(32,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,8,5.00,NULL,10000.00,NULL,1),(33,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:13','2021-07-07 14:40:13',1,9,0.00,NULL,0.00,NULL,1),(34,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:14','2021-07-07 14:40:14',1,10,0.00,NULL,0.00,NULL,1),(35,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:14','2021-07-07 14:40:14',1,11,0.00,NULL,0.00,NULL,1),(36,3,'asuidgsauihdsioadjosiajdpsioakdpsoa',NULL,'2021-07-07 14:40:14','2021-07-07 14:40:14',1,12,0.00,NULL,0.00,NULL,1),(37,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,1,5.00,NULL,10.00,NULL,1),(38,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,2,5.00,NULL,5.00,NULL,1),(39,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,3,0.00,NULL,0.00,NULL,1),(40,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,4,0.00,NULL,0.00,NULL,1),(41,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,5,0.00,NULL,0.00,NULL,1),(42,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,6,0.00,NULL,0.00,NULL,1),(43,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,7,0.00,NULL,0.00,NULL,1),(44,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,8,0.00,NULL,0.00,NULL,1),(45,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,9,0.00,NULL,0.00,NULL,1),(46,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,10,0.00,NULL,0.00,NULL,1),(47,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,11,0.00,NULL,0.00,NULL,1),(48,4,'sadsdasdasdas',NULL,'2021-07-08 03:46:42','2021-07-08 03:46:42',1,12,0.00,NULL,0.00,NULL,1);
 /*!40000 ALTER TABLE `actividades_detalladas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +194,7 @@ CREATE TABLE `acuerdos` (
   KEY `tema_id` (`tema_id`),
   CONSTRAINT `acuerdos_ibfk_1` FOREIGN KEY (`tema_id`) REFERENCES `temas` (`tema_id`),
   CONSTRAINT `fk_combinacion_area` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +203,6 @@ CREATE TABLE `acuerdos` (
 
 LOCK TABLES `acuerdos` WRITE;
 /*!40000 ALTER TABLE `acuerdos` DISABLE KEYS */;
-INSERT INTO `acuerdos` VALUES (1,9,'Puente de Grijalva 3',5,1,2021,35,'2021-07-07 11:32:42','2021-07-07 11:32:42');
 /*!40000 ALTER TABLE `acuerdos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -943,7 +940,7 @@ CREATE TABLE `preproyectos` (
   CONSTRAINT `fk_ums_preproyectos` FOREIGN KEY (`unidad_medida_id`) REFERENCES `unidades_medida` (`unidad_medida_id`),
   CONSTRAINT `fk_usuario_modifica_preproyecto` FOREIGN KEY (`usuario_id_modifica`) REFERENCES `usuarios` (`usuario_id`),
   CONSTRAINT `fk_usuarios_preproyecto` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -952,7 +949,6 @@ CREATE TABLE `preproyectos` (
 
 LOCK TABLES `preproyectos` WRITE;
 /*!40000 ALTER TABLE `preproyectos` DISABLE KEYS */;
-INSERT INTO `preproyectos` VALUES (1,9,'0000-00-00 00:00:00','0000-00-00 00:00:00','Nuevo Proyecto  de Desarrollo de Vacas Locas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',2,1,5,3,5,NULL,'2021-07-07 16:15:19','2021-07-07 16:27:47'),(2,4,'0000-00-00 00:00:00','0000-00-00 00:00:00','sdfsdffsdff sdfs dfsdfsdaf sdfsda fsdaf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'https://psiqueyciencia.com/comming-soon/',1,1,1,1,NULL,NULL,'2021-07-27 09:49:41',NULL);
 /*!40000 ALTER TABLE `preproyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -988,7 +984,7 @@ CREATE TABLE `preproyectos_actividades` (
   `fecha_modificacion` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `estatus_id` int(11) DEFAULT '1',
   PRIMARY KEY (`preproyecto_actividad_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -997,7 +993,6 @@ CREATE TABLE `preproyectos_actividades` (
 
 LOCK TABLES `preproyectos_actividades` WRITE;
 /*!40000 ALTER TABLE `preproyectos_actividades` DISABLE KEYS */;
-INSERT INTO `preproyectos_actividades` VALUES (1,1,'Compra de las Vacas ',9,4,872,0,1,3,15,NULL,255000.00,'',3,'2021-07-01 00:00:00','2021-09-30 00:00:00',2,0,5,5,'2021-07-07 16:18:53','2021-07-07 16:24:58',1),(2,1,'Gastarlo que otra queda',9,4,872,0,1,4,17,NULL,35000.00,'',4,'2021-10-01 00:00:00','2021-12-31 00:00:00',2,0,5,NULL,'2021-07-07 16:23:48',NULL,1),(3,1,'Avances',9,4,872,0,1,2,10,NULL,25000.00,'',3,'2021-07-01 00:00:00','2021-09-30 00:00:00',0,0,5,NULL,'2021-07-07 16:27:47',NULL,1);
 /*!40000 ALTER TABLE `preproyectos_actividades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1054,7 +1049,7 @@ CREATE TABLE `proyectos` (
   KEY `proyecto_ca` (`combinacion_area_id`),
   CONSTRAINT `proyecto_ca` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`),
   CONSTRAINT `proyectos_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1063,7 +1058,6 @@ CREATE TABLE `proyectos` (
 
 LOCK TABLES `proyectos` WRITE;
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` VALUES (1,'No tiene nombre',1,NULL,'2021',0,'2021-07-06 07:32:04','2021-07-08 03:45:08',1,1),(2,'A huevitos',1,5151515151515,'2021',0,'2021-07-08 03:38:27','2021-07-08 03:39:50',1,1),(3,'A huevitos',1,1500000,'2021',0,'2021-07-19 04:13:34','2021-07-19 04:13:34',1,1);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1157,7 +1151,7 @@ CREATE TABLE `seguimientos_acuerdos` (
   CONSTRAINT `fk_combinacion_area_sa` FOREIGN KEY (`combinacion_area_id`) REFERENCES `combinaciones_areas` (`combinacion_area_id`),
   CONSTRAINT `fk_estatus_acuerdos` FOREIGN KEY (`estatus_acuerdo_id`) REFERENCES `estatus_acuerdos` (`estatus_acuerdo_id`),
   CONSTRAINT `seguimientos_acuerdos_ibfk_1` FOREIGN KEY (`acuerdo_id`) REFERENCES `acuerdos` (`acuerdo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1166,7 +1160,6 @@ CREATE TABLE `seguimientos_acuerdos` (
 
 LOCK TABLES `seguimientos_acuerdos` WRITE;
 /*!40000 ALTER TABLE `seguimientos_acuerdos` DISABLE KEYS */;
-INSERT INTO `seguimientos_acuerdos` VALUES (1,1,1,2021,'Puente de Grijalva 3',104,5,5,'puente.jpg','2021-07-07 11:32:42','2021-07-07 11:35:12',1),(2,1,2,2021,'Construcción de un puente sencillito',71,5,NULL,'puente.jpg','2021-07-07 11:35:12','2021-07-07 11:35:12',2);
 /*!40000 ALTER TABLE `seguimientos_acuerdos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1447,7 +1440,7 @@ CREATE TABLE `usuarios` (
   KEY `cargo_id` (`cargo_id`),
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`titulo_id`) REFERENCES `titulos` (`titulo_id`),
   CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`cargo_id`) REFERENCES `cargos` (`cargo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1456,7 +1449,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'114086',47,'MARCO ANTONIO','GONZALEZ','AGUIRRE','H','99331528787','correo1@gmail.com','114086','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,1,0,1,1,1,'2021-03-13 16:28:13.789328','2021-04-07 04:04:14.233158'),(2,'208478',47,'ARCENIO','LANESTOSA','ALAMILLA','H','9931234567','correo2@gmail.com','208478','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,2,0,1,1,1,'2021-03-13 16:28:13.797424','2021-03-24 17:30:37.612034'),(3,'170224',11,'DORA','FERRER','GONZALEZ','M','9937654321','correo3@gmail.com','170224','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,2,0,1,1,1,'2021-03-13 16:28:13.801952','2021-03-24 17:30:43.210921'),(4,'101010',1,'JOSE','BOUREGARD','SOLIS','H','9937654321','correo4@gmail.com','101010','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,2,0,1,1,1,'2021-03-13 16:28:13.808455','2021-03-24 17:30:47.759143'),(5,'100000',35,'TEMPORAL','PRUEBAS','TEST','H','9937654321','correo1@gmail.com','100000','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,3,0,1,1,1,'2021-03-24 17:04:07.983437','2021-03-24 17:31:51.468418'),(6,'100001',55,'TEMPORAL 2','TEST','PRUEBAS','M','9937654321','correo2@gmail.com','100001','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,3,0,1,1,1,'2021-03-24 17:04:07.989740','2021-03-24 17:31:51.536115'),(7,'100002',85,'TEMPORAL 3','TESTER','CAPTURAS','H','9937654321','correo3@gmail.com','100002','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,3,0,1,1,1,'2021-03-24 17:04:07.990260','2021-03-24 17:31:54.895863'),(8,'100003',105,'TEMPORAL 4','TEMPORAL','TEMP TEST','M','9937654321','correo4@gmail.com','100003','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,3,0,1,1,1,'2021-03-24 17:23:44.580653','2021-03-24 17:31:54.939134'),(9,'admin',1,'RAYMUNDO','DOMINGUEZ','RUIZ','H','9931700441','raydr95@gmail.com','admin','$2y$10$K83rbx2sv6y0NDVc43f1ceakDL30eO90WezyDbzeMmTL3KdEryrtG',1,NULL,NULL,NULL,3,0,1,1,1,'2021-07-27 12:00:44.188708','2021-07-27 20:51:39.672830'),(10,NULL,107,'OTRO','USUARIO','MARCO','1','9931700441','raydr@gmail.com','114085','$2y$10$cqSd3UeXg3qhGKVCOlgwe.wg/9PJdEMFJSxae0sP0HmHk9GZzofGy',1,NULL,NULL,NULL,3,0,3,NULL,NULL,'2021-07-27 18:57:13.509687','2021-07-27 19:00:55.021213'),(11,'123456',103,'Sandra Luz','MONTERO','Montero','2','9932172057','sol07_66@hotmail.com','123456','$2y$10$7R43T.VgTuPFzDgN7tno3uXfORFYV4uSWUtBAy.2FgYufodOI4BQa',1,NULL,NULL,NULL,3,0,4,NULL,NULL,'2021-07-27 19:00:39.228489','2021-07-27 19:00:39.228489');
+INSERT INTO `usuarios` VALUES (1,'114086',47,'MARCO ANTONIO','GONZALEZ','AGUIRRE','H','99331528787','correo1@gmail.com','114086','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,1,0,1,1,1,'2021-03-13 16:28:13.789328','2021-04-07 04:04:14.233158'),(2,'208478',47,'ARCENIO','LANESTOSA','ALAMILLA','H','9931234567','correo2@gmail.com','208478','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,2,0,1,1,1,'2021-03-13 16:28:13.797424','2021-03-24 17:30:37.612034'),(3,'170224',11,'DORA','FERRER','GONZALEZ','M','9937654321','correo3@gmail.com','170224','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,2,0,1,1,1,'2021-03-13 16:28:13.801952','2021-03-24 17:30:43.210921'),(4,'101010',1,'JOSE','BOUREGARD','SOLIS','H','9937654321','correo4@gmail.com','101010','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,2,0,1,1,1,'2021-03-13 16:28:13.808455','2021-03-24 17:30:47.759143'),(5,'100000',35,'TEMPORAL','PRUEBAS','TEST','H','9937654321','correo1@gmail.com','100000','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,3,0,1,1,1,'2021-03-24 17:04:07.983437','2021-03-24 17:31:51.468418'),(6,'100001',55,'TEMPORAL 2','TEST','PRUEBAS','M','9937654321','correo2@gmail.com','100001','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,3,0,1,1,1,'2021-03-24 17:04:07.989740','2021-03-24 17:31:51.536115'),(7,'100002',85,'TEMPORAL 3','TESTER','CAPTURAS','H','9937654321','correo3@gmail.com','100002','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,3,0,1,1,1,'2021-03-24 17:04:07.990260','2021-03-24 17:31:54.895863'),(8,'100003',105,'TEMPORAL 4','TEMPORAL','TEMP TEST','M','9937654321','correo4@gmail.com','100003','$2y$10$lzkbXMp4Fktqcr2.s8JGluTj7/MXiKZ4PAb9lX3cityAv7G1amaaO',1,NULL,NULL,NULL,3,0,1,1,1,'2021-03-24 17:23:44.580653','2021-03-24 17:31:54.939134');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2551,4 +2544,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-28 13:32:36
+-- Dump completed on 2021-07-28 15:29:20

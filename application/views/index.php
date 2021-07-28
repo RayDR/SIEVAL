@@ -36,10 +36,12 @@
         <div class="card border-light shadow-sm">
           <div class="card-body">
             <h2 class="h5">Actividades</h2>
-            <h3 id="counter-actividades" class="h2 mb-1"></h3>
-            <div class="small mb-3">Periodo: Enero 1 - <?= mdate('%F %d', strtotime('now')); ?>, <span class="icon icon-small">
-              <span class="fas fa-globe-europe"></span>
-            </span> <a href="<?= base_url('Actividades') ?>">Actividades</a></div>
+            <h3 id="counter-actividades" class="h2 mb-1">0</h3>
+            <div class="small mb-3">
+              <span class="icon icon-small">
+                <span class="far fa-calendar-alt"></span>
+              </span> 
+              <a class="stretched-link" href="<?= base_url('Actividades') ?>">Ver más</a></div>
           </div>
         </div>
       </div>
@@ -47,10 +49,13 @@
         <div class="card border-light shadow-sm">
           <div class="card-body">
             <h2 class="h5">Preproyectos</h2>
-            <h3 class="h2 mb-1">367,567</h3>
-            <div class="small mb-3">Periodo: Enero 1 - Abril 1, <span class="icon icon-small">
-              <span class="fas fa-globe-europe"></span>
-            </span> <a href="<?= base_url('Preproyectos') ?>">Preproyectos</a></div>
+            <h3 id="counter-preproyectos" class="h2 mb-1">0</h3>
+            <div class="small mb-3">
+              <span class="icon icon-small">
+                <span class="fas fa-tasks"></span>
+              </span> 
+              <a class="stretched-link" href="<?= base_url('Preproyectos') ?>">Ver más</a>
+            </div>
           </div>
         </div>
       </div>
@@ -58,10 +63,13 @@
         <div class="card border-light shadow-sm">
           <div class="card-body">
             <h2 class="h5">Acuerdos</h2>
-            <h3 class="h2 mb-1">367,567</h3>
-            <div class="small mb-3">Periodo: Enero 1 - Abril 1, <span class="icon icon-small">
-              <span class="fas fa-globe-europe"></span>
-            </span> <a href="<?= base_url('Acuerdos') ?>">Acuerdos</a></div>
+            <h3 id="counter-acuerdos" class="h2 mb-1">0</h3>
+            <div class="small mb-3">
+              <span class="icon icon-small">
+                <span class="far fa-handshake"></span>
+              </span>
+              <a class="stretched-link" href="<?= base_url('Acuerdos') ?>">Ver más</a>
+            </div>
           </div>
         </div>
       </div>
@@ -73,20 +81,11 @@
         <div class="card border-light shadow-sm">
           <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
             <div class="d-block">
-              <h2 class="h5">Gráfico de ejemplo</h2>
-              <div class="small mt-2 mb-3">
-                <span class="fas fa-angle-up text-success"></span> 
-                <span class="text-success fw-bold">155</span> 
-                <span class="fw-bold ms-2">
-                  <span class="icon icon-small me-1">
-                    <span class="fas fa-globe-europe"></span>
-                  </span>Actividades
-                </span>
-              </div>
+              <h2 class="h5">Progreso de Actividades</h2>
               <div class="d-flex">
                 <div class="d-flex align-items-center me-3 lh-130">
                   <span class="shape-xs rounded-circle bg-tertiary me-2"></span> 
-                  <span class="fw-normal small">Direccion</span>
+                  <span class="fw-normal small">Concl</span>
                 </div>
                 <div class="d-flex align-items-center me-3 lh-130">
                   <span class="shape-xs rounded-circle bg-secondary me-2"></span> 
@@ -104,46 +103,7 @@
               <div class="chartist-tooltip" style="top: -22px; left: 628px;">
                 <span class="chartist-tooltip-value">10</span>
               </div>
-              <svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-bar" style="width: 100%; height: 100%;"><g class="ct-grids">
-                <line x1="10" x2="10" y1="15" y2="237.796875" class="ct-grid ct-horizontal"></line>
-                <line x1="103.85714285714286" x2="103.85714285714286" y1="15" y2="237.796875" class="ct-grid ct-horizontal"></line>
-                <line x1="197.71428571428572" x2="197.71428571428572" y1="15" y2="237.796875" class="ct-grid ct-horizontal"></line>
-                <line x1="291.57142857142856" x2="291.57142857142856" y1="15" y2="237.796875" class="ct-grid ct-horizontal"></line>
-                <line x1="385.42857142857144" x2="385.42857142857144" y1="15" y2="237.796875" class="ct-grid ct-horizontal"></line>
-                <line x1="479.28571428571433" x2="479.28571428571433" y1="15" y2="237.796875" class="ct-grid ct-horizontal"></line>
-                <line x1="573.1428571428571" x2="573.1428571428571" y1="15" y2="237.796875" class="ct-grid ct-horizontal"></line></g><g><g class="ct-series ct-series-a">
-                <line x1="41.92857142857143" x2="41.92857142857143" y1="237.796875" y2="126.3984375" class="ct-bar" ct:value="5"></line>
-                <line x1="135.78571428571428" x2="135.78571428571428" y1="237.796875" y2="148.678125" class="ct-bar" ct:value="4"></line>
-                <line x1="229.64285714285717" x2="229.64285714285717" y1="237.796875" y2="170.9578125" class="ct-bar" ct:value="3"></line>
-                <line x1="323.5" x2="323.5" y1="237.796875" y2="81.83906250000001" class="ct-bar" ct:value="7"></line>
-                <line x1="417.3571428571429" x2="417.3571428571429" y1="237.796875" y2="126.3984375" class="ct-bar" ct:value="5"></line>
-                <line x1="511.2142857142858" x2="511.2142857142858" y1="237.796875" y2="15" class="ct-bar" ct:value="10"></line>
-                <line x1="605.0714285714286" x2="605.0714285714286" y1="237.796875" y2="170.9578125" class="ct-bar" ct:value="3"></line></g><g class="ct-series ct-series-b">
-                <line x1="56.92857142857143" x2="56.92857142857143" y1="237.796875" y2="193.2375" class="ct-bar" ct:value="2"></line>
-                <line x1="150.78571428571428" x2="150.78571428571428" y1="237.796875" y2="193.2375" class="ct-bar" ct:value="2"></line>
-                <line x1="244.64285714285717" x2="244.64285714285717" y1="237.796875" y2="215.5171875" class="ct-bar" ct:value="1"></line>
-                <line x1="338.5" x2="338.5" y1="237.796875" y2="126.3984375" class="ct-bar" ct:value="5"></line>
-                <line x1="432.3571428571429" x2="432.3571428571429" y1="237.796875" y2="170.9578125" class="ct-bar" ct:value="3"></line>
-                <line x1="526.2142857142858" x2="526.2142857142858" y1="237.796875" y2="148.678125" class="ct-bar" ct:value="4"></line>
-                <line x1="620.0714285714286" x2="620.0714285714286" y1="237.796875" y2="193.2375" class="ct-bar" ct:value="2"></line></g><g class="ct-series ct-series-c">
-                <line x1="71.92857142857143" x2="71.92857142857143" y1="237.796875" y2="170.9578125" class="ct-bar" ct:value="3"></line>
-                <line x1="165.78571428571428" x2="165.78571428571428" y1="237.796875" y2="193.2375" class="ct-bar" ct:value="2"></line>
-                <line x1="259.64285714285717" x2="259.64285714285717" y1="237.796875" y2="37.279687499999994" class="ct-bar" ct:value="9"></line>
-                <line x1="353.5" x2="353.5" y1="237.796875" y2="126.3984375" class="ct-bar" ct:value="5"></line>
-                <line x1="447.3571428571429" x2="447.3571428571429" y1="237.796875" y2="148.678125" class="ct-bar" ct:value="4"></line>
-                <line x1="541.2142857142858" x2="541.2142857142858" y1="237.796875" y2="104.11875" class="ct-bar" ct:value="6"></line>
-                <line x1="635.0714285714286" x2="635.0714285714286" y1="237.796875" y2="148.678125" class="ct-bar" ct:value="4"></line></g></g><g class="ct-labels">
-                  <foreignObject style="overflow: visible;" x="10" y="242.796875" width="93.85714285714286" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 94px; height: 20px;">21 Apr</span></foreignObject>
-                  <foreignObject style="overflow: visible;" x="103.85714285714286" y="242.796875" width="93.85714285714286" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 94px; height: 20px;">21 Ap</span></foreignObject>
-                  <foreignObject style="overflow: visible;" x="197.71428571428572" y="242.796875" width="93.85714285714283" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 94px; height: 20px;">22 Ap</span></foreignObject>
-                  <foreignObject style="overflow: visible;" x="291.57142857142856" y="242.796875" width="93.85714285714289" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 94px; height: 20px;">23 Ap</span></foreignObject>
-                  <foreignObject style="overflow: visible;" x="385.42857142857144" y="242.796875" width="93.85714285714289" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 94px; height: 20px;">24 Ap</span></foreignObject>
-                  <foreignObject style="overflow: visible;" x="479.28571428571433" y="242.796875" width="93.85714285714278" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 94px; height: 20px;">25 Ap</span></foreignObject>
-                  <foreignObject style="overflow: visible;" x="573.1428571428571" y="242.796875" width="93.85714285714289" height="20">
-                    <span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 94px; height: 20px;">26 Ap</span>
-                  </foreignObject></g>
-                </svg>
-              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -220,7 +180,7 @@
               <div class="card border-light shadow-sm">
                 <div class="card-body">
                   <h2 class="h5">Otro contador</h2>
-                  <h3 class="h2 mb-1">367,567</h3>
+                  <h3 class="h2 mb-1">0367,567</h3>
                   <div class="small mb-3">Enero 1 - Abril 1, <span class="icon icon-small">
                     <span class="fas fa-globe-europe"></span>
                   </span> Actividades</div>

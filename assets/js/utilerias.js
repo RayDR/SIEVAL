@@ -348,6 +348,9 @@ function fu_modal(titulo, contenido = "", botones = "", anchura = "xl", tipo = '
   var contenedor  = $("#modales"),
       modal       = $("#modal");
       
+  if ( !titulo || !contenido && ( titulo == '' && contenido == '') )
+    modal.modal('hide');
+      
   if ( titulo == "ERR"){
     titulo    = "ERROR NO CONTROLADO";
     contenido = (contenido != "")? contenido: "Ha ocurrido un error al intentar ingresar al sistema, por favor, comunique al administrador del sistema.";
