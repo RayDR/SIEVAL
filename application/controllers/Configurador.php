@@ -130,7 +130,7 @@ class Configurador extends CI_Controller {
                   'view'      => 'configurador/proyectos/modal'
                );
                break;
-            case 'programa_presupuestario':
+            case 'programas':
                $titulo = 'Registrar Programa Presupuestario';
                $data   = array(
                   'titulo'    => $titulo  . ' | ' . EMPRESA,
@@ -149,11 +149,14 @@ class Configurador extends CI_Controller {
                $json   = array('exito' => FALSE, 'error' => 'Se ha recibido una opción inválida');
                break;
          }
+         // Abrir la vista
+         if ( $opcion ){
+            $json['html'] = $this->load->view($data['view'], $data, TRUE);
+         }
       } else 
          $json  = array('exito' => FALSE, 'error' => 'Opción inválida.');
       
-      if ( !$json['exito'] )
-         redirect(base_url(), 'refresh');
+      return print(json_encode($json));
    }
 
    /*------------------------------

@@ -7,7 +7,7 @@ $(document).ready(function($) {
     loader(false);
     activar_menu_desplegable();
 
-    $(`${dtNombre} tbody`).on('click', 'tr td', fcModal); 
+    $(`${dtNombre} tbody`).on('click', 'tr td', fcModalDetalles); 
 });
 
 function finicia_datatable(){
@@ -64,6 +64,22 @@ function finicia_datatable(){
     });
 }
 
-function fcModal(){
-    
+function fcModalDetalles(){
+    var dtData = dt.row($(this).closest('tr')).data();
+    if ( dtData ){
+        $.post(url('Configurador/modal/proyecto', true, false), {proyecto_id: dtData.proyecto_actividad_id}, function(data, textStatus, xhr) {
+            loader();
+        }).then(function(data){
+            return JSON.parse(data);
+        }).then(function(data){
+            if ( data.exito ){
+                fu_modal(`<span class="text-white">Proyecto: <b>${dtData.proyecto_nombre}</b></span>`, data.html);
+            } else 
+                fu_notificacion((data.error)? data.error : 'Falló la operación','danger');
+            loader(false);
+        }).catch(function(error){
+            loader(false);
+            fu_notificacion('Falló al obtener la respuesta del servidor. Contacte al administrador.', 'danger');
+        });
+    }
 }

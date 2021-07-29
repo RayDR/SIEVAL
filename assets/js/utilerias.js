@@ -378,6 +378,11 @@ function fu_modal(titulo, contenido = "", botones = "", anchura = "xl", tipo = '
   contenedor  = $("#modales"),
   modal       = $("#modal");
 
+  if ( titulo )
+    $('.modal-header').prepend(titulo);
+  else 
+    $('.modal-header').hide();
+
   if ( contenedor ){
     if ( anchura == "lg" ){
       $("#modal .modal-dialog").removeClass('modal-xl');
