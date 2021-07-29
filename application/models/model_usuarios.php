@@ -11,6 +11,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_usuarios extends CI_Model {
 
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('model_actividades');
+        $this->load->model('model_usuarios');
+        $this->load->model('model_catalogos');
+        $this->load->model('model_proyectos');       
+    }
+    
+
     /**
         * Obtener el listado de usuarios
         *
@@ -44,6 +55,38 @@ class Model_usuarios extends CI_Model {
                 else
                     return $usuarios->row_array();
             }
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    /**
+        * Obtener usuario por id
+        *
+        * @access public
+        * @param  integer $usuario_id       ID
+        * @param  array   $filtros          filtros a iterar
+        * @param  boolean $tipo_retorno     Modo de retonro: 
+        *                                       TRUE - Objeto
+        *                                       FALSE - Array
+        * @return usuarios
+    */
+    public function get_usuario($usuario_id, $filtros = NULL, $tipo_retorno = TRUE){
+        try {           
+            if ( is_array($filtros) ){
+                foreach ($filtros as $key => $filtro) {
+                    $this->db->where($key, $filtro);
+                }
+            } else 
+                $this->db->where('estatus', 1);            
+            
+            $this->db->where('usuario_id', $usuario_id);            
+            $usuarios = $this->db->get('vw_usuarios');
+
+            if ( $tipo_retorno )
+                return $usuarios->row();
+            else
+                return $usuarios->row_array();
         } catch (Exception $e) {
             return [];
         }

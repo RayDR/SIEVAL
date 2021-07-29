@@ -124,25 +124,46 @@ class Configurador extends CI_Controller {
       if ( is_string($opcion) ){
          switch ($opcion) {
             case 'proyecto':
-               $titulo = 'Registrar Proyecto';
-               $data   = array(
-                  'titulo'    => $titulo  . ' | ' . EMPRESA,
-                  'view'      => 'configurador/proyectos/modal'
-               );
+               $titulo = 'Proyecto';
+               $proyecto_id = $this->input->post('proyecto_id');
+               if ( $proyecto_id ){
+                  $data   = array(
+                     'titulo'    => $titulo  . ' | ' . EMPRESA,
+                     'view'      => 'configurador/proyectos/modal',
+                     'proyecto'  => $this->model_proyectos->get_proyecto($proyecto_id)
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Proyecto');
+               }
                break;
             case 'programas':
-               $titulo = 'Registrar Programa Presupuestario';
-               $data   = array(
-                  'titulo'    => $titulo  . ' | ' . EMPRESA,
-                  'view'      => 'configurador/programas/modal'
-               );
+               $titulo = 'Programa Presupuestario';
+               $programa_id = $this->input->post('proyecto_id');
+               if ( $programa_id ){
+                  $data   = array(
+                     'titulo'    => $titulo  . ' | ' . EMPRESA,
+                     'view'      => 'configurador/programas/modal',
+                     'programa'  => $this->model_catalogos->get_programas(['programa_presupuestario_id' => $programa_id])
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Programa Presupuestal');
+               }
                break;
             case 'usuario':
-               $titulo = 'Registrar Usuario';
-               $data   = array(
-                  'titulo'    => $titulo  . ' | ' . EMPRESA,
-                  'view'      => 'configurador/usuarios/modal'
-               );
+               $titulo = 'Usuario';
+               $usuario_id = $this->input->post('usuario_id');
+               if ( $usuario_id ){
+                  $data   = array(
+                     'titulo'    => $titulo  . ' | ' . EMPRESA,
+                     'view'      => 'configurador/usuarios/modal',
+                     'usuario'   => $this->model_usuarios->get_usuario($usuario_id)
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Usuario');
+               }
                break;
             default:
                $opcion = NULL;

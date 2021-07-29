@@ -33,32 +33,35 @@ function fguardar(e){
         errores = '',
         datos   = {};
 
-    try {
-        // Validar valores
-        inputs.forEach( function(input, index) {
-            let valor           = $(`#${input.nombre}`).val();
-            datos[input.nombre] = valor;
-            if( (valor == '' || valor == null || valor == undefined) && $(`#${input.nombre}`).prop('required') )
-                errores += `El campo <a href="#${input.nombre}">${input.texto}</a> es requerido.<br>`;            
-        });
-        if ( ! errores ){
-            respuesta   = fu_json_query(
-                url('Configurador/registra_proyecto', true, false),
-                datos 
-            );
-            if ( respuesta.exito ){
+    // Validar valores
+    inputs.forEach( function(input, index) {
+        let valor           = $(`#${input.nombre}`).val();
+        datos[input.nombre] = valor;
+        if( (valor == '' || valor == null || valor == undefined) && $(`#${input.nombre}`).prop('required') )
+            errores += `El campo <a href="#${input.nombre}">${input.texto}</a> es requerido.<br>`;            
+    });
+    if ( ! errores ){
+        $.post(url('Configurador/registra_proyecto'), datos, function(data, textStatus, xhr) {
+            loader();
+        }).then(function(data){
+            return JSON.parse(data);
+        }).then(function(data){
+            if ( data.exito ){
                 fu_notificacion('Se ha registrado el proyecto exitosamente.', 'success');
                 window.location.replace( url('Configurador/proyectos') );
-            } else
-                fu_notificacion(respuesta.mensaje, 'danger');
-        } else {
-            fu_alerta(errores, 'danger');
-            fu_notificacion('Existen campos pendientes por llenar.', 'danger');    
-        }
-    } catch(e) {
-        fu_alerta('Ha ocurrido un error al guardar el proyecto, intentelo más tarde.', 'danger');
+                $('#guardar').html('');
+            } else{
+                fu_notificacion(data.mensaje, 'danger');
+                $('#guardar').html(`Guardar`);
+            }
+            loader(false);
+        }).catch(function(error){
+            loader(false);
+            $('#guardar').html(`Reintentar`);
+            fu_notificacion('Falló al obtener la respuesta del servidor. Contacte al administrador.', 'danger');
+        });        
+    } else {
+        fu_alerta(errores, 'danger');
+        fu_notificacion('Existen campos pendientes por llenar.', 'danger');
     }
-
-    $('#guardar').prop({disabled: false});
-    $('#guardar').html(`Guardar`);
 }

@@ -25,45 +25,48 @@ function fcu_guardar(e){
    if ( inputs ){
       e.preventDefault();
       $('#guardar').html(`
-        <button class="btn btn-primary" type="button" disabled>
+         <button class="btn btn-primary" type="button" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             <span class="ms-1">Registrando...</span>
-        </button>`);
+         </button>`);
 
       var respuesta,
-        errores = '',
-        datos   = {};
+          errores = '',
+          datos   = {};
 
-      try {
-         // Validar valores
-         inputs.forEach( function(input, index) {
-            let valor           = $(`#${input.nombre}`).val();
-            datos[input.nombre] = valor;
-            if( (valor == '' || valor == null || valor == undefined) && $(`#${input.nombre}`).prop('required') )
-                errores += `El campo <a href="#${input.nombre}">${input.texto}</a> es requerido.<br>`;            
-         });
-         if ( ! errores ){
-            respuesta = $.post( url('Configurador/registra_usuario'), datos, function(data, textStatus, xhr) {
-               loader();
-            }).then(function(data){
-               return JSON.parse(data);
-            }).then(function(data){
-               if ( data.exito ){
-                  fu_notificacion('Se ha registrado el proyecto exitosamente.', 'success');
-                  window.location.replace( url('Configurador/usuarios') );
-               } else
-                  fu_notificacion((data.error)? data.error: 'Operación fallida.', 'danger');
-               loader(false);
-            }).catch(function(error){
-               loader(false);
-               fu_notificacion('No se pudo obtener respueta del servidor. Por favor comuniquelo al administrador.<br>' + `<b>${error}</b>`, 'danger');
-            });
-         } else {
-            fu_alerta(errores, 'danger');
-            fu_notificacion('Existen campos pendientes por llenar.', 'danger');    
-        }
-      } catch(e) {
-        fu_alerta('Ha ocurrido un error al guardar el proyecto, intentelo más tarde.', 'danger');
+      inputs.forEach( function(input, index) {
+         let valor           = $(`#${input.nombre}`).val();
+         datos[input.nombre] = valor;
+         if( (valor == '' || valor == null || valor == undefined) && $(`#${input.nombre}`).prop('required') )
+            errores += `El campo <a href="#${input.nombre}">${input.texto}</a> es requerido.<br>`;
+         if ( input.nombre == 'nombres' || input.nombre == 'primer_apellido' || input.nombre == 'segundo_apellido' )
+            datos[input.nombre] = valor.toUpperCase;
+      });
+
+      // Validar valores
+      if ( ! errores ){
+         $.post(url('Configurador/registra_usuario'), datos, function(data, textStatus, xhr) {
+            loader();
+         }).then(function(data){
+            return JSON.parse(data);
+         }).then(function(data){
+            if ( data.exito ){
+               fu_notificacion('Registro exitoso.', 'success');
+               window.location.replace( url('Configurador/proyectos') );
+               $('#guardar').html('');
+            } else{
+               fu_notificacion(data.mensaje, 'danger');
+               $('#guardar').html(`Guardar`);
+            }
+            loader(false);
+         }).catch(function(error){
+            loader(false);
+            $('#guardar').html(`Reintentar`);
+            fu_notificacion('Falló al obtener la respuesta del servidor. Contacte al administrador.', 'danger');
+         });        
+      } else {
+         fu_alerta(errores, 'danger');
+         fu_notificacion('Existen campos pendientes por llenar.', 'danger');
       }
 
       $('#guardar').prop({disabled: false});

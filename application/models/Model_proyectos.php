@@ -58,7 +58,7 @@ class Model_proyectos extends CI_Model {
                     $this->db->where($key, $filtro);
                 }
             }
-            $this->db->where('proyecto_id', $proyecto_id);
+            $this->db->where('proyecto_actividad_id', $proyecto_id);
             $proyectos = $this->db->get('vw_proyectos');
 
             if ( $tipo_retorno )
