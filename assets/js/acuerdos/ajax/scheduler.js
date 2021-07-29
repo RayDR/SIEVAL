@@ -14,7 +14,7 @@ function finiciar_scheduler(){
   acuerdos.forEach( function(acuerdo, index) {
     let _endDate = ( acuerdo.estatus_seguimiento == 'Terminado')? acuerdo.fecha_actualizacion_seguimiento : moment(acuerdo.fecha_creacion_acuerdo).add(acuerdo.fecha_respuesta, 'days');
     datos.push({
-      disabled  : true,
+      disabled  : false,
       content   : `${acuerdo.estatus_seguimiento}: ${acuerdo.asunto}`,
       startDate : new Date(acuerdo.fecha_creacion_acuerdo),
       endDate   : new Date(_endDate)

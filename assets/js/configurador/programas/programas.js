@@ -3,8 +3,10 @@ var dt,
     dtAjaxUrl    = 'Configurador/datatable_programas';
 
 $(document).ready(function($) {
+	
 	finicia_datatable();
     loader(false);
+    activar_menu_desplegable();
 
     $(`${dtNombre} tbody`).on('click', 'tr td', fcModalDetalles); 
 });

@@ -24,13 +24,6 @@
                     <li class="list-group-item d-flex align-items-center justify-content-end px-0 bg-transparent">
                         <div class="nav-wrapper">
                             <ul class="nav nav-pills nav-pill-circle flex-column flex-md-row">
-                                <li class="nav-item">
-                                    <a id="editar" class="nav-link" aria-label="Tab Editar" data-bs-toggle="tooltip" title="Editar">
-                                        <span class="nav-link-icon d-block">
-                                            <span class="fas fa-pencil-alt fa-2x"></span>
-                                        </span>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </li>
@@ -64,3 +57,32 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function($) {
+   finicia_select2();
+   
+   $('#guardar').click(fmConfEditar);
+});
+
+function finicia_select2(){
+    // Estilizar Select2
+    $('.form-select').select2();
+    // Configurar Select2 de Áreas
+    var datos_select2 = fu_json_query(url('Configurador/get_areas_select2', true, false));
+    if ( datos_select2 ){
+        if ( datos_select2.exito ){
+            $('.areas_select2').select2({
+                data: datos_select2.result,
+                pagination: {
+                    'more': true
+                }
+            });
+        }
+    }
+}
+
+function fmConfEditar(){
+    
+}
+</script>

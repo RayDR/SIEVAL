@@ -83,3 +83,20 @@ function fcModalDetalles(){
         });
     }
 }
+
+function finicia_select2(){
+    // Estilizar Select2
+    $('.form-select').select2();
+    // Configurar Select2 de Áreas
+    var datos_select2 = fu_json_query(url('Configurador/get_areas_select2', true, false));
+    if ( datos_select2 ){
+        if ( datos_select2.exito ){
+            $('.areas_select2').select2({
+                data: datos_select2.result,
+                pagination: {
+                    'more': true
+                }
+            });
+        }
+    }
+}

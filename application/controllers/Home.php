@@ -28,10 +28,13 @@ class Home extends CI_Controller {
             redirect(base_url('index.php/Home/login'),'refresh');
             print(json_encode(array('estatus' => 'sess_expired', 'mensaje' => 'Su sesión ha caducado. Por favor, recargue la página.')));
         }
-
+        
+        $this->load->model('model_estadistica');
+        
         $data = array(
             'titulo'    => 'Home ' . APLICACION  . ' | ' . EMPRESA,
             'menu'      => $this->model_catalogos->get_menus(),
+            'totales'   => $this->model_estadistica->get_totales(),
             'view'      => 'index'
         );
         $this->load->view( RUTA_TEMA . 'body', $data, FALSE );

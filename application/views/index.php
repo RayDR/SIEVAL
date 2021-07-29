@@ -36,7 +36,7 @@
         <div class="card border-light shadow-sm">
           <div class="card-body">
             <h2 class="h5">Actividades</h2>
-            <h3 id="counter-actividades" class="h2 mb-1">0</h3>
+            <h3 id="counter-actividades" class="h2 mb-1"><?= $totales['actividades'] ?></h3>
             <div class="small mb-3">
               <span class="icon icon-small">
                 <span class="far fa-calendar-alt"></span>
@@ -49,7 +49,7 @@
         <div class="card border-light shadow-sm">
           <div class="card-body">
             <h2 class="h5">Preproyectos</h2>
-            <h3 id="counter-preproyectos" class="h2 mb-1">0</h3>
+            <h3 id="counter-preproyectos" class="h2 mb-1"><?= $totales['preproyectos'] ?></h3>
             <div class="small mb-3">
               <span class="icon icon-small">
                 <span class="fas fa-tasks"></span>
@@ -63,7 +63,7 @@
         <div class="card border-light shadow-sm">
           <div class="card-body">
             <h2 class="h5">Acuerdos</h2>
-            <h3 id="counter-acuerdos" class="h2 mb-1">0</h3>
+            <h3 id="counter-acuerdos" class="h2 mb-1"><?= $totales['acuerdos'] ?></h3>
             <div class="small mb-3">
               <span class="icon icon-small">
                 <span class="far fa-handshake"></span>
@@ -75,61 +75,6 @@
       </div>
     </div>
     <!-- /Contadores por Módulo -->
-    <!-- Gráficas de Finanzas -->
-    <div class="row">
-      <div class="col-12 col-xl-6 mb-4">
-        <div class="card border-light shadow-sm">
-          <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
-            <div class="d-block">
-              <h2 class="h5">Progreso de Actividades</h2>
-              <div class="d-flex">
-              </div>
-            </div>
-          </div>
-          <div class="card-body p-2">
-            <div class="ct-chart-app-ranking ct-major-tenth ct-series-a">
-              <div class="chartist-tooltip" style="top: -22px; left: 628px;">
-                <span class="chartist-tooltip-value">10</span>
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-xl-6 mb-4">
-          <div class="card border-light shadow-sm">
-            <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
-              <div class="d-block">
-                <h2 class="h5">Progreso de Preproyectos</h2>
-                <div class="d-flex">
-                  <div class="d-flex align-items-center me-3 lh-130">
-                    <span class="shape-xs rounded-circle bg-tertiary me-2"></span> 
-                    <span class="fw-normal small">Con Acciones</span>
-                  </div>
-                  <div class="d-flex align-items-center me-3 lh-130">
-                    <span class="shape-xs rounded-circle bg-secondary me-2"></span> 
-                    <span class="fw-normal small">Con Avances</span>
-                  </div>
-                  <div class="d-flex align-items-center me-3 lh-130">
-                    <span class="shape-xs rounded-circle bg-dark me-2"></span> 
-                    <span class="fw-normal small">Cumplidos</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-body p-2">
-              <div class="ct-chart-app-ranking ct-major-tenth ct-series-a">
-                <div class="chartist-tooltip" style="top: -22px; left: 628px;">
-                  <span class="chartist-tooltip-value">10</span>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /Gráficas de Finanzas -->
   </div>
   <!-- /Sección Estadística -->
 </div>
