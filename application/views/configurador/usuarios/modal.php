@@ -25,7 +25,7 @@
                         <div class="nav-wrapper">
                             <ul class="nav nav-pills nav-pill-circle flex-column flex-md-row">
                                 <li class="nav-item">
-                                    <a id="editar" class="nav-link" aria-label="Tab Editar" href="#editar-actividad" data-bs-toggle="tooltip" title="Editar Actividad">
+                                    <a id="editar" class="nav-link" aria-label="Tab Editar" data-bs-toggle="tooltip" title="Editar">
                                         <span class="nav-link-icon d-block">
                                             <span class="fas fa-pencil-alt fa-2x"></span>
                                         </span>
