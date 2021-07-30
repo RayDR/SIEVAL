@@ -252,7 +252,15 @@ class Actividades extends CI_Controller {
 
     // Datatable
     public function datatable_actividades(){
-        return print(json_encode( $this->model_actividades->get_actividades() ));
+        $condicion = array();
+        if ( $this->session->userdata('tuser') != 1 ){
+            $where       = array('combinacion_area_id' => $this->session->userdata('combinacion_area')); 
+            $combinacion = $this->model_catalogos->get_areas( $where );
+            if ( $combinacion ){
+            } else
+                return print(json_encode([]));
+        } 
+        return print(json_encode( $this->model_actividades->get_actividades($condicion) ));
     }
 
     // Función de Guardado

@@ -1,4 +1,4 @@
-CREATE OR REPLACE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sipat`.`vw_proyecto_actividades` AS SELECT
+CREATE OR REPLACE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sieval`.`vw_proyecto_actividades` AS SELECT
    `act`.`actividad_id` AS `actividad_id`,
    `act`.`descripcion` AS `actividad`,
    `act`.`beneficiado_id` AS `beneficiado_id`,

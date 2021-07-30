@@ -13,7 +13,7 @@
     }
 </style>
 
-<div class="container">
+<form id="fceUsuario" class="container formulario">
     <div class="card card-body shadow-sm mb-4 mb-lg-0 bg-transparent">
         <div class="row d-flex justify-content-between">
             <div class="col my-auto">
@@ -45,6 +45,14 @@
                     <label for="segundo_apellido">Segundo Apellido</label>
                     <input type="text" name="segundo_apellido" id="segundo_apellido" class="form-control" value="<?= $usuario->segundo_apellido ?>">
                 </div>
+                <div class="col-lg-6 mb-2">
+                    <label for="sexo">Sexo</label>
+                    <select id="sexo" name="sexo" class="form-control">
+                        <option disabled selected>Seleccione una opción</option>
+                        <option value="H" <?= ($usuario->sexo == 'H')? 'selected' : '' ?>>HOMBRE</option>
+                        <option value="M" <?= ($usuario->sexo == 'M')? 'selected' : '' ?>>MUJER</option>
+                    </select>
+                </div>
             </div>
             <div class="row">
                 <div class="col-12 mb-3">
@@ -53,15 +61,38 @@
                         <option selected disabled>Seleccione una opción</option>
                     </select>
                 </div>
+                <div class="col-lg-6 mb-2">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria" class="form-control">
+                        <option disabled selected>Seleccione una opción</option>
+                        <?php foreach ($categorias as $key => $categoria): ?>
+                        <option value="<?= $categoria->categoria_id ?>" <?= ($usuario->categoria_id == $categoria->categoria_id)? 'selected' : '' ?>><?= $categoria->descripcion ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
             </div>
+            <div class="row mb-3">
+                <div class="col-lg-6 mb-2">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="text" name="correo" id="correo" class="form-control" value="<?= $usuario->correo ?>">
+                </div>
+                <div class="col-lg-6 mb-2">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" name="telefono" id="telefono" class="form-control" value="<?= $usuario->telefono ?>">
+                </div>
+            </div>
+
+            <input id="guardar" type="submit" value="Editar" class="btn btn-primary my-3" style="display: none;">
         </div>
     </div>
-</div>
+</form>
 
 <script type="text/javascript">
 $(document).ready(function($) {
    finicia_select2();
-   
+   $('.formulario').change(function(event) {
+       $('#guardar').fadeIn('slow');
+   });
    $('#guardar').click(fmConfEditar);
 });
 

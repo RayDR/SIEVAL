@@ -144,6 +144,10 @@ class Configurador extends CI_Controller {
                   $data   = array(
                      'titulo'    => $titulo  . ' | ' . EMPRESA,
                      'view'      => 'configurador/programas/modal',
+                     'programas' => $this->model_catalogos->get_programas(),
+                     'l_accion'  => $this->model_catalogos->get_lineas_accion(),
+                     'f_financia'=> $this->model_catalogos->get_fuentes_financiamiento(),
+                     'g_benef'   => $this->model_catalogos->get_grupos_beneficiados(),
                      'programa'  => $this->model_catalogos->get_programas(['programa_presupuestario_id' => $programa_id])
                   );
                } else {
@@ -157,8 +161,75 @@ class Configurador extends CI_Controller {
                if ( $usuario_id ){
                   $data   = array(
                      'titulo'    => $titulo  . ' | ' . EMPRESA,
+                     'categorias'=> $this->model_catalogos->get_categorias(),
                      'view'      => 'configurador/usuarios/modal',
                      'usuario'   => $this->model_usuarios->get_usuario($usuario_id)
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Usuario');
+               }
+               break;
+            default:
+               $opcion = NULL;
+               $json   = array('exito' => FALSE, 'error' => 'Se ha recibido una opción inválida');
+               break;
+         }
+         // Abrir la vista
+         if ( $opcion ){
+            $json['html'] = $this->load->view($data['view'], $data, TRUE);
+         }
+      } else 
+         $json  = array('exito' => FALSE, 'error' => 'Opción inválida.');
+      
+      return print(json_encode($json));
+   }
+
+   public function editar($opcion){
+      $json  = array('exito' => TRUE);
+      if ( is_string($opcion) ){
+         switch ($opcion) {
+            case 'proyecto':
+               $titulo = 'Editar Proyecto';
+               $proyecto_id = $this->input->post('proyecto_id');
+               if ( $proyecto_id ){
+                  // Data a editar
+                  $datos  = array(
+                     'proyecto_nombre'       => $proyecto_nombre,
+                     'techo_financiero'      => $techo_financiero,
+                     'combinacion_area'      => ($area_responsable)? $area_responsable : null,
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Proyecto');
+               }
+               break;
+            case 'programas':
+               $titulo = 'Editar Programa Presupuestario';
+               $programa_id = $this->input->post('proyecto_id');
+               if ( $programa_id ){
+                  // Data a editar
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Programa Presupuestal');
+               }
+               break;
+            case 'usuario':
+               $titulo = 'Editar Usuario';
+               $usuario_id = $this->input->post('usuario_id');
+               if ( $usuario_id ){
+                  // Data a editar
+                  $datos = array(
+                     'area_usuaria'       =>  $this->input->post('area_usuaria'),
+                     'nombres'            =>  $this->input->post('nombres'),
+                     'primer_apellido'    =>  $this->input->post('primer_apellido'),
+                     'segundo_apellido'   =>  $this->input->post('segundo_apellido'),
+                     'categoria'          =>  $this->input->post('categoria'),
+                     'sexo'               =>  $this->input->post('sexo'),
+                     'correo'             =>  $this->input->post('correo'),
+                     'telefono'           =>  $this->input->post('telefono'),
+                     'usuario'            =>  $this->input->post('usuario'),
+                     'cve_cuenta'         =>  $this->input->post('usuario'),
                   );
                } else {
                   $opcion  = NULL;
