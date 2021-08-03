@@ -89,7 +89,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="my-1 me-2" for="unidad_medida">Unidad de Análisis</label>
-                            <select class="form-select" id="unidad_medida" aria-label="Default select example">
+                            <select class="form-select" id="unidad_medida" aria-label="Unidades de Análisis">
                                 <option selected disabled>Seleccione una opción</option>
                                 <?php foreach ($u_medida as $key => $um): ?>
                                 <option value="<?= $um->unidad_medida_id ?>"><?= $um->descripcion ?> (<?= $um->cve_medida ?>)</option>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="my-1 me-2" for="tipo_medicion">Tipo de Medición</label>
-                            <select class="form-select" id="tipo_medicion" aria-label="Default select example">
+                            <select class="form-select" id="tipo_medicion" aria-label="Tipos de Medición">
                                 <option selected disabled>Seleccione una opción</option>
                                 <?php foreach ($mediciones as $key => $medicion): ?>
                                 <option value="<?= $medicion->medicion_id ?>"><?= $medicion->descripcion ?></option>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="my-1 me-2" for="grupo_beneficiado">Grupo Beneficiado</label>
-                            <select class="form-select" id="grupo_beneficiado" aria-label="Default select example">
+                            <select class="form-select" id="grupo_beneficiado" aria-label="Grupos Beneficiados">
                                 <option selected disabled>Seleccione una opción</option>
                                 <?php foreach ($g_benef as $key => $grupo): ?>
                                 <option value="<?= $grupo->beneficiado_id ?>"><?= $grupo->descripcion ?></option>
@@ -117,6 +117,15 @@
                         <div class="col-md-6 mb-3">
                             <label for="cantidad_beneficiarios">Población Objetivo</label>
                             <input type="number" class="form-control" id="cantidad_beneficiarios" value="0" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="indicador">Indicador</label>
+                            <select class="form-select" id="indicador" aria-label="Indicadores">
+                                <option selected disabled>Seleccione una opción</option>
+                                <option value="0">Promedio diario de consultas por médico general y familiar</option>
+                                <option value="1">Cobertura en atención de médicos generales y familiares en las unidades médicas de primer nivel</option>
+                                <option value="2">Indicador de 5 puntos</option>
+                            </select>
                         </div>
                     </div>
                     <!-- DATOS DE ACTIVIDAD -->

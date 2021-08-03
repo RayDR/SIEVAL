@@ -96,8 +96,11 @@
                 <div class="card shadow-sm">
                     <div class="card-header">
                         <h3 class="h5 mb-0 text-primary">Reportes de Actividad</h3>
+
+                        <?php if ( $encabezado->programado_fisico != 0 || $encabezado->programado_financiero != 0 ): ?>
                         <li class="list-group-item d-flex align-items-center justify-content-center px-0 bg-transparent">
                             <div class="accordion my-3 w-100" id="reportes">
+                                <?php if ( $encabezado->programado_fisico != 0 ): ?>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="encabezado-rfisico">
                                         <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#reporte_fisico" aria-expanded="false" aria-controls="reporte_fisico">
@@ -108,80 +111,82 @@
                                         <div class="accordion-body">
                                             <div class="card-body">
                                                 <div class="row">
-                                                <?php foreach ($detalles as $key => $detalle): ?>
-                                                    <?php if( $detalle->programado_fisico != 0 || $detalle->realizado_fisico != 0  ): ?>
-                                                        <?php if( $key == 6 ): ?>
-                                                            </div> <!-- Fin de lista -->
-                                                        </div> <!-- Fin de columna -->
-                                                        <?php endif ?>    
-                                                        <?php if( $key == 0 || $key == 6 ): ?>
-                                                        <div class="col-md-6">
-                                                            <div class="list-group list-group-flush list-group-timeline">
-                                                        <?php endif ?>
-                                                            <div class="list-group-item">
-                                                                <?php 
-                                                                    $reporteFisico      = '';
-                                                                    $color = 'bg-dark';
-                                                                    if ( !$detalle->realizado_fisico ){
-                                                                        $reporteFisico = 'SIN REPORTE';
+                                                    <?php foreach ($detalles as $key => $detalle): ?>
+                                                        <?php if( $detalle->programado_fisico != 0 || $detalle->realizado_fisico != 0  ): ?>
+                                                            <?php if( $key == 6 ): ?>
+                                                                </div> <!-- Fin de lista -->
+                                                            </div> <!-- Fin de columna -->
+                                                            <?php endif ?>    
+                                                            <?php if( $key == 0 || $key == 6 ): ?>
+                                                            <div class="col-md-6">
+                                                                <div class="list-group list-group-flush list-group-timeline">
+                                                            <?php endif ?>
+                                                                <div class="list-group-item">
+                                                                    <?php 
+                                                                        $reporteFisico      = '';
                                                                         $color = 'bg-dark';
-                                                                    } else if ( $detalle->realizado_fisico == $detalle->programado_fisico ){
-                                                                        $reporteFisico = 'OBJETIVO ALCANZADO';
-                                                                        $color = 'bg-success';
-                                                                    } else if ( $detalle->realizado_fisico > $detalle->programado_fisico ){
-                                                                        $reporteFisico = 'OBJETIVO SUPERADO';
-                                                                        $color = 'bg-success';
-                                                                    } else if ( $detalle->realizado_fisico == 0 ){
-                                                                        $reporteFisico = 'NO SE REALIZÓ NINGUNA ACTIVIDAD';
-                                                                        $color = 'bg-warning';
-                                                                    } else if ( $detalle->realizado_fisico < $detalle->programado_fisico ){
-                                                                        $reporteFisico = 'NO SE ALCANZÓ EL OBJETIVO';
-                                                                        $color = 'bg-warning';
-                                                                    } else {
-                                                                        $reporteFisico = 'SIN REPORTE';
-                                                                        $color = 'bg-dark';
-                                                                    }
-                                                                ?>
-                                                                <div class="row">
-                                                                    <div class="col-auto">
-                                                                        <div class="icon icon-shape icon-sm <?= $color ?> text-white rounded-circle">
-                                                                            <i class="far fa-calendar-check"></i>
+                                                                        if ( !$detalle->realizado_fisico ){
+                                                                            $reporteFisico = 'SIN REPORTE';
+                                                                            $color = 'bg-dark';
+                                                                        } else if ( $detalle->realizado_fisico == $detalle->programado_fisico ){
+                                                                            $reporteFisico = 'OBJETIVO ALCANZADO';
+                                                                            $color = 'bg-success';
+                                                                        } else if ( $detalle->realizado_fisico > $detalle->programado_fisico ){
+                                                                            $reporteFisico = 'OBJETIVO SUPERADO';
+                                                                            $color = 'bg-success';
+                                                                        } else if ( $detalle->realizado_fisico == 0 ){
+                                                                            $reporteFisico = 'NO SE REALIZÓ NINGUNA ACTIVIDAD';
+                                                                            $color = 'bg-warning';
+                                                                        } else if ( $detalle->realizado_fisico < $detalle->programado_fisico ){
+                                                                            $reporteFisico = 'NO SE ALCANZÓ EL OBJETIVO';
+                                                                            $color = 'bg-warning';
+                                                                        } else {
+                                                                            $reporteFisico = 'SIN REPORTE';
+                                                                            $color = 'bg-dark';
+                                                                        }
+                                                                    ?>
+                                                                    <div class="row">
+                                                                        <div class="col-auto">
+                                                                            <div class="icon icon-shape icon-sm <?= $color ?> text-white rounded-circle">
+                                                                                <i class="far fa-calendar-check"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col ms-n2">
+                                                                            <span class="badge <?= $color ?> py-1 mb-2">
+                                                                                Reporte Mensual: 
+                                                                                <b class="text-uppercase">
+                                                                                    <?= strftime( "%B", DateTime::createFromFormat('!m', $detalle->mes)->getTimestamp() ); ?>
+                                                                                </b>
+                                                                            </span>
+                                                                            <p class="text-dark fw-bold mb-1">
+                                                                                <?php if ( $detalle->realizado_fisico ): ?>
+                                                                                Trabajo físico realizado: <?= $detalle->realizado_fisico ?>
+                                                                                <?php endif ?>
+                                                                                <span class="badge text-dark"><?= $reporteFisico ?></span>
+                                                                            </p>
+                                                                            <?php if ( $detalle->descripcion ): ?>
+                                                                            <small class="text-primary">
+                                                                                Detalle de actividad:
+                                                                                <span contenteditable="true"><?= $detalle->descripcion ?></span>
+                                                                            </small>
+                                                                            <?php endif ?>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col ms-n2">
-                                                                        <span class="badge <?= $color ?> py-1 mb-2">
-                                                                            Reporte Mensual: 
-                                                                            <b class="text-uppercase">
-                                                                                <?= strftime( "%B", DateTime::createFromFormat('!m', $detalle->mes)->getTimestamp() ); ?>
-                                                                            </b>
-                                                                        </span>
-                                                                        <p class="text-dark fw-bold mb-1">
-                                                                            <?php if ( $detalle->realizado_fisico ): ?>
-                                                                            Trabajo físico realizado: <?= $detalle->realizado_fisico ?>
-                                                                            <?php endif ?>
-                                                                            <span class="badge text-dark"><?= $reporteFisico ?></span>
-                                                                        </p>
-                                                                        <?php if ( $detalle->descripcion ): ?>
-                                                                        <small class="text-primary">
-                                                                            Detalle de actividad:
-                                                                            <span contenteditable="true"><?= $detalle->descripcion ?></span>
-                                                                        </small>
-                                                                        <?php endif ?>
-                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                    <?php endif ?>
-                                                    <?php if( $key == count($detalles) - 1 ): ?>
-                                                        </div> <!-- Fin de lista -->
-                                                    </div> <!-- Fin de columna --> 
-                                                    <!-- Fin general -->
-                                                    <?php endif ?>
-                                                <?php endforeach ?>
+                                                        <?php endif ?>
+                                                        <?php if( $key == count($detalles) - 1 ): ?>
+                                                            </div> <!-- Fin de lista -->
+                                                        </div> <!-- Fin de columna --> 
+                                                        <!-- Fin general -->
+                                                        <?php endif ?>
+                                                    <?php endforeach ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <?php endif ?>
+                                <?php if ( $encabezado->programado_financiero != 0 ): ?>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="encabezado-rfinanciero">
                                         <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#reporte_financiero" aria-expanded="false" aria-controls="reporte_financiero">
@@ -266,8 +271,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php endif ?>
                             </div>
                         </li>
+                        <?php else: ?>
+                            <p class="lead text-dark mt-2">No hay actividades para reportar. Modifique primero la programación de la actividad.</p>
+                        <?php endif ?>
+
                     </div>
                 </div>
             </div>
