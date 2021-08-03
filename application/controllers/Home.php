@@ -40,10 +40,11 @@ class Home extends CI_Controller {
         $this->load->model('model_estadistica');
         
         $data = array(
-            'titulo'    => 'Home ' . APLICACION  . ' | ' . EMPRESA,
-            'menu'      => $this->model_catalogos->get_menus(),
-            'totales'   => $this->model_estadistica->get_totales(),
-            'view'      => 'index'
+            'titulo'        => 'Home ' . APLICACION  . ' | ' . EMPRESA,
+            'menu'          => $this->model_catalogos->get_menus(),
+            'totales'       => $this->model_estadistica->get_totales(),
+            'direcciones'   => $this->model_catalogos->get_direcciones(),
+            'view'          => 'index'
         );
         $this->load->view( RUTA_TEMA . 'body', $data, FALSE );
     }

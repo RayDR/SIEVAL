@@ -22,7 +22,10 @@
       <div class="mb-4">
         <label class="my-1 me-2" for="filtro-area">Dirección</label>
         <select class="form-select" id="filtro-area" aria-label="Filtro de dirección/área">
-          <option selected="selected">Todos</option>
+          <option selected="selected">Todas</option>
+          <?php foreach ($direcciones as $key => $direccion): ?>
+          <option value="<?= $direccion->direccion_id ?>"><?= $direccion->descripcion ?></option>
+          <?php endforeach ?>
         </select>
       </div>
     </div>

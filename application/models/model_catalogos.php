@@ -134,6 +134,35 @@ class Model_catalogos extends CI_Model {
 	}
 
 	/**
+		* Devuelve el catalogo de direcciones
+		*
+		* @access public
+		* @param  array   $filtros 			filtros a iterar
+		* @param  boolean $tipo_retorno 	Modo de retonro: 
+		*								 		TRUE - Objeto
+		*								 		FALSE - Array
+		* @return areas
+	*/
+	public function get_direcciones($filtros = NULL, $tipo_retorno = TRUE){
+		try {			
+			if ( is_array($filtros) ){
+				foreach ($filtros as $key => $filtro) {
+					$this->db->where($key, $filtro);
+				}
+			} else 
+				$this->db->where('estatus', 1);
+			$this->db->order_by('cve_direccion', 'asc');
+			$areas = $this->db->get('direcciones');
+			if ( $tipo_retorno )
+				return $areas->result();
+			else
+				return $areas->result_array();
+		} catch (Exception $e) {
+			return [];
+		}
+	}
+
+	/**
 		* Devuelve el catalogo de programas
 		*
 		* @access public
