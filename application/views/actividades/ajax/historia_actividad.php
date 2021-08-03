@@ -1,7 +1,15 @@
+<style type="text/css" media="screen">
+    #encabezado.accordion-button{
+        color: dark !important;
+    }
+    #encabezado.accordion-button:hover{
+        color: #29313d !important;
+    }
+</style>
 <div class="accordion my-3 w-100" id="encabezado">
     <div class="accordion-item">
         <h2 class="accordion-header" id="titulo_actividad">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datos_actividad" aria-expanded="false" aria-controls="datos_actividad">
+            <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#datos_actividad" aria-expanded="false" aria-controls="datos_actividad">
                 <strong>ACTIVIDAD GENERAL:</strong>&nbsp;<?= $encabezado->actividad_general ?>
             </button>
         </h2>

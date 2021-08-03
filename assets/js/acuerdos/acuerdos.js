@@ -76,7 +76,7 @@ function finicia_datatable(){
 }
 
 function factualiza_datatable(mensaje = '', tipo = ''){
-    if ( $.fn.dataTable.isDataTable(dtNombre) ) {        
+    if ( $.fn.dataTable.isDataTable(dtNombre) ) {
         dt.ajax.reload(null, false);
         mensaje = ( mensaje == '' )? 'Tabla actualizada.': mensaje;
         tipo    = ( tipo == '' )? 'info' : tipo;

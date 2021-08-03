@@ -171,10 +171,56 @@ class Model_usuarios extends CI_Model {
                 throw new Exception("No se recibieron datos");
 
             $db_datos = array(
-                'sexo'              => $datos['sexo'],
-                'nombres'           => $datos['nombres'],
+                'sexo'               => $datos['sexo'],
+                'nombres'            => $datos['nombres'],
                 'primer_apellido'    => $datos['primer_apellido'],
                 'segundo_apellido'   => $datos['segundo_apellido'],
+            );
+
+            $this->db->where('usuario_id', $usuario_id);
+            $this->db->update('usuarios', $db_datos);
+
+            $this->db->trans_commit();
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
+            $resultado['exito'] = FALSE;
+            $resultado['error'] = $e->getMessage();
+        }
+        return $resultado;
+    }
+
+    /**
+        * Actualizar usuario modo administrador
+        *
+        * @access public
+        * @param  string   $usuario_id      ID de usuario a actualizar
+        * @param  string   $password        Contraseña a establecer
+        * @return resultado
+    */
+    public function update_usuario($usuario_id, $datos){
+        $resultado = array('exito' => TRUE);
+        try {
+            $this->db->trans_begin(); 
+
+            if ( !is_array($datos) )
+                throw new Exception("No se recibieron datos");
+
+            $this->db->where('usuario_id', $usuario_id);
+            $dbUser = $this->db->get('usuarios');
+            if ( $dbUser->num_rows() == 0 )
+                throw new Exception("El usuario no existe", 1);
+
+            $db_datos = array(
+                'sexo'                  => $datos['sexo'],
+                'nombres'               => $datos['nombres'],
+                'primer_apellido'       => $datos['primer_apellido'],
+                'segundo_apellido'      => $datos['segundo_apellido'],
+                'combinacion_area_id'   => $datos['area_usuaria'],
+                'categoria_id'          => $datos['categoria'],
+                'correo'                => $datos['correo'],
+                'telefono'              => $datos['telefono'],
+                'cve_cuenta'            => $datos['cve_cuenta'],
+                'usuario'               => $datos['usuario'],
             );
 
             $this->db->where('usuario_id', $usuario_id);

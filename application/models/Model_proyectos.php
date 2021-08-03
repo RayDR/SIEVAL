@@ -101,8 +101,6 @@ class Model_proyectos extends CI_Model {
         }
     }
 
-
-
     /**
         * Registrar un proyecto
         *
@@ -139,6 +137,40 @@ class Model_proyectos extends CI_Model {
         return $resultado;
     }
 
+    /**
+        * Actualizar un proyecto
+        *
+        * @access public
+        * @param  integer $id                   ID
+        * @param  array   $datos                Datos de proyecto
+        *
+        * @return resultado[]
+    */
+    public function update_proyecto($proyecto_id, $datos){
+        $resultado = array('exito' => TRUE);
+        try {
+            $this->db->trans_begin();
+
+            if ( is_array($datos) ){
+                // REGISTRO DE PROYECTO
+                $db_datos = array(
+                    'proyecto_nombre'           => $datos['proyecto_nombre'],
+                    'techo_financiero'          => $datos['techo_financiero'],
+                    'combinacion_area_id'       => $datos['combinacion_area']
+                );
+                $this->db->where('proyecto_actividad_id', $proyecto_id);
+                $this->db->update('proyectos', $db_datos);
+            } else
+                throw new Exception('La estructura de los datos es incorrecta.');
+
+            $this->db->trans_commit();
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
+            $resultado['exito'] = FALSE;
+            $resultado['error'] = $e;
+        }
+        return $resultado;
+    }
 }
 
 /* End of file Model_proyectos.php */

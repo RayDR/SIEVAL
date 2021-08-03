@@ -15,11 +15,23 @@ class Configurador extends CI_Controller {
    {
       parent::__construct();
       $this->load->model('model_catalogos');
+
+      $this->load->model('model_proyectos');
+      $this->load->model('model_programas');
+      $this->load->model('model_usuarios');
       
       if ( !$this->session->estatus_usuario_sesion() ){
-         print(json_encode(array('estatus' => 'sess_expired', 'mensaje' => 'Su sesión ha caducado. Por favor, recargue la página.')));
-         redirect(base_url('index.php/Home/login'),'refresh');
-      }
+            print(
+                json_encode(
+                    array('exito'   => FALSE, 
+                          'error'   => 'Sesión caducada. Recargue la página',
+                          'estatus' => 'sess_expired', 
+                          'mensaje' => 'Su sesión ha caducado. Por favor, recargue la página.'
+                    )
+                )
+            );
+            redirect(base_url('index.php/Home/login'),'refresh');
+        }
    }
 
 /*--------------------------------------------------------------------------*
@@ -191,24 +203,36 @@ class Configurador extends CI_Controller {
          switch ($opcion) {
             case 'proyecto':
                $titulo = 'Editar Proyecto';
-               $proyecto_id = $this->input->post('proyecto_id');
+               $proyecto_id = $this->input->post('proyecto_actividad_id');
                if ( $proyecto_id ){
                   // Data a editar
                   $datos  = array(
-                     'proyecto_nombre'       => $proyecto_nombre,
-                     'techo_financiero'      => $techo_financiero,
-                     'combinacion_area'      => ($area_responsable)? $area_responsable : null,
+                     'proyecto_nombre'       => $this->input->post('proyecto_nombre'),
+                     'techo_financiero'      => $this->input->post('techo_financiero'),
+                     'combinacion_area'      => ( $this->input->post('area_responsable') )? 
+                                                  $this->input->post('area_responsable')  : null,
                   );
+
+                  $json = $this->model_proyectos->update_proyecto($proyecto_id, $datos);
                } else {
                   $opcion  = NULL;
                   $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Proyecto');
                }
                break;
-            case 'programas':
+            case 'programa':
                $titulo = 'Editar Programa Presupuestario';
-               $programa_id = $this->input->post('proyecto_id');
+               $programa_id = $this->input->post('programa_presupuestario_id');
                if ( $programa_id ){
                   // Data a editar
+                  $datos = array(
+                     'clave'           => $this->input->post('clave'),
+                     'nombre'          => $this->input->post('nombre'),
+                     'descripcion'     => $this->input->post('descripcion'),
+                     'objetivo'        => $this->input->post('objetivo'),
+                     'techo_financiero'=> $this->input->post('techo_financiero')
+                  );
+
+                  $json = $this->model_programas->update_programa($programa_id, $datos);
                } else {
                   $opcion  = NULL;
                   $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Programa Presupuestal');
@@ -228,9 +252,10 @@ class Configurador extends CI_Controller {
                      'sexo'               =>  $this->input->post('sexo'),
                      'correo'             =>  $this->input->post('correo'),
                      'telefono'           =>  $this->input->post('telefono'),
-                     'usuario'            =>  $this->input->post('usuario'),
-                     'cve_cuenta'         =>  $this->input->post('usuario'),
+                     'usuario'            =>  $this->input->post('cuenta'),
+                     'cve_cuenta'         =>  $this->input->post('cuenta'),
                   );
+                  $json = $this->model_usuarios->update_usuario($usuario_id, $datos);
                } else {
                   $opcion  = NULL;
                   $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Usuario');
@@ -240,10 +265,6 @@ class Configurador extends CI_Controller {
                $opcion = NULL;
                $json   = array('exito' => FALSE, 'error' => 'Se ha recibido una opción inválida');
                break;
-         }
-         // Abrir la vista
-         if ( $opcion ){
-            $json['html'] = $this->load->view($data['view'], $data, TRUE);
          }
       } else 
          $json  = array('exito' => FALSE, 'error' => 'Opción inválida.');
@@ -256,8 +277,6 @@ class Configurador extends CI_Controller {
    * ---------------------*/
 
    public function registra_proyecto(){
-      $this->load->model('model_proyectos');
-
       $json  = array('exito' => FALSE);
 
       $proyecto_nombre        = $this->input->post('proyecto_nombre');
@@ -277,8 +296,6 @@ class Configurador extends CI_Controller {
    }
 
    public function registra_usuario(){
-      $this->load->model('model_usuarios');
-
       $json  = array('exito' => FALSE);
 
       $datos = array(
@@ -439,7 +456,6 @@ class Configurador extends CI_Controller {
    }
 
    public function datatable_usuarios(){
-      $this->load->model('model_usuarios');
       return print(json_encode($this->model_usuarios->get_usuarios()));
    }
 

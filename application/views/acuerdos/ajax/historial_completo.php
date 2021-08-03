@@ -1,7 +1,15 @@
+<style type="text/css" media="screen">
+    #encabezado.accordion-button{
+        color: dark !important;
+    }
+    #encabezado.accordion-button:hover{
+        color: #29313d !important;
+    }
+</style>
 <!-- Ver Historial General -->
     <div class="accordion-item">
         <h2 class="accordion-header" id="seguimientos">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#historial-seguimiento" aria-expanded="false" aria-controls="historial-seguimiento">
+            <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#historial-seguimiento" aria-expanded="false" aria-controls="historial-seguimiento">
             Mostrar historial de seguimiento
             </button>
         </h2>
@@ -14,7 +22,7 @@
     
     <div class="accordion-item">
         <h2 class="accordion-header" id="archivos">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#historial-archivos" aria-expanded="false" aria-controls="historial-archivos">
+            <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#historial-archivos" aria-expanded="false" aria-controls="historial-archivos">
             Mostrar historial de archivos
             </button>
         </h2>

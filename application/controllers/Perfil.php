@@ -17,8 +17,16 @@ class Perfil extends CI_Controller {
         $this->load->model('model_catalogos');
         $this->load->model('model_usuarios');
         
-        if ( ! $this->session->estatus_usuario_sesion() ){
-            print(json_encode(array('estatus' => 'sess_expired', 'mensaje' => 'Su sesión ha caducado. Por favor, recargue la página.')));
+        if ( !$this->session->estatus_usuario_sesion() ){
+            print(
+                json_encode(
+                    array('exito'   => FALSE, 
+                          'error'   => 'Sesión caducada. Recargue la página',
+                          'estatus' => 'sess_expired', 
+                          'mensaje' => 'Su sesión ha caducado. Por favor, recargue la página.'
+                    )
+                )
+            );
             redirect(base_url('index.php/Home/login'),'refresh');
         }
     }

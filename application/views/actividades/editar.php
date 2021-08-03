@@ -1,6 +1,5 @@
-<input type="hidden" id="proyecto_id" name="proyecto_id" value="<?= $encabezado->proyecto_actividad_id ?>">
+<input type="hidden" id="proyecto_id" name="proyecto_id" value="<?= $encabezado->proyecto_id ?>">
 <input type="hidden" id="actividad_id" name="actividad_id" value="<?= $encabezado->actividad_id ?>">
-
 <div class="py-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">

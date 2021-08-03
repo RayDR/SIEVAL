@@ -14,6 +14,7 @@
 </style>
 
 <form id="fceProyecto" class="container formulario">
+    <input type="hidden" id="proyecto_actividad_id" name="proyecto_actividad_id" value="<?= $proyecto->proyecto_actividad_id ?>">
     <div class="card card-body shadow-sm mb-4 mb-lg-0 bg-transparent">
         <div class="row d-flex justify-content-between">
             <div class="col my-auto">
@@ -34,8 +35,8 @@
         <div class="card card-body shadow-sm mb-4 mb-lg-0 bg-white" style="color: #000 !important;">
             <div class="row mb-3">
                 <div class="col-lg-6 mb-2">
-                    <label for="nombre_proyecto">Nombre del Proyecto</label>
-                    <input type="text" name="nombre_proyecto" id="nombre_proyecto" class="form-control" value="<?= $proyecto->proyecto_nombre ?>">
+                    <label for="proyecto_nombre">Nombre del Proyecto</label>
+                    <input type="text" name="proyecto_nombre" id="proyecto_nombre" class="form-control" value="<?= $proyecto->proyecto_nombre ?>">
                 </div>
                 <div class="col-lg-6 mb-2">
                     <label for="techo_financiero">Techo Financiero</label>
@@ -58,33 +59,43 @@
 
 <script type="text/javascript">
 $(document).ready(function($) {
-   finicia_select2();
-   
-   $('.formulario').change(function(event) {
+    finicia_select2();
+    $('.formulario').change(function(event) {
        $('#guardar').fadeIn('slow');
-   });
-
-   $('#guardar').click(fmConfEditar);
+    });
+    $('#guardar').click(fmConfEditar);
 });
 
-function finicia_select2(){
-    // Estilizar Select2
-    $('.form-select').select2();
-    // Configurar Select2 de Áreas
-    var datos_select2 = fu_json_query(url('Configurador/get_areas_select2', true, false));
-    if ( datos_select2 ){
-        if ( datos_select2.exito ){
-            $('.areas_select2').select2({
-                data: datos_select2.result,
-                pagination: {
-                    'more': true
-                }
-            });
-        }
-    }
-}
-
-function fmConfEditar(){
+function fmConfEditar(e){
+    e.preventDefault();
     
+    var datos   = $('#fceProyecto').serializeArray()
+        errores = '';
+
+    datos.forEach( function(input, index) {
+        if ( input.length == 0 && $(`#${input.name}`).attr('required') ){
+            errores += `El campo <a href="#${input.name}">${ $(`#${input.name}`).data('label') }</a> es requerido.<br>`;
+        }
+    });
+
+    if ( errores.length > 0 ){
+        fu_notificacion('Por favor, complete los campos correctamente', 'danger');
+        alert(errores, 'warning');
+    } else { // GO
+        $.post(url('Configurador/editar/proyecto'), datos, function(data, textStatus, xhr) {
+            loader();
+        }).then(function(data){
+            return JSON.parse(data);
+        }).then(function(data){
+            if ( data.exito ){
+                fu_notificacion('Datos actualizados', 'success');
+            } else 
+                fu_notificacion((data.error)? data.error : 'Falló la operación','danger');
+            loader(false);
+        }).catch(function(error){
+            loader(false);
+            fu_notificacion('Falló al obtener la respuesta del servidor. Contacte al administrador.', 'danger');
+        });
+    }
 }
 </script>

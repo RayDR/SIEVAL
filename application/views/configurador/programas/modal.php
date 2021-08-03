@@ -15,6 +15,7 @@
 
 <?php $programa = $programa[0]; ?>
 <form id="fcePrograma" class="container formulario">
+    <input type="hidden" id="programa_presupuestario_id" name="programa_presupuestario_id" value="<?= $programa->programa_presupuestario_id ?>">
     <div class="card card-body shadow-sm mb-4 mb-lg-0 bg-transparent">
         <div class="row d-flex justify-content-between">
             <div class="col my-auto">
@@ -63,63 +64,43 @@
 
 <script type="text/javascript">
 $(document).ready(function($) {
-   finicia_select2();
-   
-   $('.formulario').change(function(event) {
+    finicia_select2();
+    $('.formulario').change(function(event) {
        $('#guardar').fadeIn('slow');
-   });
-
-   $('#guardar').click(fmConfEditar);
+    });
+    $('#guardar').click(fmConfEditar);
 });
-
-function finicia_select2(){
-    // Estilizar Select2
-    $('.form-select').select2();
-    // Configurar Select2 de Áreas
-    var datos_select2 = fu_json_query(url('Configurador/get_areas_select2', true, false));
-    if ( datos_select2 ){
-        if ( datos_select2.exito ){
-            $('.areas_select2').select2({
-                data: datos_select2.result,
-                pagination: {
-                    'more': true
-                }
-            });
-        }
-    }
-}
 
 function fmConfEditar(e){
     e.preventDefault();
-    $('#guardar').attr({disabled: true});
-    $('#guardar').html(`
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span class="ms-1">Registrando...</span>
-    `);
-    datos = {
-        
-    }
-    $.post(url('Configurador/editar/usuario'), datos, function(data, textStatus, xhr) {
-        loader();
-    }).then(function(data){
-        return JSON.parse(data);
-    }).then(function(data){
-        if ( data.exito ){
-           fu_notificacion('Registro exitoso.', 'success');
-           window.location.replace( url('Configurador/proyectos') );
-           $('#guardar').html('');
-           $('#guardar').attr({disabled: true});
-        } else{
-            $('#guardar').attr({disabled: false});
-           fu_notificacion(data.mensaje, 'danger');
-           $('#guardar').html(`Guardar`);
+    
+    var datos   = $('#fcePrograma').serializeArray()
+        errores = '';
+
+    datos.forEach( function(input, index) {
+        if ( ( input.value == '' || input.value == null ) && $(`#${input.name}`).attr('required') ){
+            errores += `El campo <a href="#${input.name}">${ $(`#${input.name}`).data('label') }</a> es requerido.<br>`;
         }
-        loader(false);
-    }).catch(function(error){
-        loader(false);
-        $('#guardar').attr({disabled: false});
-        $('#guardar').html(`Reintentar`);
-        fu_notificacion('Falló al obtener la respuesta del servidor. Contacte al administrador.', 'danger');
     });
+
+    if ( errores.length > 0 ){
+        fu_notificacion('Por favor, complete los campos correctamente', 'danger');
+        alert(errores, 'warning');
+    } else { // GO
+        $.post(url('Configurador/editar/programa'), datos, function(data, textStatus, xhr) {
+            loader();
+        }).then(function(data){
+            return JSON.parse(data);
+        }).then(function(data){
+            if ( data.exito ){
+                fu_notificacion('Datos actualizados', 'success');
+            } else 
+                fu_notificacion((data.error)? data.error : 'Falló la operación','danger');
+            loader(false);
+        }).catch(function(error){
+            loader(false);
+            fu_notificacion('Falló al obtener la respuesta del servidor. Contacte al administrador.', 'danger');
+        });
+    }
 }
 </script>
