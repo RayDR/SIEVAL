@@ -44,8 +44,9 @@ function fguardar(e){
             let valor           = $(`#${input.nombre}`).val();
             datos[input.nombre] = valor;
             if ( input.nombre == 'financiero_objetivo_anual' || input.nombre == 'fisico_objetivo_anual'){
-                if ( valor < 1 )
-                    errores += `El <a href="#${input.nombre}">${input.texto}</a> no puede ser 0.<br>`;
+                if ( valor < 0 ){
+                    errores += `El <a href="#${input.nombre}">${input.texto}</a> no puede ser menor de 0.<br>`;
+                }
             } else if ( input.nombre == 'programado-fisico' ){
                 if ( !fejecuta_calculo_total('fisico') )
                     errores += `El <a href="#${input.nombre}">${input.texto}</a> no es correcto.<br>`;
