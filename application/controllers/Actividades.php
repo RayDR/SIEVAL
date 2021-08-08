@@ -201,7 +201,7 @@ class Actividades extends CI_Controller {
             // echo '<hr>';
             // print_r($metas);
             $sheet->fromArray($presupuesto, 0,'H15');
-            $sheet->fromArray($metas, 0,'H19');
+            $sheet->fromArray($metas, 0,'H18');
             $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="'. urlencode($reporte).'"');

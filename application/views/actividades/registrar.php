@@ -119,8 +119,16 @@
                             <input type="number" class="form-control" id="cantidad_beneficiarios" value="0" required>
                         </div>
                         <div class="col-md-6 mb-3">
+                            <label for="umbral">Umbrales</label>
+                            <select class="form-select" id="umbral" aria-label="umbral">
+                                <option selected disabled>Seleccione una opción</option>
+                                <option value="A">Limite Aceptable 90% - 100%</option>
+                            </select>
+                            <small>Mostrar tabla de umbrales</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="indicador">Indicador</label>
-                            <select class="form-select" id="indicador" aria-label="Indicadores">
+                            <select class="form-select" id="indicador" aria-label="Indicadores" multiple>
                                 <option selected disabled>Seleccione una opción</option>
                                 <option value="0">Promedio diario de consultas por médico general y familiar</option>
                                 <option value="1">Cobertura en atención de médicos generales y familiares en las unidades médicas de primer nivel</option>
