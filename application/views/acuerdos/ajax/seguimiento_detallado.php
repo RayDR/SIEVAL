@@ -91,25 +91,6 @@
                     </ul>
                     <span class="badge badge-lg bg-secondary text-dark"><?= $seguimiento[0]->estatus_seguimiento ?></span>
                     <br>
-                    <?php 
-                    if ( 
-                        ( $this->session->userdata('tuser') == 1 ) // Solo administradores
-                        ||
-                        ( $combinacion->subdireccion_id   == 1 && 
-                          $combinacion->departamento_id   == 1 && 
-                          $combinacion->area_id           == 1  ) // Solo directores
-                    ): 
-                    ?>
-                        <?php if ( $seguimiento[0]->estatus_acuerdo_id != 3 ): ?>
-                        <label class="my-1 me-2 form-label-sm" for="asignar">Asignar a:</label>
-                        <select id="asignar" class="select2 form-control-sm text-right" name="asignar">
-                            <option selected disabled>Seleccione el usuario</option>
-                            <?php foreach ($area_usuarios as $key => $usuario): ?>
-                            <option value="<?= $usuario->usuario_id ?>"><?= $usuario->cve_cuenta ?> - <?= $usuario->nombres ?> <?= $usuario->primer_apellido ?></option>
-                            <?php endforeach ?>
-                        </select>
-                        <?php endif ?>
-                    <?php endif ?>
                 </div>
             </li>
         </ul>

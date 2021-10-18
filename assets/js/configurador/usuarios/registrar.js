@@ -40,7 +40,7 @@ function fcu_guardar(e){
          if( (valor == '' || valor == null || valor == undefined) && $(`#${input.nombre}`).prop('required') )
             errores += `El campo <a href="#${input.nombre}">${input.texto}</a> es requerido.<br>`;
          if ( input.nombre == 'nombres' || input.nombre == 'primer_apellido' || input.nombre == 'segundo_apellido' )
-            datos[input.nombre] = valor.toUpperCase;
+            datos[input.nombre] = $(`#${input.nombre}`).val().toUpperCase();
       });
 
       // Validar valores

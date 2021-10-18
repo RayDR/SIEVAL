@@ -11,8 +11,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Acuerdos extends CI_Controller {
 
-    private $rootPR = 'C:/SvrArchivos/sieval/Acuerdos/'; // PATH a archivos locales ( Dentro de la app )
-    private $rootPL = FCPATH . 'uploads/Acuerdos/';      // PATH para guardarlo en otro directorio ( Fuera de la app )
+    private $rootPR = 'C:'.DIRECTORY_SEPARATOR.'Users'.DIRECTORY_SEPARATOR.'DEV-RDR'.DIRECTORY_SEPARATOR.'Documents'.DIRECTORY_SEPARATOR; // PATH a archivos locales ( Dentro de la app )
+    private $rootPL = FCPATH . 'uploads'.DIRECTORY_SEPARATOR.'Acuerdos'.DIRECTORY_SEPARATOR;      // PATH para guardarlo en otro directorio ( Fuera de la app )
 
 	public function __construct()
     {
@@ -180,7 +180,7 @@ class Acuerdos extends CI_Controller {
 
         }catch( Exception $e ){
             header("HTTP/1.1 404 Not Found");
-            echo 'Error: ',  $e->getMessage(), "\n";
+            echo 'Error: ',  $e->getMessage(), "'.DIRECTORY_SEPARATOR.'n";
         }
     }
 
@@ -215,7 +215,8 @@ class Acuerdos extends CI_Controller {
         $area_usuario   = array('combinacion_area_id' => $this->session->userdata('combinacion_area'));
         if ( $area_usuario ){
             $combinacion = $this->model_catalogos->get_areas( $area_usuario );
-            if ( $combinacion ){
+            if ( is_array($combinacion) ){
+                $combinacion = $combinacion[0];
                 $direccion = ( $this->session->userdata('tuser') == 1 )? NULL : 
                                 array( 'direccion_id' => $combinacion->direccion_id );
                 $usuarios  = $this->model_usuarios->get_usuarios( $direccion );
@@ -302,7 +303,8 @@ class Acuerdos extends CI_Controller {
         if ( $this->session->userdata('tuser') != 1 ){
             $where       = array('combinacion_area_id' => $this->session->userdata('combinacion_area')); 
             $combinacion = $this->model_catalogos->get_areas( $where );
-            if ( $combinacion ){
+            if ( is_array($combinacion) ){
+                $combinacion = $combinacion[0];
                 $condicion  = "    direccion_id_acuerdo     = {$combinacion->direccion_id} ";
                 $condicion .= "OR direccion_id_seguimiento  = {$combinacion->direccion_id} ";
                 if ( $combinacion->subdireccion_id != 1 ){
@@ -487,8 +489,8 @@ class Acuerdos extends CI_Controller {
 
         if ( !empty($_FILES) ) {
             // Carga de documentos
-            $uploadFolder  = "{$this->rootPR}/{$ejercicio}/{$acuerdo_id}/";
-            $localUploads  = "{$this->rootPL}/{$ejercicio}/{$acuerdo_id}/";
+            $uploadFolder  = "{$this->rootPR}".DIRECTORY_SEPARATOR."{$ejercicio}".DIRECTORY_SEPARATOR."{$acuerdo_id}".DIRECTORY_SEPARATOR;
+            $localUploads  = "{$this->rootPL}".DIRECTORY_SEPARATOR."{$ejercicio}".DIRECTORY_SEPARATOR."{$acuerdo_id}".DIRECTORY_SEPARATOR;
 
             // Configuración de Libreriía CI Upload
             $config['upload_path']   = $uploadFolder; 
@@ -501,10 +503,10 @@ class Acuerdos extends CI_Controller {
             if ( !file_exists($this->rootPL) && !is_dir($this->rootPL) )
                 mkdir( $this->rootPL, 0777 ); // Crear directorio si no existe
 
-            if ( !file_exists($this->rootPR . "{$ejercicio}/") && !is_dir($this->rootPR . "{$ejercicio}/") )
-                mkdir( $this->rootPR . "{$ejercicio}/", 0777 ); // Crear directorio si no existe
-            if ( !file_exists($this->rootPL . "{$ejercicio}/") && !is_dir($this->rootPL . "{$ejercicio}/") )
-                mkdir( $this->rootPL . "{$ejercicio}/", 0777 ); // Crear directorio si no existe
+            if ( !file_exists($this->rootPR . "{$ejercicio}".DIRECTORY_SEPARATOR) && !is_dir($this->rootPR . "{$ejercicio}".DIRECTORY_SEPARATOR ))
+                mkdir( $this->rootPR . "{$ejercicio}".DIRECTORY_SEPARATOR, 0777 ); // Crear directorio si no existe
+            if ( !file_exists($this->rootPL . "{$ejercicio}".DIRECTORY_SEPARATOR) && !is_dir($this->rootPL . "{$ejercicio}".DIRECTORY_SEPARATOR ))
+                mkdir( $this->rootPL . "{$ejercicio}".DIRECTORY_SEPARATOR, 0777 ); // Crear directorio si no existe
 
             if ( !file_exists($uploadFolder) && !is_dir($uploadFolder) )
                 mkdir( $uploadFolder, 0777 ); // Crear directorio si no existe
