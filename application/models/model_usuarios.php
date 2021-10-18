@@ -92,6 +92,7 @@ class Model_usuarios extends CI_Model {
         }
     }
 
+
     // ------------------------- SETTERS
 
     /**

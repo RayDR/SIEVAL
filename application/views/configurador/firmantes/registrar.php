@@ -3,13 +3,13 @@
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item"><a href="<?= base_url() ?>"><span class="fas fa-home"></span></a></li>
             <li class="breadcrumb-item"><a href="<?= base_url() ?>">Configurador</a></li>
-            <li class="breadcrumb-item"><a href="#">Proyectos</a></li>
+            <li class="breadcrumb-item"><a href="#">Firmantes</a></li>
             <li class="breadcrumb-item active" aria-current="page">Registrar</li>
         </ol>
     </nav>
     <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Registrar Proyecto</h1>
+            <h1 class="h4">Registrar Firmante</h1>
         </div>
     </div>
 </div>
@@ -25,13 +25,15 @@
                     <form>
                         <div class="row">
                             <div class="mb-3 col-12">
-                                <label class="my-1 me-2" for="proyecto_nombre"><span class="text-danger">*</span> Nombre del Proyecto</label>
-                                <input type="text" id="proyecto_nombre" name="proyecto_nombre" class="form-control" placeholder="Ingrese el nombre del Proyecto" required>
+                                <label class="my-1 me-2" for="usuario_id"><span class="text-danger">*</span> Usuario Firmante</label>
+                                <select class="form-select select2" id="area_responsable" aria-label="Área Responsable">
+                                    <option selected disabled>Seleccione una opción</option>
+                                    <?php foreach ($usuarios as $key => $usuario): ?>
+                                    <option value="<?= $usuario->usuario_id ?>"><?= $usuario->nombres ?> <?= $usuario->primer_apellido ?> <?= $usuario->segundo_apellido ?></option>
+                                    <?php endforeach ?>
+                                </select>
                             </div>
-                            <div class="mb-3 col-12">
-                                <label class="my-1 me-2" for="techo_financiero"><span class="text-danger">*</span> Techo Financiero</label>
-                                <input type="number" id="techo_financiero" name="techo_financiero" class="form-control" placeholder="Techo financiero" value="0" min="0" required>
-                            </div>
+                            
                             <div class="mb-3 col-12">
                                 <label class="my-1 me-2" for="area_responsable">Área Responsable</label>
                                 <select class="form-select areas_select2" id="area_responsable" aria-label="Área Responsable">
@@ -53,4 +55,4 @@
     var inputs = JSON.parse('<?php print(json_encode($inputs, JSON_HEX_TAG)); ?>');
 </script>
 <script src="<?= base_url('assets/js/configurador/configurador.js') ?>?<?= date('dmYHis') ?>" type="text/javascript" charset="utf-8" async defer></script>
-<script src="<?= base_url('assets/js/configurador/proyectos/registrar.js') ?>?<?= date('dmYHis') ?>" type="text/javascript" charset="utf-8" async defer></script>
+<script src="<?= base_url('assets/js/configurador/programas/registrar.js') ?>?<?= date('dmYHis') ?>" type="text/javascript" charset="utf-8" async defer></script>

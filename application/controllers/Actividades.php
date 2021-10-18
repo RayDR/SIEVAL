@@ -62,16 +62,18 @@ class Actividades extends CI_Controller {
                      array( 'direccion_id' => $combinacion->direccion_id );
                      
         $data = array(
-            'titulo'    => 'Registrar',
-            'programas' =>  $this->model_catalogos->get_programas(),
-            'proyectos' =>  $this->model_catalogos->get_proyectos(),
-            'l_accion'  =>  $this->model_catalogos->get_lineas_accion(),
-            'f_financia'=>  $this->model_catalogos->get_fuentes_financiamiento(),
-            'u_medida'  =>  $this->model_catalogos->get_unidades_medida($condicion),
-            'g_benef'   =>  $this->model_catalogos->get_grupos_beneficiados(),
-            'mediciones'=>  $this->model_catalogos->get_mediciones(),
-            'inputs'    =>  $this->inputs_registro(),
-            'view'      => 'actividades/registrar'
+            'titulo'        => 'Registrar',
+            'programas'     => $this->model_catalogos->get_programas(),
+            'proyectos'     => $this->model_catalogos->get_proyectos(),
+            'l_accion'      => $this->model_catalogos->get_lineas_accion(),
+            'f_financia'    => $this->model_catalogos->get_fuentes_financiamiento(),
+            'u_medida'      => $this->model_catalogos->get_unidades_medida($condicion),
+            'g_benef'       => $this->model_catalogos->get_grupos_beneficiados(),
+            'mediciones'    => $this->model_catalogos->get_mediciones(),
+            'umbrales'      => $this->model_catalogos->get_umbrales(),
+            'indicadores'   => $this->model_catalogos->get_indicadores(),
+            'inputs'        => $this->inputs_registro(),
+            'view'          => 'actividades/registrar'
         );
         $json['html'] = $this->load->view( $data['view'], $data, TRUE );
         return print(json_encode($json));    
@@ -94,18 +96,20 @@ class Actividades extends CI_Controller {
             $encabezado   = $this->model_actividades->get_actividad($actividad_id);
             $detalles     = $this->model_actividades->get_seguimiento_actividades($actividad_id);
             $data = array(
-                'titulo'    => 'Registrar',
-                'view'      => 'actividades/editar',
-                'encabezado'=> $encabezado,
-                'detalles'  => $detalles,
-                'programas' => $this->model_catalogos->get_programas(),
-                'proyectos' =>  $this->model_catalogos->get_proyectos(),
-                'l_accion'  => $this->model_catalogos->get_lineas_accion(),
-                'f_financia'=> $this->model_catalogos->get_fuentes_financiamiento(),
-                'g_benef'   => $this->model_catalogos->get_grupos_beneficiados(),
-                'mediciones'=> $this->model_catalogos->get_mediciones(),
-                'u_medida'  => $this->model_catalogos->get_unidades_medida($condicion),
-                'inputs'    => $this->inputs_registro()
+                'titulo'        => 'Registrar',
+                'view'          => 'actividades/editar',
+                'encabezado'    => $encabezado,
+                'detalles'      => $detalles,
+                'programas'     => $this->model_catalogos->get_programas(),
+                'proyectos'     => $this->model_catalogos->get_proyectos(),
+                'l_accion'      => $this->model_catalogos->get_lineas_accion(),
+                'f_financia'    => $this->model_catalogos->get_fuentes_financiamiento(),
+                'g_benef'       => $this->model_catalogos->get_grupos_beneficiados(),
+                'mediciones'    => $this->model_catalogos->get_mediciones(),
+                'u_medida'      => $this->model_catalogos->get_unidades_medida($condicion),
+                'umbrales'      => $this->model_catalogos->get_umbrales(),
+                'indicadores'   => $this->model_catalogos->get_indicadores(),
+                'inputs'        => $this->inputs_registro()
             );
             $json['html'] = $this->load->view( $data['view'], $data, TRUE );
         } else 
@@ -267,6 +271,7 @@ class Actividades extends CI_Controller {
     public function guardar(){
         $json = array('exito' => TRUE);
         $area_origen                    = $this->input->post('area_origen');
+        $proyecto_id                    = $this->input->post('proyecto_id');
         $linea_accion                   = $this->input->post('linea_accion');
         $fuente_financiamiento          = $this->input->post('fuente_financiamiento');
         $detalle_actividad              = $this->input->post('detalle_actividad');
@@ -281,6 +286,7 @@ class Actividades extends CI_Controller {
 
         $datos  = array(
             'area_origen'                   => $area_origen,
+            'proyecto_id'                   => $proyecto_id,
             'programa_presupuestario'       => $programa_presupuestario,
             'linea_accion'                  => $linea_accion,
             'fuente_financiamiento'         => $fuente_financiamiento,
@@ -303,9 +309,8 @@ class Actividades extends CI_Controller {
     public function guardar_edicion(){
         $json = array('exito' => TRUE);
         
-        $proyecto_actividad_id  = $this->input->post('proyecto_id');
-        $actividad_id           = $this->input->post('actividad_id');
-
+        $proyecto_id                    = $this->input->post('proyecto_id');
+        $actividad_id                   = $this->input->post('actividad_id');
         $area_origen                    = $this->input->post('area_origen');
         $linea_accion                   = $this->input->post('linea_accion');
         $fuente_financiamiento          = $this->input->post('fuente_financiamiento');
@@ -336,7 +341,7 @@ class Actividades extends CI_Controller {
             'ejercicio'                     => date('Y')
         );
 
-        $json = $this->model_actividades->update_proyecto_actividad($proyecto_actividad_id, $actividad_id, $datos);
+        $json = $this->model_actividades->update_proyecto_actividad($actividad_id, $proyecto_id, $datos);
         return print(json_encode($json));
     }
 
@@ -441,7 +446,7 @@ class Actividades extends CI_Controller {
                 'tipo'  => 'select'
             ],
             [
-                'nombre'=> 'proyecto',
+                'nombre'=> 'proyecto_id',
                 'texto' => 'Proyecto',
                 'tipo'  => 'select'
             ],
@@ -477,6 +482,14 @@ class Actividades extends CI_Controller {
             [
                 'nombre'=> 'cantidad_beneficiarios',
                 'texto' => 'Población Objetivo'
+            ],
+            [
+                'nombre'=> 'umbral',
+                'texto' => 'Umbral'
+            ],
+            [
+                'nombre'=> 'indicador',
+                'texto' => 'Indicador'
             ],
             [
                 'nombre'=> 'fisico_objetivo_anual',

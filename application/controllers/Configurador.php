@@ -68,6 +68,42 @@ class Configurador extends CI_Controller {
       $this->load->view( RUTA_TEMA . 'body', $data, FALSE );
    }
 
+   public function ums(){
+      $data = array(
+         'titulo'        => 'Configuración - Unidades de Medida '  . ' | ' . EMPRESA,
+         'menu'          => $this->model_catalogos->get_menus(),
+         'view'          => 'configurador/ums/index'
+      );
+      $this->load->view( RUTA_TEMA . 'body', $data, FALSE );
+   }
+
+   public function areas(){
+      $data = array(
+         'titulo'        => 'Configuración - Asignación y Configuración de Áreas'  . ' | ' . EMPRESA,
+         'menu'          => $this->model_catalogos->get_menus(),
+         'view'          => 'configurador/areas/index'
+      );
+      $this->load->view( RUTA_TEMA . 'body', $data, FALSE );
+   }
+
+   public function umbrales(){
+      $data = array(
+         'titulo'        => 'Configuración - Umbrales '  . ' | ' . EMPRESA,
+         'menu'          => $this->model_catalogos->get_menus(),
+         'view'          => 'configurador/umbrales/index'
+      );
+      $this->load->view( RUTA_TEMA . 'body', $data, FALSE );
+   }
+
+   public function firmantes(){
+      $data = array(
+         'titulo'        => 'Configuración - Firmantes '  . ' | ' . EMPRESA,
+         'menu'          => $this->model_catalogos->get_menus(),
+         'view'          => 'configurador/firmantes/index'
+      );
+      $this->load->view( RUTA_TEMA . 'body', $data, FALSE );
+   }
+
 //  ------- FIN DE VISTAS ------
 
 /*--------------------------------------------------------------------------*
@@ -112,6 +148,53 @@ class Configurador extends CI_Controller {
                   'categorias'=> $this->model_catalogos->get_categorias(),
                   'inputs'    => $this->inputs_usuarios(),
                   'view'      => 'configurador/usuarios/registrar'
+               );
+               break;
+            case 'Ums':
+               $titulo = 'Registrar Unidad de Medida';
+               $data   = array(
+                  'titulo'    => $titulo  . ' | ' . EMPRESA,
+                  'menu'      => $this->model_catalogos->get_menus(),
+                  'inputs'    => $this->inputs_usuarios(),
+                  'view'      => 'configurador/ums/registrar'
+               );
+               break;
+            case 'Direccion':
+               $titulo = 'Registrar Dirección';
+               $data   = array(
+                  'titulo'    => $titulo  . ' | ' . EMPRESA,
+                  'menu'      => $this->model_catalogos->get_menus(),
+                  'inputs'    => $this->inputs_direccion(),
+                  'view'      => 'configurador/areas/registrar_direccion'
+               );
+               break;
+            case 'Area':
+               $titulo = 'Registrar Combinación de Área';
+               $data   = array(
+                  'titulo'       => $titulo  . ' | ' . EMPRESA,
+                  'menu'         => $this->model_catalogos->get_menus(),
+                  'inputs'       => $this->inputs_areas(),
+                  'direcciones'  => $this->model_catalogos->get_direcciones(),
+                  'view'         => 'configurador/areas/registrar_area'
+               );
+               break;
+            case 'Umbral':
+               $titulo = 'Registrar Umbral';
+               $data   = array(
+                  'titulo'       => $titulo  . ' | ' . EMPRESA,
+                  'menu'         => $this->model_catalogos->get_menus(),
+                  'inputs'       => $this->inputs_umbral(),
+                  'view'         => 'configurador/umbrales/registrar'
+               );
+               break;
+            case 'Firmante':
+               $titulo = 'Registrar Firmante';
+               $data   = array(
+                  'titulo'       => $titulo  . ' | ' . EMPRESA,
+                  'menu'         => $this->model_catalogos->get_menus(),
+                  'inputs'       => $this->inputs_firmante(),
+                  'usuarios'     => $this->model_usuarios->get_usuarios(),
+                  'view'         => 'configurador/firmantes/registrar'
                );
                break;
             default:
@@ -180,6 +263,63 @@ class Configurador extends CI_Controller {
                } else {
                   $opcion  = NULL;
                   $json    = array('exito' => FALSE, 'error' => 'No se recibió el número de Usuario');
+               }
+               break;
+            case 'ums':
+               $titulo = 'Unidad de Medida';
+               $medida_id = $this->input->post('medida_id');
+               if ( $medida_id ){
+                  $data   = array(
+                     'titulo'    => $titulo  . ' | ' . EMPRESA,
+                     'um'        => $this->model_catalogos->get_unidad_medida_id($medida_id),
+                     'view'      => 'configurador/ums/modal',
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el identificador de UM.');
+               }
+               break;
+            case 'direccion':
+               $titulo = 'Dirección';
+               $direccion_id = $this->input->post('direccion_id');
+               if ( $direccion_id ){
+                  $data   = array(
+                     'titulo'       => $titulo  . ' | ' . EMPRESA,
+                     'direccion'    => $this->model_catalogos->get_direccion_id($direccion_id),
+                     'combinaciones'=> $this->model_catalogos->get_areas(['direccion_id' => $direccion_id]),
+                     'view'         => 'configurador/areas/modal',
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el identificador de Dirección.');
+               }
+               break;
+            case 'umbral':
+               $titulo = 'Umbral';
+               $umbral_id = $this->input->post('umbral_id');
+               if ( $umbral_id ){
+                  $data   = array(
+                     'titulo'       => $titulo  . ' | ' . EMPRESA,
+                     'umbral'       => $this->model_catalogos->get_umbral_id($umbral_id),
+                     'view'         => 'configurador/umbrales/modal',
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el identificador de Umbral.');
+               }
+               break;
+            case 'firmantes':
+               $titulo = 'Firmante';
+               $firmante_id = $this->input->post('firmante_id');
+               if ( $firmante_id ){
+                  $data   = array(
+                     'titulo'    => $titulo  . ' | ' . EMPRESA,
+                     'firmante'  => $this->model_catalogos->get_firmante_id($firmante_id),
+                     'view'      => 'configurador/firmantes/modal',
+                  );
+               } else {
+                  $opcion  = NULL;
+                  $json    = array('exito' => FALSE, 'error' => 'No se recibió el identificador del Firmante.');
                }
                break;
             default:
@@ -410,7 +550,7 @@ class Configurador extends CI_Controller {
             }
          }
       } else 
-         $json['mensaje'] = 'No se encontraron datos.';
+         $json['error'] = 'No se encontraron datos.';
 
       $json['result'] = $resultados;
       return print(json_encode($json));
@@ -439,9 +579,30 @@ class Configurador extends CI_Controller {
             ));
          } 
       } else // Sin datos
-         $json['mensaje'] = 'No se encontraron datos.';
+         $json['error'] = 'No se encontraron datos.';
       $json['result'] = $resultados;
 
+      return print(json_encode($json));
+   }
+
+   // Catálogo de Usuarios - SELECT2
+   public function get_usuarios_select2(){
+      $json       = array('exito' => FALSE);
+      $usuarios   = $this->model_usuarios->get_usuarios();
+
+      if ( $usuarios ){
+         $json['exito']  = TRUE;
+         $resultados     = [];
+         foreach ($usuarios as $key => $usuario) {
+            array_push($resultados, array(
+               'id'    => $usuario->usuario_id,
+               'text'  => $usuario->usuario . ' - ' . $usuario->nombre_completo
+            ));
+         } 
+      } else 
+         $json['error'] = 'No se encontraron datos.';
+
+      $json['result'] = $resultados;
       return print(json_encode($json));
    }
 
@@ -459,8 +620,20 @@ class Configurador extends CI_Controller {
       return print(json_encode($this->model_usuarios->get_usuarios()));
    }
 
-   public function datatable_areas(){
-      return print(json_encode($this->model_catalogos->get_areas()));
+   public function datatable_direcciones(){
+      return print(json_encode($this->model_catalogos->get_direcciones()));
+   }
+
+   public function datatable_umbrales(){
+      return print(json_encode($this->model_catalogos->get_umbrales()));
+   }
+
+   public function datatable_firmantes(){
+      return print(json_encode($this->model_catalogos->get_firmantes()));
+   }
+
+   public function datatable_ums(){
+      return print(json_encode($this->model_catalogos->get_ums()));
    }
 
 /*--------------------------------------------------------------------------*
@@ -556,6 +729,80 @@ class Configurador extends CI_Controller {
       );
    }
 
+   private function inputs_direccion(){
+      return array(
+         [
+            'nombre'=> 'descripcion',
+            'texto' => 'Nombre de la Dirección',
+         ],
+         [
+            'nombre'=> 'clave',
+            'texto' => 'Clave de la Dirección',
+         ],
+      );
+   }
+
+   private function inputs_areas(){
+      return array(
+         [
+            'nombre'=> 'direccion_id',
+            'texto' => 'Dirección',
+            'tipo'  => 'select'
+         ],
+         [
+            'nombre'=> 'combinacion_id',
+            'texto' => 'Combinación de Área',
+         ],
+      );
+   }
+
+   private function inputs_umbral(){
+      return array(
+         [
+            'nombre'=> 'clave_umbral',
+            'texto' => 'Clave de Umbral'
+         ],
+         [
+            'nombre'=> 'l_aceptable_inf',
+            'texto' => 'Limite Aceptable Inferior',
+         ],
+         [
+            'nombre'=> 'l_aceptable_sup',
+            'texto' => 'Limite Aceptable Superior',
+         ],
+         [
+            'nombre'=> 'l_riesgo_inf',
+            'texto' => 'Limite Riesgo Inferior',
+         ],
+         [
+            'nombre'=> 'l_riesgo_sup',
+            'texto' => 'Limite Riesgo Inferior',
+         ],
+         [
+            'nombre'=> 'l_critico_inf',
+            'texto' => 'Limite Crítico Inferior',
+         ],
+         [
+            'nombre'=> 'l_critico_sup',
+            'texto' => 'Limite Crítico Inferior',
+         ]
+      );
+   }
+
+   private function inputs_firmante(){
+      return array(
+         [
+            'nombre'=> 'usuario_id',
+            'texto' => 'Usuario',
+            'tipo'  => 'select'
+         ],
+         [
+            'nombre'=> 'combinacion_id',
+            'texto' => 'Combinación de Área',
+            'tipo'  => 'select'
+         ],
+      );
+   }
 }
 
 /* End of file Configurador.php */

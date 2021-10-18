@@ -1,7 +1,7 @@
 // Variables globales
 var dt, 
     dtNombre     = '#dtActividades', 
-    dtAjaxUrl    = 'Actividades/datatable_actividades'
+    dtAjaxUrl    = 'Actividades/datatable_actividades',
     vRegistro    = 'Actividades/registrar',
     vSeguimiento = 'Actividades/seguimiento';
 

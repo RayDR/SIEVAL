@@ -6,7 +6,7 @@ $query_builder  = TRUE;
 
 $db_hostname    = 'localhost';
 $db_username    = 'root';
-$db_password    = '';
+$db_password    = '120517rys';
 $db_database    = 'sipat';
 
 $db['default'] = array(

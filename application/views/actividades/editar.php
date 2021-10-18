@@ -109,6 +109,25 @@
                             <label for="cantidad_beneficiarios">Población Objetivo</label>
                             <input type="number" class="form-control" id="cantidad_beneficiarios" value="<?= $encabezado->cantidad_beneficiario ?>" required>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="umbral">Umbral</label>
+                            <select class="form-select" id="umbral" aria-label="umbral">
+                                <option selected disabled>Seleccione una opción</option>
+                                <?php foreach($umbrales as $key => $umbral): ?>
+                                <option value="<?= $umbral->umbral_id ?>"><?= $umbral->cve_umbral ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <small>Mostrar tabla de umbrales</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="indicador">Indicador</label>
+                            <select class="form-select" id="indicador" aria-label="Indicadores" multiple>
+                                <option disabled>Seleccione una opción</option>
+                                <?php foreach($indicadores as $key => $indicador): ?>
+                                <option value="<?= $indicador->indicador_ejercicio_id ?>"><?= $indicador->indicador_nombre ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
                     </div>
                     <!-- DATOS DE ACTIVIDAD -->
 

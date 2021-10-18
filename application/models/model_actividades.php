@@ -115,13 +115,11 @@ class Model_actividades extends CI_Model {
             $this->db->trans_begin();
 
             if ( is_array($datos) ){
-                $proyecto = 1;
-                $resultado['proyecto'] = $proyecto;
                 
                 // REGISTRO DE ACTIVIDAD
                 $db_datos = array(
                     'descripcion'                   => $datos['detalle_actividad'],
-                    'proyecto_id'                   => $proyecto,
+                    'proyecto_id'                   => $datos['proyecto_id'],
                     'unidad_medida_id'              => $datos['unidad_medida'],
                     'medicion_id'                   => $datos['tipo_medicion'],
                     'beneficiado_id'                => $datos['grupo_beneficiado'],
@@ -174,26 +172,15 @@ class Model_actividades extends CI_Model {
         *
         * @return resultado[]
     */
-    public function update_proyecto_actividad($proyecto_actividad_id, $actividad_id, $datos){
+    public function update_proyecto_actividad($actividad_id, $proyecto_id, $datos){
         $resultado = array('exito' => TRUE);
         try {
             $this->db->trans_begin();
 
-            if ( is_array($datos) ){
-                // ACTUALIZAR PROYECTO
-                $db_datos = array(
-                    'combinacion_area_id'           => $datos['area_origen'],
-                    'linea_accion_id'               => $datos['linea_accion'],
-                    'usuario_id'                    => $datos['usuario_id'],
-                    'ejercicio'                     => $datos['ejercicio'],
-                    'programa_presupuestario_id'    => $datos['programa_presupuestario'],
-                    'fuente_financiamiento_id'      => $datos['fuente_financiamiento']
-                );
-                $this->db->where('proyecto_actividad_id', $proyecto_actividad_id);
-                $this->db->update('proyectos_actividades', $db_datos);
-                
+            if ( is_array($datos) ){                
                 // ACTUALIZAR ACTIVIDAD
                 $db_datos = array(
+                    'proyecto_id'           => $proyecto_id,
                     'descripcion'           => $datos['detalle_actividad'],
                     'unidad_medida_id'      => $datos['unidad_medida'],
                     'medicion_id'           => $datos['tipo_medicion'],
